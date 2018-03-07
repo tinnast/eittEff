@@ -6,8 +6,8 @@
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
 
-package is.hi.hbv401g.flightsearch.controller;
+package is.hi.hbv401g.flightsearch.model;
 
-public class FlightSearchController {
+public class Airline {
 
 }
