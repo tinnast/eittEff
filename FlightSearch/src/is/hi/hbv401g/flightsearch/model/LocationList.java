@@ -9,5 +9,7 @@
 package is.hi.hbv401g.flightsearch.model;
 
 public class LocationList {
+	
+	// forritum hér hahahha
 
 }
