@@ -8,30 +8,20 @@
  */
 package is.hi.hbv401g.flightsearch.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-import java.awt.Insets;
 import javax.swing.JButton;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JSeparator;
 
 /**
  * @author tinna
@@ -43,6 +33,8 @@ public class FlightSearchView1 extends JFrame {
 	private JTextField txtFrom;
 	private JTextField txtTo;
 	private JButton btnSearch;
+	private static final long serialVersionUID = 1L;
+	private JTextField txtBookingNumber;
 
 	/**
 	 * Launch the application.
@@ -92,7 +84,7 @@ public class FlightSearchView1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSearch.setBounds(171, 417, 193, 51);
+		btnSearch.setBounds(160, 343, 234, 51);
 		contentPane.add(btnSearch);
 		
 		JDateChooser dateChooserFrom = new JDateChooser();
@@ -111,9 +103,22 @@ public class FlightSearchView1 extends JFrame {
 		lblTopDestinations.setBounds(179, 174, 185, 20);
 		contentPane.add(lblTopDestinations);
 		
-		JList listTopDestinations = new JList();
-		listTopDestinations.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		listTopDestinations.setBounds(100, 377, 330, -145);
-		contentPane.add(listTopDestinations);
+		JLabel lblSeeMyBooking = new JLabel("View my booking");
+		lblSeeMyBooking.setBounds(35, 432, 105, 16);
+		contentPane.add(lblSeeMyBooking);
+		
+		txtBookingNumber = new JTextField();
+		txtBookingNumber.setText("Booking Number");
+		txtBookingNumber.setBounds(135, 429, 116, 22);
+		contentPane.add(txtBookingNumber);
+		txtBookingNumber.setColumns(10);
+		
+		JButton btnFindBooking = new JButton("Find");
+		btnFindBooking.setBounds(267, 428, 97, 25);
+		contentPane.add(btnFindBooking);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(25, 407, 492, 9);
+		contentPane.add(separator);
 	}
 }

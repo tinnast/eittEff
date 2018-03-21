@@ -14,8 +14,6 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.LocationList;
 import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Passenger;
-import is.hi.hbv401g.flightsearch.model.Seat;
-
 import java.util.ArrayList;
 
 

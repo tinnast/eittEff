@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 /**
  * Group 1F
  * @author Aníta Kristjánsdóttir 		190592-2949 <ank16@hi.is>
