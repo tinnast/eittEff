@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 public class FlightSearchController {
-	
+
 	// Usage: manager = new DBManager();
 	// Before: Nothing 
 	// After: manager handles communication with the SQL database
@@ -28,22 +28,42 @@ public class FlightSearchController {
 	private LocationList locationList;
 	// topDestinations contains a list of the top 5-10 destinations in the database with the greatest number of bookings associated  
 	private LocationList topDestinations;
-	
-	
+
+
 	private ArrayList<Airline> airlineList;
 	private ArrayList<Flight> results;
 	
+	private ArrayList<Passenger> passengers;
+
 	// myFlight contains flight user would like to add to their booking
 	private Flight myFlight;
-	
+
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
-		
-	
-	
-	
-	public void bookFlight(Flight f, ArrayList<Passenger> passengers) {
-		myBooking = new Booking();
-	}
 
+
+
+	// Usage: 	bookFlight();
+	// Before:	myFlight and passengers are set.
+	// After: 	booking has been added to manager DB.
+	// 			myBooking.bookingId has been set to a unique alphanumeric string.
+	private void bookFlight(Flight f, ArrayList<Passenger> p) {
+		myBooking = new Booking(myFlight, passengers);
+		addBookingToDB();
+	}
+	
+	// Usage:	addbookingToDB();
+	// Before: 	myBooking contains a random alphanumeric string, a flight, and a list of 1 or more passengers. Each passenger may have 0 or 1 seat chosen.
+	// After:	booking has been added to manager DB.
+	// 			If myBooking.bookingId was already taken in DB, change it to a new, unique alphanumeric string.
+	private void addBookingToDB() {
+		try {
+			manager.addBooking(myBooking);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
+

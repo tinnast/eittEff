@@ -8,9 +8,12 @@
 package is.hi.hbv401g.flightsearch.storage;
 import java.sql.Connection; 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import is.hi.hbv401g.flightsearch.model.Booking;
+
 /**
  * Group 1F
  * @author AnÃ­ta KristjÃ¡nsdÃ³ttir 		190592-2949 <ank16@hi.is>
@@ -20,50 +23,35 @@ import java.sql.Statement;
  */
  
 	public class DBManager {
-		private static String JDBC_CONNECTION;
+		public static String JDBC_CONNECTION;
+		public static String DATABASE_NAME;
 //		
 		public DBManager() {
 			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
+			DATABASE_NAME = "org.sqlite.JDBC";
 		}
-//		
-//		public String searchByQuery(String q) {
-////			Class.forName("org.sqlite.JDBC");
-////			Connection conn = null;
-////			try {
-////				conn = DriverManager.getConnection(JDBC_CONNECTION);
-////			}
-//		}
-		public static void main( String[] args ) throws Exception { 
-			Class.forName("org.sqlite.JDBC"); 
-			
-			Connection conn = null; 
-			try { 
-				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
-				boolean USE_AUTOCOMMIT = true;
-				conn.setAutoCommit(USE_AUTOCOMMIT); 
-				//Bý til tengingu og framkvæmi umbeðna SQL skipanir 
-				Statement stmt = conn.createStatement(); 
+		
+		public void addBooking(Booking booking)  {
+			Connection conn = null;
+			try {
+				Class.forName(DATABASE_NAME);
+				} catch (Exception e) {
+				  System.err.println(e.getMessage());
+				}
+			try {
+				conn = DriverManager.getConnection(JDBC_CONNECTION);
+				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Bookings VALUES(?,?,?,?)"); 
 				
-				//SQL skipunin sem ég ætla að keyra 1000000 sinnum 
-				//PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Flights VALUES(?,?)"); 
-				
-//				pstmt.clearParameters(); 
-//				pstmt.setString(1,"Iceland"); 
-//				pstmt.setString(2,"France"); 
-//				pstmt.executeUpdate(); 
-//				
-			//	if( !USE_AUTOCOMMIT ) conn.commit(); 
-				ResultSet r = stmt.executeQuery ("SELECT * FROM Flights" );
-				r.next();
-				System.out.println(r.getString(1));
-				System.out.println(r.getString(2));
-//				System.out.println(r.getString(3));
-//				System.out.println(r.getString(4));
-//				System.out.println(r.getString(5));
-//				System.out.println(r.getString(6));
-				
-				} 
-				catch(SQLException e) {
+				pstmt.clearParameters(); 
+				pstmt.setString(1,"AA");
+				pstmt.setString(2, "AAAAA");
+				pstmt.setString(3,"Anna Beib"); 
+				pstmt.setString(4, "14A");
+				int res = pstmt.executeUpdate(); 
+//				Statement stmt = conn.createStatement();
+//				int res = stmt.executeUpdate("INSERT INTO Bookings VALUES (\"AA\", \"AAAAA\", \"Jon Jonsson\", \"13A\");");
+				System.out.println("Her er "   +  res);
+			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
 				} finally {
 					try {
@@ -71,7 +59,78 @@ import java.sql.Statement;
 						} catch(SQLException e) {
 							System.err.println(e); 
 						  } 
-					    }
+					    } 
+			
+		}
+		
+		public void searchByQuery(String q)  {
+			Connection conn = null;
+			try {
+			Class.forName(DATABASE_NAME);
+			} catch (Exception e) {
+			  System.err.println(e.getMessage());
+			}
+			try {
+				conn = DriverManager.getConnection(JDBC_CONNECTION);
+				Statement stmt = conn.createStatement();
+				ResultSet r = stmt.executeQuery(q);
+				while (r.next()) {
+					System.out.println(r.getString(1));
+					System.out.println(r.getString(2));
+					System.out.println(r.getString(3));
+					System.out.println(r.getString(4));
+					System.out.println(r.getString(5));
+					System.out.println(r.getString(6));
+				}
+			} catch(SQLException e) {
+				System.err.println(e.getMessage()); 
+				} finally {
+					try {
+						if(conn != null) conn.close(); 
+						} catch(SQLException e) {
+							System.err.println(e); 
+						  } 
+					    } 
+			String r = "jeij";
+////			return r;
+			
+	 }
+		public static void main( String[] args ) throws Exception { 
+			DBManager mydb = new DBManager();
+			mydb.searchByQuery("SELECT * FROM FLIGHTS WHERE departure = \"Iceland\"");
+			
+//			Class.forName("org.sqlite.JDBC"); 
+//			
+//			Connection conn = null; 
+//			try { 
+//				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
+//				boolean USE_AUTOCOMMIT = true;
+//				conn.setAutoCommit(USE_AUTOCOMMIT); 
+//				//Bï¿½ til tengingu og framkvï¿½mi umbeï¿½na SQL skipanir 
+//				Statement stmt = conn.createStatement(); 
+//				
+//				
+//////				
+//			//	if( !USE_AUTOCOMMIT ) conn.commit(); 
+//				ResultSet r = stmt.executeQuery ("SELECT * FROM Flights" );
+//				r.next();
+//				System.out.println(r.getString(1));
+//				System.out.println(r.getString(2));
+//					System.out.println(r.getString(3));
+//					System.out.println(r.getString(4));
+//					System.out.println(r.getString(5));
+//					System.out.println(r.getString(6));
+//				
+//				} 
+//				catch(SQLException e) {
+//				System.err.println(e.getMessage()); 
+//				} finally {
+//					try {
+//						if(conn != null) conn.close(); 
+//						} catch(SQLException e) {
+//							System.err.println(e); 
+//						  } 
+//					    }
 	 }
 }
 
