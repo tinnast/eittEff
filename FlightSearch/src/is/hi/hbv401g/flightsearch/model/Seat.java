@@ -1,3 +1,4 @@
+package is.hi.hbv401g.flightsearch.model;
 /**
  * Group 1F
  * @author Aníta Kristjánsdóttir 		190592-2949 <ank16@hi.is>
@@ -9,9 +10,52 @@
 package is.hi.hbv401g.flightsearch.model;
 
 /**
- * @author karlpestka
- *
- */
 public class Seat {
 
+	public static void main(String[]args) {
+		
+		private int price;
+
+		private String Class;
+
+		private Passenger passenger; //import from your project
+
+		private boolean entertainment;
+
+		private String electricalConnections;
+
+		private String luggage;
+
+		private boolean food;
+
+		private int seatNumber;
+
+		public int getPrice() {
+
+		return price;
+
+		}
+
+		public String getClass() {
+
+		return Class;
+
+		}
+
+		public int getSeatNo() {
+
+		return SeatNo;
+
+		}
+
+		public Passenger getPassenger(){
+
+		return Passenger;
+
+		}
+
+		}
+	
+	
+	
 }
