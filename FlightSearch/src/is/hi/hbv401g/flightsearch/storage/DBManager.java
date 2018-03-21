@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import is.hi.hbv401g.flightsearch.model.Booking;
 /**
  * Group 1F
  * @author AnÃ­ta KristjÃ¡nsdÃ³ttir 		190592-2949 <ank16@hi.is>
@@ -41,10 +43,10 @@ import java.sql.Statement;
 				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
 				boolean USE_AUTOCOMMIT = true;
 				conn.setAutoCommit(USE_AUTOCOMMIT); 
-				//Bý til tengingu og framkvæmi umbeðna SQL skipanir 
+				//Bï¿½ til tengingu og framkvï¿½mi umbeï¿½na SQL skipanir 
 				Statement stmt = conn.createStatement(); 
 				
-				//SQL skipunin sem ég ætla að keyra 1000000 sinnum 
+				//SQL skipunin sem ï¿½g ï¿½tla aï¿½ keyra 1000000 sinnum 
 				//PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Flights VALUES(?,?)"); 
 				
 //				pstmt.clearParameters(); 
@@ -73,6 +75,13 @@ import java.sql.Statement;
 						  } 
 					    }
 	 }
+		/**
+		 * @param myBooking
+		 */
+		public void addBooking(Booking myBooking) {
+			// TODO Auto-generated method stub
+			
+		}
 }
 
 //import java.sql.Connection;
