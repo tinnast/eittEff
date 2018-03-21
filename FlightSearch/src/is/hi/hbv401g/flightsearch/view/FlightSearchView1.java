@@ -21,6 +21,7 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JSeparator;
 
 /**
  * @author tinna
@@ -32,6 +33,8 @@ public class FlightSearchView1 extends JFrame {
 	private JTextField txtFrom;
 	private JTextField txtTo;
 	private JButton btnSearch;
+	private static final long serialVersionUID = 1L;
+	private JTextField txtBookingNumber;
 
 	/**
 	 * Launch the application.
@@ -81,7 +84,7 @@ public class FlightSearchView1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSearch.setBounds(171, 417, 193, 51);
+		btnSearch.setBounds(160, 343, 234, 51);
 		contentPane.add(btnSearch);
 		
 		JDateChooser dateChooserFrom = new JDateChooser();
@@ -99,5 +102,23 @@ public class FlightSearchView1 extends JFrame {
 		lblTopDestinations.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTopDestinations.setBounds(179, 174, 185, 20);
 		contentPane.add(lblTopDestinations);
+		
+		JLabel lblSeeMyBooking = new JLabel("View my booking");
+		lblSeeMyBooking.setBounds(35, 432, 105, 16);
+		contentPane.add(lblSeeMyBooking);
+		
+		txtBookingNumber = new JTextField();
+		txtBookingNumber.setText("Booking Number");
+		txtBookingNumber.setBounds(135, 429, 116, 22);
+		contentPane.add(txtBookingNumber);
+		txtBookingNumber.setColumns(10);
+		
+		JButton btnFindBooking = new JButton("Find");
+		btnFindBooking.setBounds(267, 428, 97, 25);
+		contentPane.add(btnFindBooking);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(25, 407, 492, 9);
+		contentPane.add(separator);
 	}
 }
