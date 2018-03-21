@@ -5,7 +5,6 @@
  * @author Mimoza Herta Róbertsdóttir 	310194-3289 <mhr4@hi.is>
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
-
 package is.hi.hbv401g.flightsearch.model;
 
 public class Flight {
