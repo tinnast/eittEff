@@ -57,7 +57,12 @@ public class FlightSearchController {
 	// After:	booking has been added to manager DB.
 	// 			If myBooking.bookingId was already taken in DB, change it to a new, unique alphanumeric string.
 	private void addBookingToDB() {
-		manager.addBooking(myBooking);
+		try {
+			manager.addBooking(myBooking);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

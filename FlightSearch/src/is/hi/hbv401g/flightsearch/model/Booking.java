@@ -18,8 +18,7 @@ public class Booking {
 	private ArrayList<Passenger> passengers;
 
 	RandomStringGenerator generator = new RandomStringGenerator.Builder()
-			.withinRange('a', 'z').build();
-	String randomLetters = generator.generate(20);
+			.withinRange('a', '9').build();
 
 
 	/**
@@ -33,15 +32,39 @@ public class Booking {
 	 */
 	public Booking (Flight f, ArrayList<Passenger> p) {
 
-		passengers = p;
 		flight = f;
+		passengers = p;
 		setBookingId();
 
 
 	}	
 
+	// Usage:  	setBookingId()
+	// Before:	nothing
+	// After: 	bookingId is a new random 6-character alphanumeric string.
 	public void setBookingId () {
 		bookingId = generator.generate(6);
+	}
+
+	/**
+	 * @return the bookingId
+	 */
+	public String getBookingId() {
+		return bookingId;
+	}
+
+	/**
+	 * @return the flight
+	 */
+	public Flight getFlight() {
+		return flight;
+	}
+
+	/**
+	 * @return the passengers
+	 */
+	public ArrayList<Passenger> getPassengers() {
+		return passengers;
 	}
 
 }
