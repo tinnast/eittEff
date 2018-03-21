@@ -7,10 +7,8 @@ package is.hi.hbv401g.flightsearch.model;
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
 
-
-
-
 public class Seat {
+	
 	private int price;
 	private String seatClass;
 	private Passenger passenger; //import from your project
@@ -22,25 +20,21 @@ public class Seat {
 	
 	
 	public int getPrice() {
-	return price;
+		return price;
 	}
 	
+	public String getSeatClass() {
+		return seatClass;
+	}
 
+	public int getSeatNumber() {
+		return seatNumber;
 
-		public String getSeatClass() {
-			return seatClass;
+	}
 
-		}
-
-		public int getSeatNumber() {
-			return seatNumber;
-
-		}
-
-		public Passenger getPassenger(){
-			return passenger;
-
-		}
+	public Passenger getPassenger() {
+		return passenger;
+	}
 
 		}
 	
