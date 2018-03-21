@@ -23,9 +23,9 @@ import java.sql.PreparedStatement;
 	public class DBManager {
 		private static String JDBC_CONNECTION;
 //		
-//		public DBManager() {
-//			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
-//		}
+		public DBManager() {
+			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
+		}
 //		
 //		public String searchByQuery(String q) {
 ////			Class.forName("org.sqlite.JDBC");
@@ -39,7 +39,7 @@ import java.sql.PreparedStatement;
 			
 			Connection conn = null; 
 			try { 
-				conn = DriverManager.getConnection(JDBC_CONNECTION); 
+				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
 				boolean USE_AUTOCOMMIT = true;
 				conn.setAutoCommit(USE_AUTOCOMMIT); 
 				//Bý til tengingu og framkvæmi umbeðna SQL skipanir 
@@ -58,10 +58,10 @@ import java.sql.PreparedStatement;
 				r.next();
 				System.out.println(r.getString(1));
 				System.out.println(r.getString(2));
-				System.out.println(r.getString(3));
-				System.out.println(r.getString(4));
-				System.out.println(r.getString(5));
-				System.out.println(r.getString(6));
+//				System.out.println(r.getString(3));
+//				System.out.println(r.getString(4));
+//				System.out.println(r.getString(5));
+//				System.out.println(r.getString(6));
 				
 				} 
 				catch(SQLException e) {
