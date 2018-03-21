@@ -22,18 +22,18 @@ import java.sql.PreparedStatement;
  
 	public class DBManager {
 		private static String JDBC_CONNECTION;
-		
-		public DBManager() {
-			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
-		}
-		
-		public String searchByQuery(String q) {
-//			Class.forName("org.sqlite.JDBC");
-//			Connection conn = null;
-//			try {
-//				conn = DriverManager.getConnection(JDBC_CONNECTION);
-//			}
-		}
+//		
+//		public DBManager() {
+//			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
+//		}
+//		
+//		public String searchByQuery(String q) {
+////			Class.forName("org.sqlite.JDBC");
+////			Connection conn = null;
+////			try {
+////				conn = DriverManager.getConnection(JDBC_CONNECTION);
+////			}
+//		}
 		public static void main( String[] args ) throws Exception { 
 			Class.forName("org.sqlite.JDBC"); 
 			
