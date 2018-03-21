@@ -7,6 +7,13 @@
  */
 package is.hi.hbv401g.flightsearch.model;
 
+import java.sql.Date;
+
 public class Flight {
+	
+	private String departure;
+	private String arrival;
+	private Date departureTime;
+	private Date arrivalTime;
 
 }
