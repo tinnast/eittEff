@@ -21,32 +21,48 @@ import java.sql.PreparedStatement;
  */
  
 	public class DBManager {
+		private static String JDBC_CONNECTION;
+		
+		public DBManager() {
+			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
+		}
+		
+		public String searchByQuery(String q) {
+//			Class.forName("org.sqlite.JDBC");
+//			Connection conn = null;
+//			try {
+//				conn = DriverManager.getConnection(JDBC_CONNECTION);
+//			}
+		}
 		public static void main( String[] args ) throws Exception { 
 			Class.forName("org.sqlite.JDBC"); 
 			
 			Connection conn = null; 
 			try { 
-				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
+				conn = DriverManager.getConnection(JDBC_CONNECTION); 
 				boolean USE_AUTOCOMMIT = true;
 				conn.setAutoCommit(USE_AUTOCOMMIT); 
 				//Bý til tengingu og framkvæmi umbeðna SQL skipanir 
 				Statement stmt = conn.createStatement(); 
-				stmt.executeUpdate("DROP TABLE IF EXISTS Flights"); 
-				stmt.executeUpdate("CREATE TABLE Flights(departure char(100), arrival char(100))");
 				
 				//SQL skipunin sem ég ætla að keyra 1000000 sinnum 
-				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Flights VALUES(?,?)"); 
+				//PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Flights VALUES(?,?)"); 
 				
-				pstmt.clearParameters(); 
-				pstmt.setString(1,"Iceland"); 
-				pstmt.setString(2,"France"); 
-				pstmt.executeUpdate(); 
-				
-				if( !USE_AUTOCOMMIT ) conn.commit(); 
+//				pstmt.clearParameters(); 
+//				pstmt.setString(1,"Iceland"); 
+//				pstmt.setString(2,"France"); 
+//				pstmt.executeUpdate(); 
+//				
+			//	if( !USE_AUTOCOMMIT ) conn.commit(); 
 				ResultSet r = stmt.executeQuery ("SELECT * FROM Flights" );
 				r.next();
-				System.out.print(r.getString(1));
-				System.out.print(r.getString(2));
+				System.out.println(r.getString(1));
+				System.out.println(r.getString(2));
+				System.out.println(r.getString(3));
+				System.out.println(r.getString(4));
+				System.out.println(r.getString(5));
+				System.out.println(r.getString(6));
+				
 				} 
 				catch(SQLException e) {
 				System.err.println(e.getMessage()); 
