@@ -8,28 +8,17 @@
  */
 package is.hi.hbv401g.flightsearch.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
-import java.awt.Insets;
 import javax.swing.JButton;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
@@ -110,10 +99,5 @@ public class FlightSearchView1 extends JFrame {
 		lblTopDestinations.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTopDestinations.setBounds(179, 174, 185, 20);
 		contentPane.add(lblTopDestinations);
-		
-		JList listTopDestinations = new JList();
-		listTopDestinations.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		listTopDestinations.setBounds(100, 377, 330, -145);
-		contentPane.add(listTopDestinations);
 	}
 }
