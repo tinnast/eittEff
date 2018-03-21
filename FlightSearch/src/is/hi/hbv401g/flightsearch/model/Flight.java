@@ -8,6 +8,8 @@
 package is.hi.hbv401g.flightsearch.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 public class Flight {
 	
@@ -15,5 +17,50 @@ public class Flight {
 	private String arrival;
 	private Date departureTime;
 	private Date arrivalTime;
+	private int numberOfSeats;
+	private int numberOfBookedSeats;
+	private ArrayList<Seat> seats;
+	private String flightNumber;
+	
+	public Flight (String d, String a, Date dt, Date at, int ns, int nbs, ArrayList<Seat> theSeats, String fn) {
+		departure = d;
+		arrival = a;
+		departureTime = dt;
+		arrivalTime = at;
+		numberOfSeats = ns;
+		numberOfBookedSeats = nbs;
+		seats = theSeats;
+		flightNumber = fn;
+		
+	}
+	
+	
+	public String getDeparture() {
+		return departure;
+	}
+	
+	public String getArrival() {
+		return arrival;
+	}
+	
+	public Date getDepartureTime() {
+		return departureTime;
+	}
+	
+	public Date getArrivalTime() {
+		return arrivalTime;
+	}
+	
+	public int getNumberOfAvailableSeats() {
+		return numberOfSeats - numberOfBookedSeats;
+	}
+	
+	public ArrayList<Seat> getAvailableSeats() {
+		return seats;  // FIX THIS METHOD
+	}
+	
+	public String getFlightNumber() {
+		return flightNumber;
+	}
 
 }
