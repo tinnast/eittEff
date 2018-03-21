@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.18.0.jar"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/tinna/OneDrive/Þróun hugbúnaðar/lib/jcalendar-1.4.jar"/>
-=======
->>>>>>> master
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
