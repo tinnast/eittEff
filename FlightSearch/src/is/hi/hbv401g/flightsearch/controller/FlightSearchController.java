@@ -43,9 +43,20 @@ public class FlightSearchController {
 
 
 
-
-	public void bookFlight(Flight f, ArrayList<Passenger> p) {
+	// Usage: 	bookFlight();
+	// B
+	private void bookFlight(Flight f, ArrayList<Passenger> p) {
 		myBooking = new Booking(myFlight, passengers);
+		addBookingToDB();
 	}
-
+	
+	// Usage:	addbookingToDB();
+	// Before: 	myBooking contains a random bookingId, a flight, and a list of 1 or more passengers. Each passenger may have 0 or 1 seat chosen.
+	// After:	booking has been added to manager DB.
+	// 			If myBooking.bookingId was already taken in DB, change it to a new, unique bookingId.
+	private void addBookingToDB() {
+		manager.addBooking(myBooking);
+	}
+	
 }
+
