@@ -9,7 +9,7 @@ package is.hi.hbv401g.flightsearch.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import is.hi.hbv401g.flightsearch.model.Seat;
+
 
 public class Flight {
 	

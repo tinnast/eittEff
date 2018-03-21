@@ -99,6 +99,30 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 			DBManager mydb = new DBManager();
 			mydb.searchByQuery("SELECT * FROM FLIGHTS WHERE departure = \"Iceland\"");
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 //			Class.forName("org.sqlite.JDBC"); 
 //			
 //			Connection conn = null; 

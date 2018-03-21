@@ -10,5 +10,20 @@ package is.hi.hbv401g.flightsearch.model;
 
 
 public class Passenger {
-
+	
+	private String name;
+	private Seat seat;
+	
+	public Passenger(String n, Seat s) {
+		name = n;
+		seat = s;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public Seat getSeat() {
+		return seat;
+	}
 }
