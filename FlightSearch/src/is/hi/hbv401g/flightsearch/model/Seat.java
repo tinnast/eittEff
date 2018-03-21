@@ -7,55 +7,43 @@ package is.hi.hbv401g.flightsearch.model;
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
 
-package is.hi.hbv401g.flightsearch.model;
 
-/**
+
+
 public class Seat {
+	private int price;
+	private String seatClass;
+	private Passenger passenger; //import from your project
+	private boolean entertainment;
+	private String electricalConnections;
+	private String luggage;
+	private boolean food;
+	private int seatNumber;
+	
+	
+	public int getPrice() {
+	return price;
+	}
+	
 
-	public static void main(String[]args) {
-		
-		private int price;
 
-		private String Class;
-
-		private Passenger passenger; //import from your project
-
-		private boolean entertainment;
-
-		private String electricalConnections;
-
-		private String luggage;
-
-		private boolean food;
-
-		private int seatNumber;
-
-		public int getPrice() {
-
-		return price;
+		public String getSeatClass() {
+			return seatClass;
 
 		}
 
-		public String getClass() {
-
-		return Class;
-
-		}
-
-		public int getSeatNo() {
-
-		return SeatNo;
+		public int getSeatNumber() {
+			return seatNumber;
 
 		}
 
 		public Passenger getPassenger(){
-
-		return Passenger;
-
-		}
+			return passenger;
 
 		}
+
+		}
 	
 	
 	
-}
+

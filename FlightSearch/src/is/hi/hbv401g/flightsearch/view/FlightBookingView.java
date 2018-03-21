@@ -19,7 +19,7 @@ import javax.swing.JTextPane;
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.JFormattedTextField;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
