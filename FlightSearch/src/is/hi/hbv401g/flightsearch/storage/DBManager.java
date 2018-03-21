@@ -8,6 +8,7 @@
 package is.hi.hbv401g.flightsearch.storage;
 import java.sql.Connection; 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,14 +31,25 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 			DATABASE_NAME = "org.sqlite.JDBC";
 		}
 		
-		public void addBooking(Booking booking) throws Exception {
-			Class.forName(DATABASE_NAME);
+		public void addBooking(Booking booking)  {
 			Connection conn = null;
-			
+			try {
+				Class.forName(DATABASE_NAME);
+				} catch (Exception e) {
+				  System.err.println(e.getMessage());
+				}
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				Statement stmt = conn.createStatement();
-				int res = stmt.executeUpdate("INSERT INTO Bookings VALUES (\"AA\", \"AAAAA\", \"Jon Jonsson\", \"13A\");");
+				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Bookings VALUES(?,?,?,?)"); 
+				
+				pstmt.clearParameters(); 
+				pstmt.setString(1,"AA");
+				pstmt.setString(2, "AAAAA");
+				pstmt.setString(3,"Anna Beib"); 
+				pstmt.setString(4, "14A");
+				int res = pstmt.executeUpdate(); 
+//				Statement stmt = conn.createStatement();
+//				int res = stmt.executeUpdate("INSERT INTO Bookings VALUES (\"AA\", \"AAAAA\", \"Jon Jonsson\", \"13A\");");
 				System.out.println("Her er "   +  res);
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
@@ -51,9 +63,13 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 			
 		}
 		
-		public void searchByQuery(String q) throws Exception {
-			Class.forName(DATABASE_NAME);
+		public void searchByQuery(String q)  {
 			Connection conn = null;
+			try {
+			Class.forName(DATABASE_NAME);
+			} catch (Exception e) {
+			  System.err.println(e.getMessage());
+			}
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
 				Statement stmt = conn.createStatement();
@@ -94,13 +110,6 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 //				Statement stmt = conn.createStatement(); 
 //				
 //				
-//				//SQL skipunin sem �g �tla a� keyra 1000000 sinnum 
-//				//PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Flights VALUES(?,?)"); 
-//				
-//////				pstmt.clearParameters(); 
-//////				pstmt.setString(1,"Iceland"); 
-//////				pstmt.setString(2,"France"); 
-//////				pstmt.executeUpdate(); 
 //////				
 //			//	if( !USE_AUTOCOMMIT ) conn.commit(); 
 //				ResultSet r = stmt.executeQuery ("SELECT * FROM Flights" );
