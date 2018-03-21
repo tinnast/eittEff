@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 public class FlightSearchController {
-	
+
 	// Usage: manager = new DBManager();
 	// Before: Nothing 
 	// After: manager handles communication with the SQL database
@@ -30,22 +30,24 @@ public class FlightSearchController {
 	private LocationList locationList;
 	// topDestinations contains a list of the top 5-10 destinations in the database with the greatest number of bookings associated  
 	private LocationList topDestinations;
-	
-	
+
+
 	private ArrayList<Airline> airlineList;
 	private ArrayList<Flight> results;
 	
+	private ArrayList<Passenger> passengers;
+
 	// myFlight contains flight user would like to add to their booking
 	private Flight myFlight;
-	
+
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
-		
-	
-	
-	
-	public void bookFlight(Flight f, ArrayList<Passenger> passengers) {
-		myBooking = new Booking();
+
+
+
+
+	public void bookFlight(Flight f, ArrayList<Passenger> p) {
+		myBooking = new Booking(myFlight, passengers);
 	}
 
 }
