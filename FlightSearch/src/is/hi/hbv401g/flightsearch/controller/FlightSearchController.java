@@ -35,7 +35,9 @@ public class FlightSearchController {
 	private ArrayList<Airline> airlineList;
 	private ArrayList<Flight> results;
 	
+	// myFlight contains flight user would like to add to their booking
 	private Flight myFlight;
+	
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
 		
