@@ -7,10 +7,28 @@
  */
 package is.hi.hbv401g.flightsearch.controller;
 
+import java.util.List;
+
+import is.hi.hbv401g.flightsearch.model.Booking;
+import is.hi.hbv401g.flightsearch.model.Flight;
+
+
 /**
  * @author Anita Kristjansdotti
  *
  */
 public interface DBManager {
+	   List<Flight> searchByQuery (Query q); 
+
+	   List<String> getLocations();
+	   
+	   List<String> getPopularLocations();
+	   
+	   void addBooking(Booking bokking);
+	   
+	   Booking searchForBooking(int bookNumber);
+	   
+	  
+	}
 
 }
