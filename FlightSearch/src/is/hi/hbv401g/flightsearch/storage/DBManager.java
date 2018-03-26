@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import is.hi.hbv401g.flightsearch.model.Booking;
+import is.hi.hbv401g.flightsearch.model.Passenger;
 
 /**
  * Group 1F
@@ -98,6 +99,7 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
 			mydb.searchByQuery("SELECT * FROM FLIGHTS WHERE departure = \"Iceland\"");
+			Passenger p = new Passenger("Anna", null);
 			
 			
 			
