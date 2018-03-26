@@ -36,7 +36,7 @@ public class Seat {
 
 >>>>>>> Stashed changes
 public class Seat {
-	
+
 	private int price;
 	private String seatClass;
 	private Passenger passenger; //import from your project
@@ -45,12 +45,12 @@ public class Seat {
 	private String luggage;
 	private boolean food;
 	private int seatNumber;
-	
-	
+
+
 	public int getPrice() {
 		return price;
 	}
-	
+
 	public String getSeatClass() {
 		return seatClass;
 	}
@@ -111,8 +111,8 @@ public class Seat {
 		return passenger;
 	}
 
-		}
-	
-	
-	
+}
+
+
+
 
