@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 
-public class FlightMock {
+public class FlightMock implements Flight {
 	
 	private String departure;
 	private String arrival;
