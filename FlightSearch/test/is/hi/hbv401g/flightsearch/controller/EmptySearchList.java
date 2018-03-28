@@ -8,10 +8,14 @@
 package is.hi.hbv401g.flightsearch.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Passenger;
+import is.hi.hbv401g.flightsearch.model.Query;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author tinna
@@ -44,7 +48,6 @@ public class EmptySearchList implements DBManager {
 	@Override
 	public List<String> getPopularLocations() {
 		List<String> returnFlights = new ArrayList<String>();
-
 		return returnFlights;
 	}
 
@@ -54,7 +57,6 @@ public class EmptySearchList implements DBManager {
 	@Override
 	public void addBooking(Booking bokking) {
 		//
-		
 	}
 
 	/* (non-Javadoc)
@@ -62,8 +64,10 @@ public class EmptySearchList implements DBManager {
 	 */
 	@Override
 	public Booking searchForBooking(int bookNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Passenger> p = new ArrayList<Passenger>();
+		Flight flight = new Flight("test", "test", new Date(), new Date(), 0, 0, new ArrayList<Seat>(), "test");
+		Booking returnBooking = new Booking(flight, p);
+		return returnBooking;
 	}
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Query;
 
 
 /**
