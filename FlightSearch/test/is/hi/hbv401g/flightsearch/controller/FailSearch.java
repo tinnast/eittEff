@@ -21,8 +21,8 @@ import java.sql.SQLException;
  */
 public class FailSearch implements DBManager {
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchByQuery(is.hi.hbv401g.flightsearch.controller.Query)
+	/* 
+	 * Kastar villu eins og það hafi orðið villa í gagnagrunnssamskiptum.
 	 */
 	@Override
 	public List<Flight> searchByQuery(Query q) throws SQLException {

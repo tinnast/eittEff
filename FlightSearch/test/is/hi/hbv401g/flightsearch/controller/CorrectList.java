@@ -26,7 +26,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 public class CorrectList implements DBManager {
 
 	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchByQuery(is.hi.hbv401g.flightsearch.controller.Query)
+	 * Skilar lista af gildum flugum
 	 */
 	@Override
 	public List<Flight> searchByQuery(Query q) {
@@ -75,7 +75,7 @@ public class CorrectList implements DBManager {
 	 */
 	@Override
 	public List<String> getPopularLocations() {
-		// TODO Auto-generated method stub
+		// Ekki prófað í þessu verkefni
 		return null;
 	}
 
@@ -84,7 +84,7 @@ public class CorrectList implements DBManager {
 	 */
 	@Override
 	public void addBooking(Booking bokking) {
-		// TODO Auto-generated method stub
+		// Ekki prófað í þessu verkefni
 		
 	}
 
@@ -93,17 +93,8 @@ public class CorrectList implements DBManager {
 	 */
 	@Override
 	public Booking searchForBooking(int bookNumber) {
-		// TODO Auto-generated method stub
+		// Ekki prófað í þessu verkefni
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchByQuery(is.hi.hbv401g.flightsearch.controller.Query)
-	 */
-	@Override
-	public List<Flight> searchByQuery(is.hi.hbv401g.flightsearch.controller.Query q) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
