@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
-
+import java.util.ArrayList;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
 /**
  * Group 1F
  * @author Aníta Kristjánsdóttir 		190592-2949 <ank16@hi.is>
@@ -16,9 +17,30 @@ import org.junit.Test;
  */
 public class FlightSearchControllerTest {
 
+	@Before
+	public void setUp() {
+		
+	}
+	
+	@After
+	public void tearDown () {
+		
+	}
+	
 	@Test	
-	public void test() {
+	public void testSearhForFlight() {
+		
+	}
+	
+	@Test
+	public void testSearchEmpty() {
+		
+	}
+	
+	@Test
+	public void testSearchFail() {
 		fail("Not yet implemented");
 	}
-
+	
+ 
 }
