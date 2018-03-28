@@ -7,11 +7,62 @@
  */
 package is.hi.hbv401g.flightsearch.controller;
 
+import java.util.List;
+
+import is.hi.hbv401g.flightsearch.model.Booking;
+import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Query;
+
+import java.sql.SQLException;
+
 /**
  * @author tinna
  *
  */
 public class FailSearch implements DBManager {
+
+	/* (non-Javadoc)
+	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchByQuery(is.hi.hbv401g.flightsearch.controller.Query)
+	 */
+	@Override
+	public List<Flight> searchByQuery(Query q) throws SQLException {
+		throw new SQLException();
+	}
+
+	/* (non-Javadoc)
+	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getLocations()
+	 */
+	@Override
+	public List<String> getLocations() throws SQLException {
+		throw new SQLException();
+	}
+
+	/* (non-Javadoc)
+	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getPopularLocations()
+	 */
+	@Override
+	public List<String> getPopularLocations() throws SQLException {
+		throw new SQLException();
+	}
+
+	/* (non-Javadoc)
+	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#addBooking(is.hi.hbv401g.flightsearch.model.Booking)
+	 */
+	@Override
+	public void addBooking(Booking bokking) throws SQLException {
+		throw new SQLException();
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchForBooking(int)
+	 */
+	@Override
+	public Booking searchForBooking(int bookNumber) throws SQLException {
+		throw new SQLException();
+	}
+
+
 	
 
 }
