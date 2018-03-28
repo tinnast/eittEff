@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class FlightSearchControllerTest {
 
-	@Test
+	@Test	
 	public void test() {
 		fail("Not yet implemented");
 	}
