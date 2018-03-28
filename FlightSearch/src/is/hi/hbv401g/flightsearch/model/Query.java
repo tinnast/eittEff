@@ -8,18 +8,18 @@
 
 package is.hi.hbv401g.flightsearch.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Query {
 	
 	private String departure;
 	private String arrival;
-	private Date departureTime;
-	private Date arrivalTime;
+	private Calendar departureTime;
+	private Calendar arrivalTime;
 	private int passengerCount;
 	
 	
-	public Query (String dep, String arr, Date dTime, Date aTime, int pCount) {
+	public Query (String dep, String arr, Calendar dTime, Calendar aTime, int pCount) {
 		this.departure = dep;
 		this.arrival = arr;
 		this.departureTime = dTime;
@@ -35,11 +35,11 @@ public class Query {
 		return arrival;
 	}
 	
-	public Date getDepartureTime() {
+	public Calendar getDepartureTime() {
 		return departureTime;
 	}
 	
-	public Date getArrivalTime() {
+	public Calendar getArrivalTime() {
 		return arrivalTime;
 	}
 	

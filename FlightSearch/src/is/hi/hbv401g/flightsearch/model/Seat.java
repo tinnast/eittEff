@@ -7,10 +7,6 @@ package is.hi.hbv401g.flightsearch.model;
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 package is.hi.hbv401g.flightsearch.model;
 
 
@@ -29,12 +25,10 @@ public class Seat {
 		private String electricalConnections;
 
 		private String luggage;
->>>>>>> Stashed changes
 
 
-<<<<<<< Updated upstream
 
->>>>>>> Stashed changes
+
 public class Seat {
 
 	private int price;
@@ -55,13 +49,11 @@ public class Seat {
 		return seatClass;
 	}
 
-<<<<<<< Updated upstream
 	public int getSeatNumber() {
 		return seatNumber;
 
 	}
-=======
-=======
+
 		private int seatNumber;
 		
 		/**
@@ -76,27 +68,23 @@ public class Seat {
 		/**
 		 * @return Class
 		 */
-		public String getClass() {
->>>>>>> Stashed changes
 
 		public String getSeatClass() {
 			return seatClass;
 
 		}
-<<<<<<< Updated upstream
 
 		public int getSeatNumber() {
 			return seatNumber;
-=======
-		
+
 		
 		/**
 		 * @return SeatNo
 		 */
 		public int getSeatNo() {
 
-		return SeatNo;
->>>>>>> Stashed changes
+			return SeatNo;
+
 
 		}
 		
@@ -105,7 +93,6 @@ public class Seat {
 		 */
 		public Passenger getPassenger(){
 			return passenger;
->>>>>>> Stashed changes
 
 	public Passenger getPassenger() {
 		return passenger;

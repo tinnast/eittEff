@@ -7,12 +7,15 @@
  */
 package is.hi.hbv401g.flightsearch.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.management.Query;
 
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author tinna
@@ -25,6 +28,7 @@ public class CorrectList implements DBManager {
 	 */
 	@Override
 	public List<Flight> searchByQuery(Query q) {
+		Flight flight1 = new Flight ("KEFLAVIK","PARIS", int ns, int nbs, ArrayList<Seat> theSeats, String fn) )
 		List<Flight> flightList = new ArrayList<Flight>();
 		return flightList;
 	}
