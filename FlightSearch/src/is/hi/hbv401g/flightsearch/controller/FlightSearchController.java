@@ -14,7 +14,12 @@ import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.LocationList;
 import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Passenger;
+import is.hi.hbv401g.flightsearch.model.Query;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 
 public class FlightSearchController {
@@ -40,14 +45,26 @@ public class FlightSearchController {
 
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
-
+	
+	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
+		List<Flight> returnFlights = new ArrayList<Flight>();
+		
+		Query myQuery = new Query (departure, arrival, depDate, arrDate, passengerCount);
+		try {
+			returnFlights = manager.searchByQuery(myQuery);
+		} catch (SQLException e) {
+			
+		}
+		
+		return returnFlights;
+	}
 
 
 	// Usage: 	bookFlight();
 	// Before:	myFlight and passengers are set.
 	// After: 	booking has been added to manager DB.
 	// 			myBooking.bookingId has been set to a unique alphanumeric string.
-	private void bookFlight(Flight f, ArrayList<Passenger> p) {
+	public void bookFlight(Flight f, ArrayList<Passenger> p) {
 		myBooking = new Booking(myFlight, passengers);
 		addBookingToDB();
 	}
@@ -56,7 +73,7 @@ public class FlightSearchController {
 	// Before: 	myBooking contains a random alphanumeric string, a flight, and a list of 1 or more passengers. Each passenger may have 0 or 1 seat chosen.
 	// After:	booking has been added to manager DB.
 	// 			If myBooking.bookingId was already taken in DB, change it to a new, unique alphanumeric string.
-	private void addBookingToDB() {
+	public void addBookingToDB() {
 		try {
 			manager.addBooking(myBooking);
 		} catch (Exception e) {
