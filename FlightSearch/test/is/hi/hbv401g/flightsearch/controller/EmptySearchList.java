@@ -68,7 +68,9 @@ public class EmptySearchList implements DBManager {
 		ArrayList<Passenger> p = new ArrayList<Passenger>();
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
-		Flight flight = new Flight("test", "test", new Calendar(2018), new Calendar(), 0, 0, new ArrayList<Seat>(), "test");
+		c1.set(0,0,0);
+		c2.set(0, 0,0);
+		Flight flight = new Flight("test", "test", c1, c2, 0, 0, new ArrayList<Seat>(), "test");
 		Booking returnBooking = new Booking(flight, p);
 		return returnBooking;
 	}
