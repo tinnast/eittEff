@@ -7,7 +7,7 @@
  */
 package is.hi.hbv401g.flightsearch.model;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.ArrayList;
 
 
@@ -15,14 +15,14 @@ public class Flight {
 	
 	private String departure;
 	private String arrival;
-	private Date departureTime;
-	private Date arrivalTime;
+	private Calendar departureTime;
+	private Calendar arrivalTime;
 	private int numberOfSeats;
 	private int numberOfBookedSeats;
 	private ArrayList<Seat> seats;
 	private String flightNumber;
 	
-	public Flight (String d, String a, Date dt, Date at, int ns, int nbs, ArrayList<Seat> theSeats, String fn) {
+	public Flight (String d, String a, Calendar dt, Calendar at, int ns, int nbs, ArrayList<Seat> theSeats, String fn) {
 		departure = d;
 		arrival = a;
 		departureTime = dt;
@@ -43,11 +43,11 @@ public class Flight {
 		return arrival;
 	}
 	
-	public Date getDepartureTime() {
+	public Calendar getDepartureTime() {
 		return departureTime;
 	}
 	
-	public Date getArrivalTime() {
+	public Calendar getArrivalTime() {
 		return arrivalTime;
 	}
 	

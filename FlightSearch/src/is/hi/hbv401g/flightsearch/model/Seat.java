@@ -7,36 +7,10 @@ package is.hi.hbv401g.flightsearch.model;
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
  */
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
-package is.hi.hbv401g.flightsearch.model;
 
 
 public class Seat {
-
-	public static void main(String[]args) {
 		
-		private int price;
-
-		private String Class;
-
-		private Passenger passenger; //import from the project
-
-		private boolean entertainment;
-
-		private String electricalConnections;
-
-		private String luggage;
->>>>>>> Stashed changes
-
-
-<<<<<<< Updated upstream
-
->>>>>>> Stashed changes
-public class Seat {
-
 	private int price;
 	private String seatClass;
 	private Passenger passenger; //import from your project
@@ -44,7 +18,18 @@ public class Seat {
 	private String electricalConnections;
 	private String luggage;
 	private boolean food;
-	private int seatNumber;
+	private String seatNumber;
+	
+	public  Seat (int price, String seatClass, Passenger p, boolean entertainment, String electConn, String luggage, boolean food, String seatnumber ) {
+		this.price = price;
+		this.seatClass = seatClass;
+		this.passenger = p;
+		this.entertainment = entertainment;
+		this.electricalConnections = electConn;
+		this.luggage = luggage;
+		this.food = food;
+		this.seatNumber = seatNumber;
+	}
 
 
 	public int getPrice() {
@@ -55,58 +40,11 @@ public class Seat {
 		return seatClass;
 	}
 
-<<<<<<< Updated upstream
-	public int getSeatNumber() {
+	public String getSeatNumber() {
 		return seatNumber;
 
 	}
-=======
-=======
-		private int seatNumber;
-		
-		/**
-		 * @return price
-		 */
-		public int getPrice() {
-
-		return price;
-
-		}
-
-		/**
-		 * @return Class
-		 */
-		public String getClass() {
->>>>>>> Stashed changes
-
-		public String getSeatClass() {
-			return seatClass;
-
-		}
-<<<<<<< Updated upstream
-
-		public int getSeatNumber() {
-			return seatNumber;
-=======
-		
-		
-		/**
-		 * @return SeatNo
-		 */
-		public int getSeatNo() {
-
-		return SeatNo;
->>>>>>> Stashed changes
-
-		}
-		
-		/**
-		 * @return Passenger
-		 */
-		public Passenger getPassenger(){
-			return passenger;
->>>>>>> Stashed changes
-
+	
 	public Passenger getPassenger() {
 		return passenger;
 	}
