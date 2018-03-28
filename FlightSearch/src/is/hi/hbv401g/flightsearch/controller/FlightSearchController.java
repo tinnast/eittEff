@@ -46,6 +46,9 @@ public class FlightSearchController {
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
 	
+	public FlightSearchController(DBManager manager) {
+		
+	}
 	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
 		List<Flight> returnFlights = new ArrayList<Flight>();
 		

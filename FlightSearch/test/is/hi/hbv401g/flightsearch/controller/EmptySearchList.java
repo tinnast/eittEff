@@ -9,14 +9,11 @@ package is.hi.hbv401g.flightsearch.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
-import is.hi.hbv401g.flightsearch.model.Passenger;
 import is.hi.hbv401g.flightsearch.model.Query;
-import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author tinna
@@ -33,8 +30,8 @@ public class EmptySearchList implements DBManager {
 		return returnFlights;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getLocations()
+	/* 
+	 * Ekki notað í þessu verkefni
 	 */
 	@Override
 	public List<String> getLocations() throws SQLException {
@@ -43,8 +40,8 @@ public class EmptySearchList implements DBManager {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getPopularLocations()
+	/* 
+	 * Ekki notað í þessu verkefni
 	 */
 	@Override
 	public List<String> getPopularLocations() throws SQLException {
@@ -52,16 +49,16 @@ public class EmptySearchList implements DBManager {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#addBooking(is.hi.hbv401g.flightsearch.model.Booking)
+	/* 
+	 * Ekki notað í þessu verkefni
 	 */
 	@Override
 	public void addBooking(Booking bokking) throws SQLException {
 		// Ekki prófað í  þessu verkefni
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchForBooking(int)
+	/* 
+	 * Ekki notað í þessu verkefni
 	 */
 	@Override
 	public Booking searchForBooking(int bookNumber) throws SQLException {

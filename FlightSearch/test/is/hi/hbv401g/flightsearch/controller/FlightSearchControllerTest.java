@@ -26,7 +26,7 @@ public class FlightSearchControllerTest {
 	public FlightSearchController controller;
 	@Before
 	public void setUp() {
-		controller = new FlightSearchController();
+		
 	}
 	
 	@After
@@ -40,6 +40,8 @@ public class FlightSearchControllerTest {
 	@Test	
 	public void testSearhForFlight() {
 		DBManager manager = new EmptySearchList();
+		controller = new FlightSearchController(manager);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
 		
@@ -83,6 +85,8 @@ public class FlightSearchControllerTest {
 	public void testSearchEmpty() {
 		
 		DBManager manager = new EmptySearchList();
+		controller = new FlightSearchController(manager);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
 		
@@ -99,6 +103,9 @@ public class FlightSearchControllerTest {
 	/* Skoðum ef að database manager skilar error eða SQLException */
 	@Test
 	public void testSearchFail() {
+		DBManager manager = new FailSearch();
+		controller = new FlightSearchController(manager);
+		
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
 		

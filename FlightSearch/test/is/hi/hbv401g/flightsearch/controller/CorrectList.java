@@ -61,39 +61,39 @@ public class CorrectList implements DBManager {
 		return flightList;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getLocations()
+	/* 
+	 * Ekki notað í þessu verkefni/prófun 
 	 */
 	@Override
 	public List<String> getLocations() {
-		// TODO Auto-generated method stub
+		// Ekki notað
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getPopularLocations()
+	/* 
+	 * Ekki notað í þessu verkefni/prófun 
 	 */
 	@Override
 	public List<String> getPopularLocations() {
-		// Ekki prófað í þessu verkefni
+		// Ekki notað
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#addBooking(is.hi.hbv401g.flightsearch.model.Booking)
+	/* 
+	 * Ekki notað í þessu verkefni/prófun 
 	 */
 	@Override
 	public void addBooking(Booking bokking) {
-		// Ekki prófað í þessu verkefni
+		// Ekki notað
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchForBooking(int)
+	/* 
+	 * Ekki notað í þessu verkefni/prófun 
 	 */
 	@Override
 	public Booking searchForBooking(int bookNumber) {
-		// Ekki prófað í þessu verkefni
+		// Ekki notað
 		return null;
 	}
 

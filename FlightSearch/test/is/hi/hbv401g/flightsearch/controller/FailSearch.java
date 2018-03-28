@@ -29,24 +29,27 @@ public class FailSearch implements DBManager {
 		throw new SQLException();
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getLocations()
+	/* 
+	 * Ekki notað í þessu verkefni/prófun en myndi þó kasta villu eins
+	 * og aðrar aðferðir
 	 */
 	@Override
 	public List<String> getLocations() throws SQLException {
 		throw new SQLException();
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#getPopularLocations()
+	/* 
+	 * Ekki notað í þessu verkefni/prófun en myndi þó kasta villu eins
+	 * og aðrar aðferðir
 	 */
 	@Override
 	public List<String> getPopularLocations() throws SQLException {
 		throw new SQLException();
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#addBooking(is.hi.hbv401g.flightsearch.model.Booking)
+	/* 
+	 * Ekki notað í þessu verkefni/prófun en myndi þó kasta villu eins
+	 * og aðrar aðferðir
 	 */
 	@Override
 	public void addBooking(Booking bokking) throws SQLException {
@@ -54,15 +57,12 @@ public class FailSearch implements DBManager {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see is.hi.hbv401g.flightsearch.controller.DBManager#searchForBooking(int)
+	/* 
+	 * Ekki notað í þessu verkefni/prófun en myndi þó kasta villu eins
+	 * og aðrar aðferðir
 	 */
 	@Override
 	public Booking searchForBooking(int bookNumber) throws SQLException {
 		throw new SQLException();
 	}
-
-
-	
-
 }
