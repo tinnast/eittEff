@@ -7,6 +7,7 @@
  */
 package is.hi.hbv401g.flightsearch.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import is.hi.hbv401g.flightsearch.model.Booking;
@@ -19,15 +20,15 @@ import is.hi.hbv401g.flightsearch.model.Query;
  *
  */
 public interface DBManager {
-	   List<Flight> searchByQuery (Query q); 
+	   List<Flight> searchByQuery (Query q) throws SQLException; 
 
-	   List<String> getLocations();
+	   List<String> getLocations() throws SQLException;
 	   
-	   List<String> getPopularLocations();
+	   List<String> getPopularLocations() throws SQLException;
 	   
-	   void addBooking(Booking bokking);
+	   void addBooking(Booking bokking) throws SQLException;
 	   
-	   Booking searchForBooking(int bookNumber);
+	   Booking searchForBooking(int bookNumber) throws SQLException;
 	   
 	  
 	}
