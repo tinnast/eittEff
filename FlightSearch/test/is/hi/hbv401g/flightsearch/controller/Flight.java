@@ -8,59 +8,20 @@
 package is.hi.hbv401g.flightsearch.controller;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
-
-public class Flight {
+public interface Flight {	
 	
-	private String departure;
-	private String arrival;
-	private Date departureTime;
-	private Date arrivalTime;
-	private int numberOfSeats;
-	private int numberOfBookedSeats;
-	private ArrayList<Seat> seats;
-	private String flightNumber;
+	public String getDeparture();
+	public String getArrival();
 	
-	public Flight (String d, String a, Date dt, Date at, int ns, int nbs, ArrayList<Seat> theSeats, String fn) {
-		departure = d;
-		arrival = a;
-		departureTime = dt;
-		arrivalTime = at;
-		numberOfSeats = ns;
-		numberOfBookedSeats = nbs;
-		seats = theSeats;
-		flightNumber = fn;
-		
-	}
+	public Date getDepartureTime();
 	
+	public Date getArrivalTime();
 	
-	public String getDeparture() {
-		return departure;
-	}
+	public int getNumberOfAvailableSeats();
 	
-	public String getArrival() {
-		return arrival;
-	}
+//	public ArrayList<Seat> getAvailableSeats();
 	
-	public Date getDepartureTime() {
-		return departureTime;
-	}
-	
-	public Date getArrivalTime() {
-		return arrivalTime;
-	}
-	
-	public int getNumberOfAvailableSeats() {
-		return numberOfSeats - numberOfBookedSeats;
-	}
-	
-	public ArrayList<Seat> getAvailableSeats() {
-		return seats;  // FIX THIS METHOD
-	}
-	
-	public String getFlightNumber() {
-		return flightNumber;
-	}
+	public String getFlightNumber();
 
 }

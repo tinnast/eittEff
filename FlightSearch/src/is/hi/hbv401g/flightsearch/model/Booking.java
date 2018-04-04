@@ -19,21 +19,20 @@ public class Booking {
 
 
 	/**
-	 * Usage:  Booking b = new Booking(flight, passengers)
+	 * Usage:  Booking b = new Booking(bookingId, flight, passengers)
 	 * 
-	 * Before: passengers is an ArrayList<Passenger> of length > 0, 
+	 * Before: bookingId is an alphanumeric string that does not currently exist in the booking database
+	 * 		   passengers is an ArrayList<Passenger> of length > 0, 
 	 * 		   flight is a Flight available for booking in the database
-	 * 		   booking
 	 *
 	 * After:  b contains passengers, flight, and has generated unique
 	 *         booking ID not currently existing in DB.
 	 */
-	public Booking (Flight f, ArrayList<Passenger> p) {
+	public Booking (String b, Flight f, ArrayList<Passenger> p) {
 
+		bookingId = b;
 		flight = f;
 		passengers = p;
-		setBookingId();
-
 
 	}	
 

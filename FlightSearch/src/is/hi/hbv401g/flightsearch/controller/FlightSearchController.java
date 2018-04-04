@@ -67,8 +67,9 @@ public class FlightSearchController {
 	// Before:	myFlight and passengers are set.
 	// After: 	booking has been added to manager DB.
 	// 			myBooking.bookingId has been set to a unique alphanumeric string.
-	public void bookFlight(Flight f, ArrayList<Passenger> p) {
-		myBooking = new Booking(myFlight, passengers);
+	public void bookFlight(Flight myFlight, ArrayList<Passenger> passengers) {
+		String bookingId = manager.newBookingId();
+		myBooking = new Booking(bookingId, myFlight, passengers);
 		addBookingToDB();
 	}
 	
