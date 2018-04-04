@@ -1,9 +1,9 @@
 /**
  * Group 1F
- * @author Aníta Kristjánsdóttir 		190592-2949 <ank16@hi.is>
+ * @author Anï¿½ta Kristjï¿½nsdï¿½ttir 		190592-2949 <ank16@hi.is>
  * @author Karl James Pestka 			101083-2689 	<kjp3@hi.is>
- * @author Mimoza Herta Róbertsdóttir 	310194-3289 <mhr4@hi.is>
- * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
+ * @author Mimoza Herta Rï¿½bertsdï¿½ttir 	310194-3289 <mhr4@hi.is>
+ * @author Tinna Sturludï¿½ttir			300589-2439 <tis12@hi.is>
  */
 package is.hi.hbv401g.flightsearch.view;
 
@@ -72,6 +72,8 @@ public class FlightBookingView extends JFrame {
 		JButton btnBook = new JButton("BOOK THIS FLIGHT");
 		btnBook.setBounds(193, 402, 184, 46);
 		contentPane.add(btnBook);
+		btnBook.addActionListener(new ListenerForBookingView());
+
 		
 		txtName = new JTextField();
 		txtName.setBounds(141, 335, 116, 22);
