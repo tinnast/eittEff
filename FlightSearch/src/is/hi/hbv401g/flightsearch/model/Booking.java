@@ -9,7 +9,6 @@
 package is.hi.hbv401g.flightsearch.model;
 
 import java.util.ArrayList;
-import org.apache.commons.text.RandomStringGenerator;
 
 public class Booking {
 
@@ -17,8 +16,6 @@ public class Booking {
 	private Flight flight;
 	private ArrayList<Passenger> passengers;
 
-	RandomStringGenerator generator = new RandomStringGenerator.Builder()
-			.withinRange('a', '9').build();
 
 
 	/**
@@ -26,6 +23,7 @@ public class Booking {
 	 * 
 	 * Before: passengers is an ArrayList<Passenger> of length > 0, 
 	 * 		   flight is a Flight available for booking in the database
+	 * 		   booking
 	 *
 	 * After:  b contains passengers, flight, and has generated unique
 	 *         booking ID not currently existing in DB.
@@ -39,16 +37,6 @@ public class Booking {
 
 	}	
 
-	// Usage:  	setBookingId()
-	// Before:	nothing
-	// After: 	bookingId is a new random 6-character alphanumeric string.
-	public void setBookingId () {
-		bookingId = generator.generate(6);
-	}
-
-	/**
-	 * @return the bookingId
-	 */
 	public String getBookingId() {
 		return bookingId;
 	}

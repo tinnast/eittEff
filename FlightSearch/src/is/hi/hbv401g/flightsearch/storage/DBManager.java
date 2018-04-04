@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import org.apache.commons.text.RandomStringGenerator; // to generate unique bookingIds
+
 
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Passenger;
@@ -29,11 +31,51 @@ import is.hi.hbv401g.flightsearch.model.Query;
 	public class DBManager {
 		public static String JDBC_CONNECTION;
 		public static String DATABASE_NAME;
+		
+		private RandomStringGenerator generator = new RandomStringGenerator.Builder()
+				.withinRange('a', '9').build();
+
 //		
 		public DBManager() {
 			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
 			DATABASE_NAME = "org.sqlite.JDBC";
 		}
+		
+		// Usage:  	s = newBookingId()
+		// Before:	nothing
+		// After: 	s is a new random 6-character alphanumeric string that does not currently exist in the booking database.
+		public String newBookingId () {
+			String bookingId = generator.generate(6);
+			while (!isUnique(bookingId))
+				bookingId = generator.generate(6);
+			return bookingId;
+		}
+
+		/**
+		 * @param bookingId
+		 * @return
+		 */
+		private boolean isUnique(String bookingId) {
+			// TODO Auto-generated method stub
+			Booking b = searchForBooking(bookingId);
+			if (b != null)
+				return false;	
+			else return true;
+		}
+
+		/**
+		 * @param bookingId
+		 * @return
+		 */
+		public Booking searchForBooking(String bookingId) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		/**
+		 * @return the bookingId
+		 */
+
 		
 		public void addBooking(Booking booking)  {
 			Connection conn = null;
