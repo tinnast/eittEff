@@ -13,10 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.List;
+
 import org.apache.commons.text.RandomStringGenerator; // to generate unique bookingIds
 
 
 import is.hi.hbv401g.flightsearch.model.Booking;
+import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Passenger;
 import is.hi.hbv401g.flightsearch.model.Query;
 
@@ -47,6 +50,7 @@ import is.hi.hbv401g.flightsearch.model.Query;
 		public String newBookingId () {
 			String bookingId = generator.generate(6);
 			while (!isUnique(bookingId))
+				// bookingId is already taken, generate a new one
 				bookingId = generator.generate(6);
 			return bookingId;
 		}
@@ -109,7 +113,7 @@ import is.hi.hbv401g.flightsearch.model.Query;
 			
 		}
 		
-		public void searchByQuery(Query q)  {
+		public List<Flight> searchByQuery(Query q)  {
 			Connection conn = null;
 			Class.forName(DATABASE_NAME);
 			try {
@@ -125,7 +129,7 @@ import is.hi.hbv401g.flightsearch.model.Query;
 				
 			 
 				pstmt.clearParameters(); 
-				pstmt.setString(1,qgetDeparture());
+				pstmt.setString(1,qetDeparture());
 //				pstmt.setString(2, "AAAAA");
 //				pstmt.setString(3,"Anna Beib"); 
 //				pstmt.setString(4, "14A");
@@ -163,7 +167,7 @@ import is.hi.hbv401g.flightsearch.model.Query;
 //			mydb.searchByQuery(myQuery);
 //			
 			Calendar c = Calendar.getInstance();
-			System.out.print(c.toString() + 'he');
+			System.out.print(c.toString() + "he");
 			
 			
 			
