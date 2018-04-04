@@ -19,7 +19,7 @@ public Airline(String airlineName, double avgRating, int totalRatings) { //const
 	this.totalRatings = totalRatings;
 	}
 	  
-public addRating(int rating) {
+public double addRating(int rating) {
 	// Calculaing the average rating
 	this.avgRating = ((this.avgRating * this.totalRatings) + rating) / (this.totalRatings + 1);
 	this.totalRatings = this.totalRatings + 1; // incrementing the total ratings
