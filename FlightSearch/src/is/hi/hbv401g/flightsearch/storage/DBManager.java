@@ -73,7 +73,15 @@ import is.hi.hbv401g.flightsearch.model.Query;
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT FROM flights WHERE departure=?");
+				String departure = q.getDeparture();
+				String arrival = q.getArrival();
 				
+				Calendar c1 = q.getDepartureTime();
+				Calendar c2 = q.getArrivalTime();
+				
+				
+				
+			 
 				pstmt.clearParameters(); 
 				pstmt.setString(1,qgetDeparture());
 //				pstmt.setString(2, "AAAAA");
@@ -101,17 +109,19 @@ import is.hi.hbv401g.flightsearch.model.Query;
 			
 	 }
 		public static void main( String[] args ) throws Exception { 
-			DBManager mydb = new DBManager();
-			Calendar c1 = Calendar.getInstance();
-			Calendar c2 = Calendar.getInstance();
-			
-			c1.set(2018, 12, 12);
-			c2.set(2018,12,12);
-			
-			Query myQuery = new Query("Denmark", "France", c1, c2, 2);
-			
-			mydb.searchByQuery(myQuery);
-			
+//			DBManager mydb = new DBManager();
+//			Calendar c1 = Calendar.getInstance();
+//			Calendar c2 = Calendar.getInstance();
+//			
+//			c1.set(2018, 12, 12);
+//			c2.set(2018,12,12);
+//			
+//			Query myQuery = new Query("Denmark", "France", c1, c2, 2);
+//			
+//			mydb.searchByQuery(myQuery);
+//			
+			Calendar c = Calendar.getInstance();
+			System.out.print(c.toString() + 'he');
 			
 			
 			
