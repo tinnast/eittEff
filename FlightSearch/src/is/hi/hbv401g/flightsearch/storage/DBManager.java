@@ -115,13 +115,14 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			
 		}
 		
-		public List<Flight> searchByQuery(Query q)  {
+		public ArrayList<Flight> searchByQuery(Query q)  {
 			Connection conn = null;
 			try {
 				Class.forName(DATABASE_NAME);
 			} catch (Exception e) {
 				System.err.print(e);
 			}
+			ArrayList<Flight> returnFlights = new ArrayList<Flight>();
 			
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
@@ -144,7 +145,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				pstmt.setString(3, departureTime); 
 				pstmt.setString(4, arrivalTime);
 				ResultSet res = pstmt.executeQuery(); 
-				List<Flight> returnFlights = new ArrayList<Flight>();
+				
 				while (res.next()) {
 					System.out.println(res.getString(1));
 					System.out.println(res.getString(2));
@@ -157,17 +158,60 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					String farrival = res.getString(3);
 					String departureDate = res.getString(4);
 					String arrivalDate = res.getString(5);
-					int year1 = Integer.parseInt(departureDate.substring(0, 3));
-					int year2 = Integer.parseInt(arrivalDate.substring(0, 3));
-					int s = Integer.parseInt(departureDate.substring(5,5));
-					int hour2 = Integer.parseInt(arrivalDate.substring(5,5));
-					int f;
+					int year1 = Integer.parseInt(departureDate.substring(0, 4));
+					int year2 = Integer.parseInt(arrivalDate.substring(0, 4));
+					System.out.println("her   " + fNumber);
+					int month1 = Integer.parseInt(departureDate.substring(5,6));
+					int month2 = Integer.parseInt(arrivalDate.substring(5,6));
+					int day1 = Integer.parseInt(departureDate.substring(7,9));
+					int day2 = Integer.parseInt(arrivalDate.substring(7,9));
+					int hour1 = Integer.parseInt(departureDate.substring(10,12));
+					int hour2 = Integer.parseInt(arrivalDate.substring(10,12));
+					int min1 = Integer.parseInt(departureDate.substring(13,14));
+					int min2 = Integer.parseInt(arrivalDate.substring(13,14));
+					int sec1 = Integer.parseInt(departureDate.substring(15,16));
+					int sec2 = Integer.parseInt(arrivalDate.substring(15,16));
 					
-//					Calendar ca1 = Calendar.getInstance();
-//					ca1.set(Integer.parseInt(res.getString(columnIndex)), value);
-//					Flight f = new Flight(String d, String a, Calendar dt, Calendar at, int ns, int nbs, ArrayList<Seat> theSeats, String fn)
-				}
+					
+					Calendar ca1 = Calendar.getInstance();
+					Calendar ca2 = Calendar.getInstance();
+					ca1.set(year1, month1, day1, hour1, min1, sec1);
+					ca2.set(year2,  month2, day2, hour2, min2, sec2);
+					
+					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=?");
+					
+					
+					pstmt2.clearParameters(); 
+					pstmt2.setString(1, fNumber);
 				
+					ResultSet res2 = pstmt2.executeQuery(); 
+					ArrayList<Seat> theSeats = new ArrayList<Seat>();
+					
+					int bookedSeats = 0;
+					int seats = 0;
+					
+					while (res2.next()) {
+						Passenger p = null;
+						if (res2.getString(2) != null) {
+							p = new Passenger(res2.getString(2));
+							bookedSeats++;
+						} 
+						
+						int price = res2.getInt(3);
+						String seatClass = res2.getString(4);
+						boolean entertainment = res2.getBoolean(5);
+						String electricalConn = res2.getString(6);
+						String luggage = res2.getString(7);
+						boolean food = res2.getBoolean(8);
+						String sNumber = res2.getString(9);
+						
+						Seat s = new Seat(price, seatClass, p, entertainment, electricalConn, luggage, food, sNumber);
+						theSeats.add(s);
+						seats ++;
+					}
+				Flight f = new Flight(fdeparture, farrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+				returnFlights.add(f);
+				}
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
 				} finally {
@@ -177,7 +221,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 							System.err.println(e); 
 						  } 
 					    } 
-			return null;
+			return returnFlights;
 			
 	 }
 		public static void main( String[] args ) throws Exception { 
@@ -190,105 +234,17 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			
 			Query myQuery = new Query("Keflavik", "Paris", c1, c2, 2);
 			
-			mydb.searchByQuery(myQuery);
-		
+			ArrayList<Flight> result;
+			result = mydb.searchByQuery(myQuery);
+			System.out.println(result.get(0).getDeparture());
+			System.out.println(result.get(0).getArrival());
+			System.out.println(result.get(0).getNumberOfAvailableSeats());
+			System.out.println(result.get(0).getFlightNumber());
 			Calendar c = Calendar.getInstance();
 			c.set(2016, 2, 2, 11, 11, 11);
 			
 			
 			
-			
-			
-			
-//			Class.forName("org.sqlite.JDBC"); 
-//			
-//			Connection conn = null; 
-//			try { 
-//				conn = DriverManager.getConnection("jdbc:sqlite:flights.db"); 
-//				boolean USE_AUTOCOMMIT = true;
-//				conn.setAutoCommit(USE_AUTOCOMMIT); 
-//				//B� til tengingu og framkv�mi umbe�na SQL skipanir 
-//				Statement stmt = conn.createStatement(); 
-//				
-//				
-//////				
-//			//	if( !USE_AUTOCOMMIT ) conn.commit(); 
-//				ResultSet r = stmt.executeQuery ("SELECT * FROM Flights" );
-//				r.next();
-//				System.out.println(r.getString(1));
-//				System.out.println(r.getString(2));
-//					System.out.println(r.getString(3));
-//					System.out.println(r.getString(4));
-//					System.out.println(r.getString(5));
-//					System.out.println(r.getString(6));
-//				
-//				} 
-//				catch(SQLException e) {
-//				System.err.println(e.getMessage()); 
-//				} finally {
-//					try {
-//						if(conn != null) conn.close(); 
-//						} catch(SQLException e) {
-//							System.err.println(e); 
-//						  } 
-//					    }
 	 }
 }
 
-//import java.sql.Connection;
-//   import java.sql.DriverManager;
-//   import java.sql.ResultSet;
-//   import java.sql.SQLException;
-//   import java.sql.Statement;
-//
-//   public class DBManager
-//    {
-//    public static void main(String[] args) throws ClassNotFoundException
-//     {
-//      // load the sqlite-JDBC driver using the current class loader
-//      Class.forName("org.sqlite.JDBC");
-//
-//      Connection connection = null;
-//      try
-//      {
-//         // create a database connection
-//         connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-//
-//         Statement statement = connection.createStatement();
-//         statement.setQueryTimeout(30);  // set timeout to 30 sec.
-//
-//
-//         statement.executeUpdate("DROP TABLE IF EXISTS person");
-//         statement.executeUpdate("CREATE TABLE person (id INTEGER, name STRING)");
-//
-//         int ids [] = {1,2,3,4,5};
-//         String names [] = {"Peter","Pallar","William","Paul","James Bond"};
-//
-//         for(int i=0;i<ids.length;i++){
-//              statement.executeUpdate("INSERT INTO person values(' "+ids[i]+"', '"+names[i]+"')");   
-//         }
-//
-//         //statement.executeUpdate("UPDATE person SET name='Peter' WHERE id='1'");
-//         //statement.executeUpdate("DELETE FROM person WHERE id='1'");
-//
-//           ResultSet resultSet = statement.executeQuery("SELECT * from person");
-//           while(resultSet.next())
-//           {
-//              // iterate & read the result set
-//              System.out.println("name = " + resultSet.getString("name"));
-//              System.out.println("id = " + resultSet.getInt("id"));
-//           }
-//          }
-//
-//     catch(SQLException e){  System.err.println(e.getMessage()); }       
-//      finally {         
-//            try {
-//                  if(connection != null)
-//                     connection.close();
-//                  }
-//            catch(SQLException e) {  // Use SQLException class instead.          
-//               System.err.println(e); 
-//             }
-//      }
-//  }
-// }

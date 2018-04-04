@@ -12,18 +12,18 @@ package is.hi.hbv401g.flightsearch.model;
 public class Passenger {
 	
 	private String name;
-	private Seat seat;
+//	private Seat seat;
 	
-	public Passenger(String n, Seat s) {
+	public Passenger(String n) {
 		name = n;
-		seat = s;
+//		seat = s;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public Seat getSeat() {
-		return seat;
-	}
+//	public Seat getSeat() {
+//		return seat;
+//	}
 }
