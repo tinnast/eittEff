@@ -7,10 +7,63 @@
  */
 package is.hi.hbv401g.flightsearch.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import is.hi.hbv401g.flightsearch.model.Booking;
+import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Query;
+
 /**
  * @author tinna
  *
  */
 public class EmptySearchList implements DBManager {
+
+	/* 
+	 * Skilar tómum lista af flugum
+	 */
+	@Override
+	public List<Flight> searchByQuery(Query q) throws SQLException {
+		List<Flight> returnFlights = new ArrayList<Flight>();
+		return returnFlights;
+	}
+
+	/* 
+	 * Ekki notað í þessu verkefni
+	 */
+	@Override
+	public List<String> getLocations() throws SQLException {
+		// Ekki prófað í þessu verkefni
+		return null;
+
+	}
+
+	/* 
+	 * Ekki notað í þessu verkefni
+	 */
+	@Override
+	public List<String> getPopularLocations() throws SQLException {
+		// Ekki prófað í þessu verkefni
+		return null;
+	}
+
+	/* 
+	 * Ekki notað í þessu verkefni
+	 */
+	@Override
+	public void addBooking(Booking bokking) throws SQLException {
+		// Ekki prófað í  þessu verkefni
+	}
+
+	/* 
+	 * Ekki notað í þessu verkefni
+	 */
+	@Override
+	public Booking searchForBooking(int bookNumber) throws SQLException {
+		// Ekki prófað í þessu verkefni
+		return null;
+	}
 
 }

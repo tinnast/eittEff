@@ -12,8 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Passenger;
+import is.hi.hbv401g.flightsearch.model.Query;
 
 /**
  * Group 1F
@@ -64,24 +67,26 @@ import is.hi.hbv401g.flightsearch.model.Passenger;
 			
 		}
 		
-		public void searchByQuery(String q)  {
+		public void searchByQuery(Query q)  {
 			Connection conn = null;
-			try {
 			Class.forName(DATABASE_NAME);
-			} catch (Exception e) {
-			  System.err.println(e.getMessage());
-			}
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				Statement stmt = conn.createStatement();
-				ResultSet r = stmt.executeQuery(q);
-				while (r.next()) {
-					System.out.println(r.getString(1));
-					System.out.println(r.getString(2));
-					System.out.println(r.getString(3));
-					System.out.println(r.getString(4));
-					System.out.println(r.getString(5));
-					System.out.println(r.getString(6));
+				PreparedStatement pstmt = conn.prepareStatement("SELECT FROM flights WHERE departure=?");
+				
+				pstmt.clearParameters(); 
+				pstmt.setString(1,qgetDeparture());
+//				pstmt.setString(2, "AAAAA");
+//				pstmt.setString(3,"Anna Beib"); 
+//				pstmt.setString(4, "14A");
+				ResultSet res = pstmt.executeQuery(); 
+				while (res.next()) {
+					System.out.println(res.getString(1));
+					System.out.println(res.getString(2));
+					System.out.println(res.getString(3));
+					System.out.println(res.getString(4));
+					System.out.println(res.getString(5));
+					System.out.println(res.getString(6));
 				}
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
@@ -93,32 +98,19 @@ import is.hi.hbv401g.flightsearch.model.Passenger;
 						  } 
 					    } 
 			String r = "jeij";
-////			return r;
 			
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
-			mydb.searchByQuery("SELECT * FROM FLIGHTS WHERE departure = \"Iceland\"");
-			Passenger p = new Passenger("Anna", null);
+			Calendar c1 = Calendar.getInstance();
+			Calendar c2 = Calendar.getInstance();
 			
+			c1.set(2018, 12, 12);
+			c2.set(2018,12,12);
 			
+			Query myQuery = new Query("Denmark", "France", c1, c2, 2);
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			mydb.searchByQuery(myQuery);
 			
 			
 			

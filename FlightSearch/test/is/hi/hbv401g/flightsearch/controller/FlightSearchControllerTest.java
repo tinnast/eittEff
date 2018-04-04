@@ -1,8 +1,15 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import is.hi.hbv401g.flightsearch.model.Flight;
 /**
  * Group 1F
  * @author Aníta Kristjánsdóttir 		190592-2949 <ank16@hi.is>
@@ -16,10 +23,101 @@ import org.junit.Test;
  *
  */
 public class FlightSearchControllerTest {
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
+	
+	public FlightSearchController controller;
+	@Before
+	public void setUp() {
+		
 	}
-
+	
+	@After
+	public void tearDown () {
+		controller = null;
+		assertNull(controller);
+		
+	}
+	
+	/* Prufum þegar við fáum lista af flugum til baka */
+	@Test	
+	public void testSearhForFlight() {
+		DBManager manager = new EmptySearchList();
+		controller = new FlightSearchController(manager);
+		
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		
+		c1.set(2018,12,12, 15,30);
+		c2.set(2018,12,12, 18, 0);
+		int passengerCount = 2;
+		
+		// Prufum search aðferð í Controller
+		List<Flight> result = controller.search("KEFLAVIK", "PARIS", c1, c2, passengerCount);
+		
+		// Hún á ekki að skila null
+		assertNotNull(result);
+		
+		for (Flight f: result) {
+			
+			// Passar brottfarastaður?
+			String departure = f.getDeparture();
+			assertEquals(departure, "KEFLAVIK");
+			
+			// Passar áfangastaður?
+			String arrival = f.getArrival();
+			assertEquals(arrival, "PARIS");
+			
+			// Passar brottfaratími?
+			Calendar departureTime = f.getDepartureTime();
+			assertEquals(departureTime, c1);
+			
+			// Passar komutími
+			Calendar arrivalTime = f.getArrivalTime();
+			assertEquals(arrivalTime, c2);
+			
+			// Eru nógu mörg laus sæti í fluginu
+			int availableSeats = f.getNumberOfAvailableSeats();
+			assertTrue(passengerCount<= availableSeats);
+		}
+		
+	}
+	
+	/* Prufum ef að database manager skilar engum niðurstöðum */
+	@Test
+	public void testSearchEmpty() {
+		
+		DBManager manager = new EmptySearchList();
+		controller = new FlightSearchController(manager);
+		
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		
+		c1.set(2018,12,12, 15,30);
+		c2.set(2018,12,12, 18, 0);
+		List<Flight> result = controller.search("KEFLAVIK", "PARIS", c1, c2, 2);
+		
+		/* Á ekki að skila null heldur tómum lista */
+		assertNotNull(result);
+		assertEquals(result.size(),0);
+	}
+	
+	
+	/* Skoðum ef að database manager skilar error eða SQLException */
+	@Test
+	public void testSearchFail() {
+		DBManager manager = new FailSearch();
+		controller = new FlightSearchController(manager);
+		
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		
+		c1.set(2018,12,12, 15,30);
+		c2.set(2018,12,12, 18, 0);
+		List<Flight> result = controller.search("KEFLAVIK", "PARIS", c1, c2, 2);
+		
+		// Eigum þá að fá tóman lista til baka, ekki null og ekki error.
+		assertNotNull(result);
+		assertEquals(0,result.size());
+	}
+	
+ 
 }
