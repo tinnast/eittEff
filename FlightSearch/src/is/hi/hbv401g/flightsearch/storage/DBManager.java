@@ -126,7 +126,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime=? AND arrivaltime=?");
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime LIKE ? AND arrivaltime LIKE ?");
 				
 				String departure = q.getDeparture();
 				String arrival = q.getArrival();
@@ -134,8 +134,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				Calendar c1 = q.getDepartureTime();
 				Calendar c2 = q.getArrivalTime();
 				
-				String departureTime = c1.get(Calendar.YEAR) + "-" + c1.get(Calendar.MONTH) + "-" + c1.get(Calendar.DAY_OF_MONTH) + " " + c1.get(Calendar.HOUR_OF_DAY) + ":" + c1.get(Calendar.MINUTE) + ":" + c1.get(Calendar.SECOND);
-				String arrivalTime =  c2.get(Calendar.YEAR) + "-" +c2.get(Calendar.MONTH) + "-" + c2.get(Calendar.DAY_OF_MONTH) + " "+ c2.get(Calendar.HOUR_OF_DAY)  + ":" + c2.get(Calendar.MINUTE) + ":" + c2.get(Calendar.SECOND);
+				String departureTime = c1.get(Calendar.YEAR) + "-" + c1.get(Calendar.MONTH) + "-" + c1.get(Calendar.DAY_OF_MONTH) + "%";// + c1.get(Calendar.HOUR_OF_DAY) + ":" + c1.get(Calendar.MINUTE) + ":" + c1.get(Calendar.SECOND);
+				String arrivalTime =  c2.get(Calendar.YEAR) + "-" +c2.get(Calendar.MONTH) + "-" + c2.get(Calendar.DAY_OF_MONTH) + "%"; //+ c2.get(Calendar.HOUR_OF_DAY)  + ":" + c2.get(Calendar.MINUTE) + ":" + c2.get(Calendar.SECOND);
 				
 				
 				
@@ -147,12 +147,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				ResultSet res = pstmt.executeQuery(); 
 				
 				while (res.next()) {
-					System.out.println(res.getString(1));
-					System.out.println(res.getString(2));
-					System.out.println(res.getString(3));
-					System.out.println(res.getString(4));
-					System.out.println(res.getString(5));
-					System.out.println(res.getString(6));
+
 					String fNumber = res.getString(1);
 					String fdeparture = res.getString(2);
 					String farrival = res.getString(3);
@@ -209,9 +204,12 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 						theSeats.add(s);
 						seats ++;
 					}
-				Flight f = new Flight(fdeparture, farrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
-				returnFlights.add(f);
+					
+					
+					Flight f = new Flight(fdeparture, farrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+					returnFlights.add(f);
 				}
+				
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
 				} finally {
@@ -221,27 +219,74 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 							System.err.println(e); 
 						  } 
 					    } 
-			return returnFlights;
 			
+			return returnFlights;	
+	 }
+		
+		public void addThings()  {
+			Connection conn = null;
+			try {
+				Class.forName(DATABASE_NAME);
+				} catch (Exception e) {
+				  System.err.println(e.getMessage());
+				}
+			try {
+				conn = DriverManager.getConnection(JDBC_CONNECTION);
+				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO flights VALUES(?,?,?,?,?,?)"); 
+				
+				for (int j =0; j<30; j++) {
+				String date = "2018-4-" + j +  " 15:0:0";
+				String date2 = "2018-4-" + j + " 19:0:0";
+
+
+				pstmt.clearParameters(); 
+				pstmt.setString(1, ("BBBL" + j));
+				pstmt.setString(2,"Keflavik");
+				pstmt.setString(3, "Madrid");
+				pstmt.setString(4,date); 
+				pstmt.setString(5, date2);
+				pstmt.setString(6, "4 hours 0 min");
+				int res = pstmt.executeUpdate(); 
+
+				
+				}
+
+	
+
+			} catch(SQLException e) {
+				System.err.println(e.getMessage()); 
+				} finally {
+					try {
+						if(conn != null) conn.close(); 
+						} catch(SQLException e) {
+							System.err.println(e); 
+						  } 
+					    } 
+			
+		
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
-			Calendar c1 = Calendar.getInstance();
-			Calendar c2 = Calendar.getInstance();
 			
-			c1.set(2018, 03, 30, 12, 0, 0);
-			c2.set(2018, 03, 30, 15, 0, 0);
 			
-			Query myQuery = new Query("Keflavik", "Paris", c1, c2, 2);
-			
-			ArrayList<Flight> result;
-			result = mydb.searchByQuery(myQuery);
-			System.out.println(result.get(0).getDeparture());
-			System.out.println(result.get(0).getArrival());
-			System.out.println(result.get(0).getNumberOfAvailableSeats());
-			System.out.println(result.get(0).getFlightNumber());
-			Calendar c = Calendar.getInstance();
-			c.set(2016, 2, 2, 11, 11, 11);
+//			mydb.addThings();
+//			Calendar c1 = Calendar.getInstance();
+//			Calendar c2 = Calendar.getInstance();
+//			
+//			c1.set(2018, 04, 23, 11, 0, 0);
+//			c2.set(2018, 04, 23, 18, 0, 0);
+//			
+//			Query myQuery = new Query("Keflavik", "Madrid", c1, c2, 2);
+//			
+//			ArrayList<Flight> result;
+//			result = mydb.searchByQuery(myQuery);
+//			for (Flight f: result) {
+//				System.out.println(f.getFlightNumber());
+//			}
+//
+//			
+//			Calendar c = Calendar.getInstance();
+//			c.set(2016, 2, 2, 11, 11, 11);
 			
 			
 			
