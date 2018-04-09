@@ -95,7 +95,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Bookings VALUES(?,?,?,?)"); 
 				
 				pstmt.clearParameters(); 
-				pstmt.setString(1,"AA");
+				pstmt.setString(1, booking.);
 				pstmt.setString(2, "AAAAA");
 				pstmt.setString(3,"Anna Beib"); 
 				pstmt.setString(4, "14A");

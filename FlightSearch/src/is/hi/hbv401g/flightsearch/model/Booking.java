@@ -14,7 +14,8 @@ public class Booking {
 
 	private String bookingId;
 	private Flight flight;
-	private ArrayList<Passenger> passengers;
+//	private ArrayList<Passenger> passengers;
+	private ArrayList<Seat> seats;
 
 
 
@@ -28,13 +29,19 @@ public class Booking {
 	 * After:  b contains passengers, flight, and has generated unique
 	 *         booking ID not currently existing in DB.
 	 */
-	public Booking (String b, Flight f, ArrayList<Passenger> p) {
-
+//	public Booking (String b, Flight f, ArrayList<Passenger> p) {
+//
+//		bookingId = b;
+//		flight = f;
+//		passengers = p;
+//
+//	}
+	
+	public Booking (String b, Flight f, ArrayList<Seat> s) {
 		bookingId = b;
 		flight = f;
-		passengers = p;
-
-	}	
+		seats = s;
+	}
 
 	public String getBookingId() {
 		return bookingId;
@@ -50,8 +57,12 @@ public class Booking {
 	/**
 	 * @return the passengers
 	 */
-	public ArrayList<Passenger> getPassengers() {
-		return passengers;
+//	public ArrayList<Passenger> getPassengers() {
+//		return passengers;
+//	}
+	
+	public ArrayList<Seat> getSeats() {
+		return seats;
 	}
 
 }
