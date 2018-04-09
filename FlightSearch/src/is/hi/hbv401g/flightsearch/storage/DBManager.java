@@ -74,16 +74,134 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		 * @return
 		 */
 		public Booking searchForBooking(String bookingId) {
-			// TODO Auto-generated method stub
+			Connection conn = null;
+			try {
+				Class.forName(DATABASE_NAME);
+				} catch (Exception e) {
+				  System.err.println(e.getMessage());
+				}
+			try {
+				conn = DriverManager.getConnection(JDBC_CONNECTION);
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Bookings WHERE bookingnumber = ?"); 
+				
+				
+				pstmt.clearParameters(); 
+				pstmt.setString(1, bookingId);
+
+				ResultSet res = pstmt.executeQuery(); 
+				
+				if (res.next()) {
+					String fNumber = res.getString(2);
+					String bNumber = res.getString(1);
+					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM flights WHERE flightnumer = ?");
+					pstmt2.setString(1, res.getString(2));
+					ResultSet res2 = pstmt2.executeQuery();
+					String departure = res.getString(2);
+					String arrival = res.getString(3);
+					String departureDate = res2.getString(4);
+					String arrivalDate = res2.getString(5);
+					int year1 = Integer.parseInt(departureDate.substring(0, 4));
+					int year2 = Integer.parseInt(arrivalDate.substring(0, 4));
+			
+					int month1 = Integer.parseInt(departureDate.substring(5,6));
+					int month2 = Integer.parseInt(arrivalDate.substring(5,6));
+					int day1 = Integer.parseInt(departureDate.substring(7,9));
+					int day2 = Integer.parseInt(arrivalDate.substring(7,9));
+					int hour1 = Integer.parseInt(departureDate.substring(10,12));
+					int hour2 = Integer.parseInt(arrivalDate.substring(10,12));
+					int min1 = Integer.parseInt(departureDate.substring(13,14));
+					int min2 = Integer.parseInt(arrivalDate.substring(13,14));
+					int sec1 = Integer.parseInt(departureDate.substring(15,16));
+					int sec2 = Integer.parseInt(arrivalDate.substring(15,16));
+					
+					
+					Calendar ca1 = Calendar.getInstance();
+					Calendar ca2 = Calendar.getInstance();
+					ca1.set(year1, month1, day1, hour1, min1, sec1);
+					ca2.set(year2,  month2, day2, hour2, min2, sec2);
+					
+					
+					PreparedStatement pstmt3 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=?");
+					
+					
+					pstmt3.clearParameters(); 
+					pstmt3.setString(1, fNumber);
+					System.out.print(fNumber);
+				
+					ResultSet res3 = pstmt3.executeQuery(); 
+					ArrayList<Seat> theSeats = new ArrayList<Seat>();
+					
+					int bookedSeats = 0;
+					int seats = 0;
+					while (res3.next()) {
+						
+						Passenger p = null;
+						if (res3.getString(2) != null) {
+							p = new Passenger(res3.getString(2));
+							bookedSeats++;
+						} 
+						
+						int price = res3.getInt(3);
+						String seatClass = res3.getString(4);
+						boolean entertainment = res3.getBoolean(5);
+						String electricalConn = res3.getString(6);
+						String luggage = res3.getString(7);
+						boolean food = res3.getBoolean(8);
+						String sNumber = res3.getString(9);
+						
+						Seat s = new Seat(price, seatClass, p, entertainment, electricalConn, luggage, food, sNumber);
+						theSeats.add(s);
+						seats ++;
+					}
+					
+					String mySeats = res.getString(4);
+					String myPassengers = res.getString(3);
+					String [] allSeats = mySeats.split("@");
+					String [] allPassengers = myPassengers.split("@");
+					ArrayList<Seat> returnSeats = new ArrayList<Seat>();
+					
+					for (int i=0; i<allSeats.length; i++) {
+						PreparedStatement pstmt4 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber =? AND sNumber=?");
+						pstmt4.setString(1, fNumber);
+						pstmt4.setString(2, allSeats[i]);
+						ResultSet res4 = pstmt4.executeQuery();
+						
+						
+						res4.next();
+						
+						System.out.println(fNumber + " OOOOOOOOOOOOO " + allSeats.length);
+						
+						Passenger myP = new Passenger(allPassengers[i]);
+						
+						Seat myS = new Seat(res4.getInt(3), res4.getString(4), myP, res4.getBoolean(5), res4.getString(6), res4.getString(7), res4.getBoolean(8), res4.getString(9));
+						returnSeats.add(myS);
+				
+					}
+				
+					
+					
+					Flight myFlight = new Flight(departure, arrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+					
+					Booking returnBooking = new Booking(bNumber, myFlight, returnSeats);
+					return returnBooking;
+				} 
+			} catch(SQLException e) {
+				System.err.println(e.getMessage()); 
+				} finally {
+					try {
+						if(conn != null) conn.close(); 
+						} catch(SQLException e) {
+							System.err.println(e); 
+						  } 
+					    } 
+
 			return null;
 		}
 
 		/**
 		 * @return the bookingId
 		 */
-
-		
-		public void addBooking(Booking booking)  {
+		public String addBooking(Booking booking)  {
 			Connection conn = null;
 			try {
 				Class.forName(DATABASE_NAME);
@@ -93,16 +211,35 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
 				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Bookings VALUES(?,?,?,?)"); 
+				ArrayList<Seat> theSeats = booking.getSeats();
+				String passengersNames ="";
+				String seatNumbers = "";
+				
+				for (Seat s: theSeats) {
+					passengersNames += s.getPassenger().getName() + "@";
+					seatNumbers += s.getSeatNumber() + "@";
+					System.out.print(s.getSeatNumber());
+				}
+				
 				
 				pstmt.clearParameters(); 
-				pstmt.setString(1, booking.);
-				pstmt.setString(2, "AAAAA");
-				pstmt.setString(3,"Anna Beib"); 
-				pstmt.setString(4, "14A");
+				pstmt.setString(1, booking.getBookingId());
+				pstmt.setString(2, booking.getFlight().getFlightNumber());
+				pstmt.setString(3, passengersNames); 
+				pstmt.setString(4, seatNumbers);
 				int res = pstmt.executeUpdate(); 
-//				Statement stmt = conn.createStatement();
-//				int res = stmt.executeUpdate("INSERT INTO Bookings VALUES (\"AA\", \"AAAAA\", \"Jon Jonsson\", \"13A\");");
-				System.out.println("Her er "   +  res);
+				
+				
+				for (Seat s: theSeats) {
+					PreparedStatement pstmt2 = conn.prepareStatement("UPDATE seats SET passenger=? WHERE fNumber=? AND sNumber=?");	
+					pstmt2.setString(1, s.getPassenger().getName());
+					pstmt2.setString(2, booking.getFlight().getFlightNumber());
+					pstmt2.setString(3, s.getSeatNumber());
+					int res2 = pstmt2.executeUpdate();
+					
+				}
+					
+
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
 				} finally {
@@ -113,6 +250,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 						  } 
 					    } 
 			
+			return booking.getBookingId();
 		}
 		
 		public ArrayList<Flight> searchByQuery(Query q)  {
@@ -147,6 +285,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				ResultSet res = pstmt.executeQuery(); 
 				
 				while (res.next()) {
+					
 
 					String fNumber = res.getString(1);
 					String fdeparture = res.getString(2);
@@ -178,14 +317,16 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					pstmt2.clearParameters(); 
 					pstmt2.setString(1, fNumber);
-				
+					System.out.println(fNumber);
 					ResultSet res2 = pstmt2.executeQuery(); 
 					ArrayList<Seat> theSeats = new ArrayList<Seat>();
 					
 					int bookedSeats = 0;
 					int seats = 0;
 					
+					System.out.print("HER");
 					while (res2.next()) {
+						
 						Passenger p = null;
 						if (res2.getString(2) != null) {
 							p = new Passenger(res2.getString(2));
@@ -201,6 +342,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 						String sNumber = res2.getString(9);
 						
 						Seat s = new Seat(price, seatClass, p, entertainment, electricalConn, luggage, food, sNumber);
+						System.out.println("NAFN: " +s.getPassenger().getName());
 						theSeats.add(s);
 						seats ++;
 					}
@@ -247,11 +389,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				pstmt.setString(5, date2);
 				pstmt.setString(6, "4 hours 0 min");
 				int res = pstmt.executeUpdate(); 
-
-				
-				}
-
-	
+		    }
+			
+			
 
 			} catch(SQLException e) {
 				System.err.println(e.getMessage()); 
@@ -267,8 +407,40 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
+			Booking b = mydb.searchForBooking("DFADA2");
+			if (b!=null) {
+				
+			ArrayList<Seat> ss = b.getSeats();
+			System.out.print("ID ER : " + ss.get(1).getSeatNumber());
+			}
 			
 			
+			/* Try insert booking */
+			
+//			Passenger p1 = new Passenger("Anna Jónsdóttir");
+//			Passenger p2 = new Passenger("Hanna Panna");
+//			
+//			
+//			
+//			Seat mySeat1 = new Seat(10000, "First Class", p1, false, "Iphone Charger", "One bag", false, "14A");
+//			Seat mySeat2 = new Seat(10000, "First Class", p2, false, "Iphone Charger", "One bag", false, "14B");
+//			
+//			ArrayList<Seat> mySeats = new ArrayList<Seat>();
+//			mySeats.add(mySeat2);
+//			mySeats.add(mySeat1);
+//			Calendar ca1 = Calendar.getInstance();
+//			Calendar ca2 = Calendar.getInstance();
+//			ca1.set(2018, 4, 20, 15, 0, 0);
+//			ca2.set(2018, 4, 20, 19, 0, 0);
+//			
+//			Flight myFlight = new Flight("Keflavik", "Barcelona", ca1, ca2, 100, 2, mySeats, "BBBK20");
+//			Booking myBooking = new Booking("DFADA2", myFlight, mySeats);
+//			System.out.print(mySeat1.getSeatNumber());
+//			mydb.addBooking(myBooking);
+//			
+			
+			
+	/* Insert data into database */
 //			mydb.addThings();
 //			Calendar c1 = Calendar.getInstance();
 //			Calendar c2 = Calendar.getInstance();

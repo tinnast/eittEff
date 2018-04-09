@@ -28,7 +28,7 @@ public class Seat {
 		this.electricalConnections = electConn;
 		this.luggage = luggage;
 		this.food = food;
-		this.seatNumber = seatNumber;
+		this.seatNumber = seatnumber;
 	}
 
 
