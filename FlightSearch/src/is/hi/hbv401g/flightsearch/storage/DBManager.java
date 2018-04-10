@@ -37,13 +37,12 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		public static String JDBC_CONNECTION;
 		public static String DATABASE_NAME;
 		
-		private RandomStringGenerator generator; // = new RandomStringGenerator.Builder()
-				//.withinRange('a', '9').build();
-
+		private RandomStringGenerator generator;
 //		
 		public DBManager() {
 			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
 			DATABASE_NAME = "org.sqlite.JDBC";
+			generator  = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
 		}
 		
 		// Usage:  	s = newBookingId()
@@ -411,7 +410,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			if (b!=null) {
 				
 			ArrayList<Seat> ss = b.getSeats();
-			System.out.print("ID ER : " + ss.get(1).getSeatNumber());
+			System.out.println("ID ER : " + ss.get(1).getSeatNumber());
+			
+			System.out.print(mydb.newBookingId());
 			}
 			
 			
