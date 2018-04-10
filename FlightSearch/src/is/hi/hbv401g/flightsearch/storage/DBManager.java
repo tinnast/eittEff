@@ -95,8 +95,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM flights WHERE flightnumer = ?");
 					pstmt2.setString(1, res.getString(2));
 					ResultSet res2 = pstmt2.executeQuery();
-					String departure = res.getString(2);
-					String arrival = res.getString(3);
+					String departure = res2.getString(2);
+					
+					String arrival = res2.getString(3);
 					String departureDate = res2.getString(4);
 					String arrivalDate = res2.getString(5);
 					int year1 = Integer.parseInt(departureDate.substring(0, 4));
@@ -217,7 +218,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				for (Seat s: theSeats) {
 					passengersNames += s.getPassenger().getName() + "@";
 					seatNumbers += s.getSeatNumber() + "@";
-					System.out.print(s.getSeatNumber());
 				}
 				
 				
@@ -253,6 +253,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		}
 		
 		public ArrayList<Flight> searchByQuery(Query q)  {
+			System.out.println("searching for "+ q.getDeparture() + " to " + q.getArrival() + q.getDepartureTime().get(Calendar.YEAR));
 			Connection conn = null;
 			try {
 				Class.forName(DATABASE_NAME);
@@ -263,7 +264,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime LIKE ? AND arrivaltime LIKE ?");
+				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime LIKE ?");
 				
 				String departure = q.getDeparture();
 				String arrival = q.getArrival();
@@ -280,7 +281,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				pstmt.setString(1, departure);
 				pstmt.setString(2, arrival);
 				pstmt.setString(3, departureTime); 
-				pstmt.setString(4, arrivalTime);
 				ResultSet res = pstmt.executeQuery(); 
 				
 				while (res.next()) {
@@ -381,10 +381,10 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 
 
 				pstmt.clearParameters(); 
-				pstmt.setString(1, ("BBBL" + j));
-				pstmt.setString(2,"Keflavik");
-				pstmt.setString(3, "Madrid");
-				pstmt.setString(4,date); 
+				pstmt.setString(1, ("BABL" + j));
+				pstmt.setString(2,"Barcelona");
+				pstmt.setString(3, "Keflavik");
+				pstmt.setString(4, date); 
 				pstmt.setString(5, date2);
 				pstmt.setString(6, "4 hours 0 min");
 				int res = pstmt.executeUpdate(); 
@@ -406,13 +406,13 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
-			Booking b = mydb.searchForBooking("DFADA2");
+			Booking b = mydb.searchForBooking("pueqnl");
 			if (b!=null) {
 				
 			ArrayList<Seat> ss = b.getSeats();
-			System.out.println("ID ER : " + ss.get(1).getSeatNumber());
+			System.out.println("ID ER : " + b.getFlight().getArrivalTime().get(Calendar.HOUR_OF_DAY));
 			
-			System.out.print(mydb.newBookingId());
+//			System.out.print(mydb.newBookingId());
 			}
 			
 			
@@ -434,8 +434,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 //			ca1.set(2018, 4, 20, 15, 0, 0);
 //			ca2.set(2018, 4, 20, 19, 0, 0);
 //			
-//			Flight myFlight = new Flight("Keflavik", "Barcelona", ca1, ca2, 100, 2, mySeats, "BBBK20");
-//			Booking myBooking = new Booking("DFADA2", myFlight, mySeats);
+//			Flight myFlight = new Flight("Keflavik", "Barcelona", ca1, ca2, 100, 2, mySeats, "BBBK21");
+//			String bn = mydb.newBookingId();
+//			Booking myBooking = new Booking(bn, myFlight, mySeats);
 //			System.out.print(mySeat1.getSeatNumber());
 //			mydb.addBooking(myBooking);
 //			

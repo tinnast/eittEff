@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ import is.hi.hbv401g.flightsearch.controller.DBManager;
 import is.hi.hbv401g.flightsearch.controller.EmptySearchList;
 import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
 import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Query;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -97,6 +99,7 @@ public class FlightSearchView1 extends JFrame {
 		
 		btnSearch = new JButton("Find me a flight!");
 		btnSearch.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
 				String from, to, date1Str, date2Str;
@@ -113,15 +116,27 @@ public class FlightSearchView1 extends JFrame {
 				date1Str = DateFormat.getDateInstance().format(date1);
 				date2Str = DateFormat.getDateInstance().format(date2);
 				passCount = Integer.parseInt(txtPassCount.getText());
+				
+				Calendar dTime = Calendar.getInstance();
+				Calendar aTime = Calendar.getInstance();
+				
+				dTime.set(date1.getYear() + 1900, date1.getMonth() + 1, date1.getDate());
+				aTime.set(date2.getYear() + 1900, date2.getMonth() + 1, date2.getDate());
+				System.out.println(date1.getDate());
+				
+				
+				Query q1 = new Query(from, to, dTime, aTime, passCount);
+				Query q2 = new Query(to, from, aTime, dTime, passCount);
+				
+				
+				
+				FlightSearchController mySearch = new FlightSearchController();
+				List<Flight> f1 =  mySearch.search(from, to, dTime, aTime, passCount);
+				List<Flight> f2 = mySearch.search(to, from, aTime, dTime, passCount);
+				
 				// Bara til að testa útkomuna
-				textPane.setText(from + " " + to + " " + sdf.format(date1) + " " + sdf.format(date2) + " " + passCount);
-				
-				
-				
-				/*
-				FlightSearchController mySearch = new FlightSearchController(null);
-				mySearch.search(from, to, date1Str, date2Str, passCount);
-				*/
+//				textPane.setText(from + " " + to + " " + sdf.format(date1) + " " + sdf.format(date2) + " " + passCount);
+				textPane.setText(f1.get(0).getDeparture() + " " + to + " " + sdf.format(date1) + " " + sdf.format(date2) + " " + passCount);
 				
 			}
 		});

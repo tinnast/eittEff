@@ -15,6 +15,7 @@ import is.hi.hbv401g.flightsearch.model.LocationList;
 import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Passenger;
 import is.hi.hbv401g.flightsearch.model.Query;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,18 +47,17 @@ public class FlightSearchController {
 	// myBooking contains information entered by user to be later sent to manager database. Required: passengers, flight.  Optional: mySeats (defaults to a list of empty strings of the same size as passengers). Contains unique booking number string.: 
 	private Booking myBooking;
 	
-	public FlightSearchController(DBManager manager) {
+	public FlightSearchController() {
+		manager = new DBManager();
 		
 	}
 	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
 		List<Flight> returnFlights = new ArrayList<Flight>();
 		
 		Query myQuery = new Query (departure, arrival, depDate, arrDate, passengerCount);
-		try {
-			returnFlights = manager.searchByQuery(myQuery);
-		} catch (SQLException e) {
-			
-		}
+
+    	returnFlights = manager.searchByQuery(myQuery);
+	
 		
 		return returnFlights;
 	}
@@ -67,9 +67,9 @@ public class FlightSearchController {
 	// Before:	myFlight and passengers are set.
 	// After: 	booking has been added to manager DB.
 	// 			myBooking.bookingId has been set to a unique alphanumeric string.
-	public void bookFlight(Flight myFlight, ArrayList<Passenger> passengers) {
+	public void bookFlight(Flight myFlight, ArrayList<Seat> seats) {
 		String bookingId = manager.newBookingId();
-		myBooking = new Booking(bookingId, myFlight, passengers);
+		myBooking = new Booking(bookingId, myFlight, seats);
 		addBookingToDB();
 	}
 	
