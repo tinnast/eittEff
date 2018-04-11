@@ -49,8 +49,9 @@ public class FlightSearchController {
 	
 	public FlightSearchController() {
 		manager = new DBManager();
-		
+		locationList = new LocationList(manager);
 	}
+	
 	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
 		List<Flight> returnFlights = new ArrayList<Flight>();
 		
@@ -84,6 +85,12 @@ public class FlightSearchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<String> getAllLocations() {
+		List<String> loc = locationList.populateLocationList();
+		
+		return loc;
 	}
 	
 }

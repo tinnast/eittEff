@@ -7,8 +7,26 @@
  */
 package is.hi.hbv401g.flightsearch.model;
 
-public class LocationList {
-	
-	// forritum hér hahahha
+import java.util.ArrayList;
+import java.util.List;
 
+import is.hi.hbv401g.flightsearch.storage.DBManager;
+
+public class LocationList {
+	private DBManager manager;
+	
+	
+	public LocationList (DBManager d) {
+		manager = d;
+	}
+	
+	
+	public List<String> populateLocationList() {
+		List<String> locations = new ArrayList<String>();
+		
+		locations = manager.getLocations();
+		return locations;
+	}
+	
+	
 }
