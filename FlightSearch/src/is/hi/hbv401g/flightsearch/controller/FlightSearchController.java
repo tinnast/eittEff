@@ -93,5 +93,9 @@ public class FlightSearchController {
 		return loc;
 	}
 	
+	public Booking getBookingWithId(String bookingId) {
+		Booking returnBooking = manager.searchForBooking(bookingId);
+		return returnBooking;
+	}
 }
 
