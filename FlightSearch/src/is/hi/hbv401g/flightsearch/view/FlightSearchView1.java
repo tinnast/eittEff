@@ -28,6 +28,7 @@ import com.toedter.calendar.JDateChooser;
 import is.hi.hbv401g.flightsearch.controller.DBManager;
 import is.hi.hbv401g.flightsearch.controller.EmptySearchList;
 import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
+import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Query;
 
@@ -43,7 +44,8 @@ import javax.swing.JComboBox;
  *
  */
 public class FlightSearchView1 extends JFrame {
-
+	
+	
 	private JPanel contentPane;
 	private JButton btnSearch;
 	private static final long serialVersionUID = 1L;
@@ -51,6 +53,10 @@ public class FlightSearchView1 extends JFrame {
 	private JDateChooser dateChooser;
 	private JTextField txtPassCount;
 	private JTextPane textPane;
+	private JComboBox<String> comboBoxFrom;
+	private JComboBox<String> comboBoxTo;
+	private FlightSearchController myController;
+	
 
 	/**
 	 * Launch the application.
@@ -72,6 +78,7 @@ public class FlightSearchView1 extends JFrame {
 	 * Create the frame.
 	 */
 	public FlightSearchView1() {
+		myController = new FlightSearchController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 547, 540);
 		contentPane = new JPanel();
@@ -93,36 +100,32 @@ public class FlightSearchView1 extends JFrame {
 				
 				// Ná í dagsettningar
 				java.util.Date date1 = dateChooser.getDate();
-				java.util.Date date2 = dateChooserTo.getDate();
+				
 				// Formatta dagsetningu
 				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy");
 							
-				from = txtFrom.getText();
-				to = txtTo.getText();
+				from = (String)comboBoxFrom.getSelectedItem();
+				to = (String)comboBoxTo.getSelectedItem();
 				date1Str = DateFormat.getDateInstance().format(date1);
-				date2Str = DateFormat.getDateInstance().format(date2);
 				passCount = Integer.parseInt(txtPassCount.getText());
 				
 				Calendar dTime = Calendar.getInstance();
 				Calendar aTime = Calendar.getInstance();
 				
 				dTime.set(date1.getYear() + 1900, date1.getMonth() + 1, date1.getDate());
-				aTime.set(date2.getYear() + 1900, date2.getMonth() + 1, date2.getDate());
 				System.out.println(date1.getDate());
 				
 				
-				Query q1 = new Query(from, to, dTime, aTime, passCount);
-				Query q2 = new Query(to, from, aTime, dTime, passCount);
+				Query q1 = new Query("", "", dTime, aTime, passCount);
 				
 				
 				
 				FlightSearchController mySearch = new FlightSearchController();
 				List<Flight> f1 =  mySearch.search(from, to, dTime, aTime, passCount);
-				List<Flight> f2 = mySearch.search(to, from, aTime, dTime, passCount);
 				
 				// Bara til að testa útkomuna
-//				textPane.setText(from + " " + to + " " + sdf.format(date1) + " " + sdf.format(date2) + " " + passCount);
-				textPane.setText(f1.get(0).getDeparture() + " " + to + " " + sdf.format(date1) + " " + sdf.format(date2) + " " + passCount);
+//				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
+				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
 				
 			}
 		});
@@ -167,12 +170,27 @@ public class FlightSearchView1 extends JFrame {
 		lblNoOfPassengers.setBounds(232, 112, 119, 20);
 		contentPane.add(lblNoOfPassengers);
 		
-		JComboBox comboBoxFrom = new JComboBox();
+		comboBoxFrom = new JComboBox<String>();
 		comboBoxFrom.setBounds(34, 56, 159, 22);
 		contentPane.add(comboBoxFrom);
 		
-		JComboBox comboBoxTo = new JComboBox();
+		comboBoxTo = new JComboBox<String>();
 		comboBoxTo.setBounds(294, 56, 159, 22);
 		contentPane.add(comboBoxTo);
+		
+		
+		showDestinations();
+
+	}
+	
+	private void showDestinations() {
+		
+		List<String> list = myController.getAllLocations();
+		
+		for (String item: list) {
+			comboBoxFrom.addItem(item);
+			comboBoxTo.addItem(item);
+		}
+		
 	}
 }
