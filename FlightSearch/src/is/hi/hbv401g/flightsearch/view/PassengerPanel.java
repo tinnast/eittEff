@@ -9,9 +9,15 @@ package is.hi.hbv401g.flightsearch.view;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author karlpestka
@@ -19,7 +25,7 @@ import javax.swing.SwingConstants;
  */
 public class PassengerPanel extends JPanel {
 	private JTextField txtName, txtName2;
-	public PassengerPanel() {
+	public PassengerPanel(Flight flight, FlightBookingView view) {
 		
 		
 		txtName = new JTextField();
@@ -31,9 +37,17 @@ public class PassengerPanel extends JPanel {
 		add(txtName);
 		txtName.setColumns(20);
 		
-		JComboBox comboBoxSeat = new JComboBox();
+		JComboBox<String> comboBoxSeat = new JComboBox<String>();
 		comboBoxSeat.setToolTipText("Choose a seat for this passenger.");
 		add(comboBoxSeat);
+		
+		ArrayList<Seat> seats = flight.getAvailableSeats();
+		System.out.print(flight.getFlightNumber() + "  " + seats.size());
+		
+		for (Seat s: seats) {
+			comboBoxSeat.addItem(s.getSeatNumber());
+		}
+		
 		
 		
 	}

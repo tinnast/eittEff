@@ -322,9 +322,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					int bookedSeats = 0;
 					int seats = 0;
-					
-					System.out.print("HER");
+					System.out.println("fn  " + fNumber);
 					while (res2.next()) {
+						System.out.print("HER");
 						
 						Passenger p = null;
 						if (res2.getString(2) != null) {
@@ -341,13 +341,15 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 						String sNumber = res2.getString(9);
 						
 						Seat s = new Seat(price, seatClass, p, entertainment, electricalConn, luggage, food, sNumber);
-						System.out.println("NAFN: " +s.getPassenger().getName());
 						theSeats.add(s);
 						seats ++;
 					}
 					
 					
 					Flight f = new Flight(fdeparture, farrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+					System.out.println("LLLL    " + f.getAvailableSeats().size());
+					System.out.println("OOOO   " + theSeats.size());
+					
 					returnFlights.add(f);
 				}
 				

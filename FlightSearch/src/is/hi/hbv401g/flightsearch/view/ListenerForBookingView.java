@@ -22,6 +22,12 @@ public class ListenerForBookingView implements ActionListener {
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
+	FlightBookingView myView;
+	
+	public ListenerForBookingView(FlightBookingView view) {
+		myView = view;
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// color the button green
@@ -30,6 +36,9 @@ public class ListenerForBookingView implements ActionListener {
 		JButton button = (JButton)e.getSource();
 		System.out.println(button.getText());
 		System.out.println(button.getTopLevelAncestor());
+		
+		System.out.println("OKEI:   " + myView.myFlight.getDeparture());
+		
 
 	}
 

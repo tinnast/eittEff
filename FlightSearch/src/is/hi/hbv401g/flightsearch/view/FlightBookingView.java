@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
+import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Seat;
 
 import java.awt.FlowLayout;
@@ -30,7 +32,6 @@ import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
 import java.awt.CardLayout;
 import java.awt.Rectangle;
 
@@ -49,6 +50,8 @@ public class FlightBookingView extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private static int passCount;
+	public Flight myFlight;
 	
 	private ArrayList<PassengerPanel> passengerPanels;
 
@@ -60,6 +63,7 @@ public class FlightBookingView extends JFrame {
 			public void run() {
 				try {
 					FlightBookingView frame = new FlightBookingView();
+					System.out.println(passCount);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,6 +76,7 @@ public class FlightBookingView extends JFrame {
 	 * Create the frame.
 	 */
 	public FlightBookingView() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 519);
 		contentPane = new JPanel();
@@ -89,8 +94,8 @@ public class FlightBookingView extends JFrame {
 
 		passengerPanels = new ArrayList<PassengerPanel>();
 		
-		for (int i = 0; i < 5; i++) {
-            passengerPanels.add(new PassengerPanel());
+		for (int i = 0; i < passCount; i++) {
+            passengerPanels.add(new PassengerPanel(null, this));
         }
 		
 		for (PassengerPanel p : passengerPanels) {
@@ -102,9 +107,8 @@ public class FlightBookingView extends JFrame {
 			
 		}				
 
-		
 		JLabel lblTitle = new JLabel("SELECTED FLIGHT");
-		lblTitle.setBounds(220, 13, 104, 16);
+		lblTitle.setBounds(220, 13, 157, 16);
 		contentPane.add(lblTitle);
 		
 		JList listResults = new JList();
@@ -114,7 +118,7 @@ public class FlightBookingView extends JFrame {
 		JButton btnBook = new JButton("BOOK THIS FLIGHT");
 		btnBook.setBounds(193, 402, 184, 46);
 		contentPane.add(btnBook);
-		btnBook.addActionListener(new ListenerForBookingView());
+		btnBook.addActionListener(new ListenerForBookingView(this));
 				
 		JSeparator separator = new JSeparator();
 		separator.setBounds(27, 120, 542, 16);
@@ -125,21 +129,171 @@ public class FlightBookingView extends JFrame {
 		lblFlightNo.setBounds(27, 39, 70, 16);
 		contentPane.add(lblFlightNo);
 		
-		JLabel lblPricePerSeat = new JLabel("Price per seat:");
+		JLabel lblPricePerSeat = new JLabel("Price p seat:");
 		lblPricePerSeat.setBounds(27, 62, 92, 16);
 		contentPane.add(lblPricePerSeat);
 		
-		JLabel lblOnflightEntertainment = new JLabel("Onflight Entertainment:");
-		lblOnflightEntertainment.setBounds(230, 42, 147, 16);
-		contentPane.add(lblOnflightEntertainment);
+		JLabel ent = new JLabel("Entertainment:");
+		ent.setBounds(230, 42, 105, 16);
+		contentPane.add(ent);
 		
-		JLabel lblElectricalConnection = new JLabel("Electrical connection:");
-		lblElectricalConnection.setBounds(230, 62, 147, 16);
+		JLabel lblElectricalConnection = new JLabel("Connection:");
+		lblElectricalConnection.setBounds(230, 62, 105, 16);
 		contentPane.add(lblElectricalConnection);
 		
 		JLabel lblLuggage = new JLabel("Luggage:");
-		lblLuggage.setBounds(230, 91, 147, 16);
+		lblLuggage.setBounds(230, 75, 70, 29);
 		contentPane.add(lblLuggage);
+		
+		JLabel fNumber = new JLabel("");
+		fNumber.setBounds(105, 37, 69, 20);
+		contentPane.add(fNumber);
+		
+		JLabel seatPrice = new JLabel("");
+		seatPrice.setBounds(115, 60, 69, 20);
+		contentPane.add(seatPrice);
+		
+		JLabel luggage = new JLabel("");
+		luggage.setBounds(302, 84, 69, 20);
+		contentPane.add(luggage);
+		
+		JLabel connections = new JLabel("");
+		connections.setBounds(315, 60, 69, 20);
+		contentPane.add(connections);
+		
+		JLabel enter = new JLabel("");
+		enter.setBounds(338, 45, 69, 20);
+		contentPane.add(enter);
+		
+		JLabel lblNewLabel = new JLabel("Food");
+		lblNewLabel.setBounds(22, 79, 69, 20);
+		contentPane.add(lblNewLabel);
+		
+		JLabel food = new JLabel("");
+		food.setBounds(115, 79, 69, 20);
+		contentPane.add(food);
 
 	}
-}
+
+	public FlightBookingView(int pCount, Flight f) {
+		passCount = pCount;
+		myFlight = f;
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 599, 519);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel passengerPaneArea = new JPanel();
+		
+
+
+		passengerPaneArea.setBounds(12, 135, 534, 222);
+		contentPane.add(passengerPaneArea);
+
+
+		passengerPanels = new ArrayList<PassengerPanel>();
+		
+		for (int i = 0; i < passCount; i++) {
+            passengerPanels.add(new PassengerPanel(myFlight, this));
+        }
+		
+		for (PassengerPanel p : passengerPanels) {
+			p.setOpaque(false);
+			p.setBounds(new Rectangle(12, 303, 534, 22));
+			p.setBounds(12, 303, 534, 22);
+			passengerPaneArea.add(p);
+			p.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			
+		}				
+
+		JLabel lblTitle = new JLabel("SELECTED FLIGHT");
+		lblTitle.setBounds(220, 13, 157, 16);
+		contentPane.add(lblTitle);
+		
+		JList listResults = new JList();
+		listResults.setBounds(12, 267, 557, -176);
+		contentPane.add(listResults);
+		
+		JButton btnBook = new JButton("BOOK THIS FLIGHT");
+		btnBook.setBounds(193, 402, 184, 46);
+		contentPane.add(btnBook);
+		btnBook.addActionListener(new ListenerForBookingView(this));
+				
+		JSeparator separator = new JSeparator();
+		separator.setBounds(27, 120, 542, 16);
+		contentPane.add(separator);
+		
+		
+		JLabel lblFlightNo = new JLabel("Flight no.");
+		lblFlightNo.setBounds(27, 39, 70, 16);
+		contentPane.add(lblFlightNo);
+		
+		JLabel lblPricePerSeat = new JLabel("Price p seat:");
+		lblPricePerSeat.setBounds(27, 62, 92, 16);
+		contentPane.add(lblPricePerSeat);
+		
+		JLabel ent = new JLabel("Entertainment:");
+		ent.setBounds(230, 42, 105, 16);
+		contentPane.add(ent);
+		
+		
+		
+		JLabel lblElectricalConnection = new JLabel("Connection:");
+		lblElectricalConnection.setBounds(230, 62, 105, 16);
+		contentPane.add(lblElectricalConnection);
+		
+		JLabel lblLuggage = new JLabel("Luggage:");
+		lblLuggage.setBounds(230, 75, 70, 29);
+		contentPane.add(lblLuggage);
+		
+		JLabel fNumber = new JLabel("");
+		fNumber.setBounds(105, 37, 69, 20);
+		contentPane.add(fNumber);
+		
+		fNumber.setText(f.getFlightNumber());
+		
+		JLabel seatPrice = new JLabel("");
+		seatPrice.setBounds(115, 60, 69, 20);
+		contentPane.add(seatPrice);
+		
+		JLabel luggage = new JLabel("");
+		luggage.setBounds(302, 84, 69, 20);
+		contentPane.add(luggage);
+		
+		luggage.setText(f.getAvailableSeats().get(0).getLug());
+		
+		JLabel connections = new JLabel("");
+		connections.setBounds(315, 60, 69, 20);
+		contentPane.add(connections);
+		
+		JLabel enter = new JLabel("");
+		enter.setBounds(338, 45, 69, 20);
+		contentPane.add(enter);
+		if (f.getAvailableSeats().get(0).getEnt()) {
+			enter.setText("Já");
+		} else {
+			enter.setText("Nei");
+		}
+			
+		
+		
+		JLabel lblNewLabel = new JLabel("Food");
+		lblNewLabel.setBounds(22, 79, 69, 20);
+		contentPane.add(lblNewLabel);
+		
+		JLabel food = new JLabel("");
+		food.setBounds(115, 79, 69, 20);
+		contentPane.add(food);
+		if (f.getAvailableSeats().get(0).getFood()) {
+			food.setText("Yes");
+		} else {
+			food.setText("No");
+		}
+				
+	}
+	}
+
+

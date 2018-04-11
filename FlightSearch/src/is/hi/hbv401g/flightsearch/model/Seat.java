@@ -32,6 +32,10 @@ public class Seat {
 	}
 
 
+	public String getLug() {
+		return luggage;
+	}
+	
 	public int getPrice() {
 		return price;
 	}
@@ -47,6 +51,14 @@ public class Seat {
 	
 	public Passenger getPassenger() {
 		return passenger;
+	}
+	
+	public boolean getFood() {
+		return food;
+	}
+	
+	public boolean getEnt() {
+		return entertainment;
 	}
 
 }
