@@ -13,6 +13,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -38,7 +39,6 @@ import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 
 /**
  * @author tinna
@@ -53,6 +53,7 @@ public class FlightSearchView1 extends JFrame {
 	private JTextField txtBookingNumber;
 	private JDateChooser dateChooser;
 	private JTextField txtPassCount;
+	private JTextPane textPane;
 	private JComboBox<String> comboBoxFrom;
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
@@ -132,7 +133,7 @@ public class FlightSearchView1 extends JFrame {
 			
 				
 		});
-		btnSearch.setBounds(143, 151, 234, 51);
+		btnSearch.setBounds(160, 343, 234, 51);
 		contentPane.add(btnSearch);
 		
 		dateChooser = new JDateChooser();
@@ -165,6 +166,10 @@ public class FlightSearchView1 extends JFrame {
 		txtPassCount.setBounds(349, 106, 45, 26);
 		contentPane.add(txtPassCount);
 		
+		textPane = new JTextPane();
+		textPane.setBounds(50, 196, 434, 126);
+		contentPane.add(textPane);
+		
 		JLabel lblNoOfPassengers = new JLabel("No. of passengers");
 		lblNoOfPassengers.setBounds(232, 112, 119, 20);
 		contentPane.add(lblNoOfPassengers);
@@ -182,7 +187,6 @@ public class FlightSearchView1 extends JFrame {
 		list.setBackground(Color.YELLOW);
 		list.setBounds(481, 360, -430, -132);
 		contentPane.add(list);
-		
 		
 		showDestinations();
 		
