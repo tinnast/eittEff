@@ -42,7 +42,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		public DBManager() {
 			JDBC_CONNECTION = "jdbc:sqlite:flights.db";
 			DATABASE_NAME = "org.sqlite.JDBC";
-			generator  = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+			generator  = new RandomStringGenerator.Builder().withinRange('A', 'Z').build();
 		}
 		
 		// Usage:  	s = newBookingId()
