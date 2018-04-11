@@ -26,8 +26,10 @@ public class ListenerForBookingView implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// color the button green
 
+
 		JButton button = (JButton)e.getSource();
 		System.out.println(button.getText());
+		System.out.println(button.getTopLevelAncestor());
 
 	}
 
