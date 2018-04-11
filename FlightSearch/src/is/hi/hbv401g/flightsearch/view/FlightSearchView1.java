@@ -59,7 +59,7 @@ public class FlightSearchView1 extends JFrame {
 	private FlightSearchController myController;
 	private JList<String> list;
 	private DefaultListModel<String> model;
-	private List<Flight> flightResult;
+	public  List<Flight> flightResult;
 	
 
 	/**
@@ -93,7 +93,7 @@ public class FlightSearchView1 extends JFrame {
 		JLabel lblTitle = new JLabel("FLIGHT SEARCH");
 		lblTitle.setBounds(205, 16, 119, 20);
 		contentPane.add(lblTitle);
-		model = new DefaultListModel<String>(flightResult);
+		model = new DefaultListModel<String>();
 		list = new JList<String>();
 		list.setModel(model);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -140,7 +140,6 @@ public class FlightSearchView1 extends JFrame {
 				// Bara til að testa útkomuna hahahahahahah
 //				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
 //				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
-				model.addElement("hey");
 //				list.setModel(model);
 				
 				for (Flight f: flightResult) {

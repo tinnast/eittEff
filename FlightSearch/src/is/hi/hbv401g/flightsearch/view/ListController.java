@@ -17,15 +17,15 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ListController implements ListSelectionListener {
 
-	    private FlightSearchView1 myController;  // Til að hafa samband við AdalDagsrka klasann
+	    private FlightSearchView1 myView;  // Til að hafa samband við AdalDagsrka klasann
 	    private int valinDagskra;    // Númer staks sem klikkað var á í listanum
-
+	    
 	    /**
 	     * Smiðurinn upphafsstillir tilviksbreytina minDagskra með dagskra
 	     * @param dagskra AdalDagskra sem við höfum samband við
 	     */
 	    public ListController(FlightSearchView1 f){
-	        myController = f;
+	        myView = f;
 	    }
 
 	    @Override
@@ -39,7 +39,9 @@ public class ListController implements ListSelectionListener {
 	        
 	        // Ef ekkert er valið
 	        if(valinDagskra==-1) return;
+	        System.out.println(myView.flightResult.get(valinDagskra).getArrival());
 	        System.out.println(valinDagskra);
+	        System.out.println(myView.flightResult.size());
 	         showBooking();
 	         }
 	    
