@@ -312,8 +312,10 @@ public class FlightBookingView extends JFrame {
 		}
 				
 		lblSuccess = new JLabel("");
+		lblSuccess.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuccess.setForeground(new Color(0, 128, 0));
-		lblSuccess.setBounds(193, 460, 184, 31);
+		lblSuccess.setBounds(12, 460, 581, 31);
 		contentPane.add(lblSuccess);
 		
 	}
