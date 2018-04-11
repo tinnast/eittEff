@@ -125,7 +125,7 @@ public class FlightSearchView1 extends JFrame {
 				FlightSearchController mySearch = new FlightSearchController();
 				List<Flight> f1 =  mySearch.search(from, to, dTime, aTime, passCount);
 				
-				// Bara til að testa útkomuna
+				// Bara til að testa útkomuna hahahahahahah
 //				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
 				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
 				
