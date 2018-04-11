@@ -364,6 +364,38 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			return returnFlights;	
 	 }
 		
+		public List<String> getLocations() {
+			Connection conn = null;
+			List<String> departurePlaces = new ArrayList<String>();
+			try {
+				Class.forName(DATABASE_NAME);
+				} catch (Exception e) {
+				  System.err.println(e.getMessage());
+				}
+			try {
+				conn = DriverManager.getConnection(JDBC_CONNECTION);
+				PreparedStatement pstmt = conn.prepareStatement("SELECT DISTINCT departure FROM flights"); 
+				ResultSet res = pstmt.executeQuery(); 
+				
+				while (res.next()) {
+					System.out.println(res.getString(1));
+					departurePlaces.add(res.getString(1));
+				}
+					
+
+			} catch(SQLException e) {
+				System.err.println(e.getMessage()); 
+				} finally {
+					try {
+						if(conn != null) conn.close(); 
+						} catch(SQLException e) {
+							System.err.println(e); 
+						  } 
+					    } 
+			
+			return departurePlaces;
+		}
+		
 		public void addThings()  {
 			Connection conn = null;
 			try {
@@ -406,11 +438,16 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
+			List<String> s = mydb.getLocations();
+			System.out.println(s.size());
+			
+			
+/*			
 			Booking b = mydb.searchForBooking("pueqnl");
 			if (b!=null) {
 				
 			ArrayList<Seat> ss = b.getSeats();
-			System.out.println("ID ER : " + b.getFlight().getArrivalTime().get(Calendar.HOUR_OF_DAY));
+			System.out.println("ID ER : " + b.getFlight().getArrivalTime().get(Calendar.HOUR_OF_DAY));*/
 			
 //			System.out.print(mydb.newBookingId());
 			}
@@ -465,5 +502,5 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			
 			
 	 }
-}
+
 
