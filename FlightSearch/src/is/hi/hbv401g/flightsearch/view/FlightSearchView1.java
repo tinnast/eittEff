@@ -56,6 +56,7 @@ public class FlightSearchView1 extends JFrame {
 	private JComboBox<String> comboBoxFrom;
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
+	private JList list;
 	
 
 	/**
@@ -128,6 +129,8 @@ public class FlightSearchView1 extends JFrame {
 				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
 				
 			}
+			
+				
 		});
 		btnSearch.setBounds(143, 151, 234, 51);
 		contentPane.add(btnSearch);
@@ -174,14 +177,19 @@ public class FlightSearchView1 extends JFrame {
 		comboBoxTo.setBounds(294, 56, 159, 22);
 		contentPane.add(comboBoxTo);
 		
-		JList list = new JList();
+		list = new JList();
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setBackground(Color.YELLOW);
 		list.setBounds(481, 360, -430, -132);
 		contentPane.add(list);
 		
 		
 		showDestinations();
-
+		
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+			
+	});
 	}
 	
 	private void showDestinations() {
