@@ -35,9 +35,10 @@ public class ListenerForBookingView implements ActionListener {
 
 		JButton button = (JButton)e.getSource();
 		System.out.println(button.getText());
-		System.out.println(button.getTopLevelAncestor());
+		FlightBookingView theView = (FlightBookingView)button.getTopLevelAncestor();
+		theView.bookThisFlight();
 		
-		System.out.println("OKEI:   " + myView.myFlight.getDeparture());
+		System.out.println("DID I BOOK?");
 		
 
 	}

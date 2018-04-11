@@ -9,8 +9,15 @@ package is.hi.hbv401g.flightsearch.view;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+
+import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Passenger;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author karlpestka
@@ -20,11 +27,11 @@ public class PassengerPanel extends JPanel {
 	/**
 	 * 
 	 */
-	private static final String DEFAULT_PASSENGER_NAME_TEXT = "DEFAULT_PASSENGER_NAME_TEXT";
+	private static final String DEFAULT_PASSENGER_NAME_TEXT = "Passenger Name";
 	private JTextField txtName;
 	private JComboBox comboBoxSeat;
 	
-	public PassengerPanel() {
+	public PassengerPanel(Flight flight) {
 		
 		
 		txtName = new JTextField();
@@ -39,6 +46,19 @@ public class PassengerPanel extends JPanel {
 		comboBoxSeat = new JComboBox();
 		comboBoxSeat.setToolTipText("Choose a seat for this passenger.");
 		add(comboBoxSeat);
+		
+	    ArrayList<Seat> seats = new ArrayList<Seat>();
+	    Passenger passy = new Passenger("Bob");
+	    Seat f = new Seat(2, "Drunk Tank", passy, true, "NOPE", "luggage", false, "seatnumber"); //flight.getAvailableSeats(); 
+		seats.add(f);
+		
+	    System.out.print(flight.getFlightNumber() + "  " + seats.size()); 
+	     
+	    for (Seat s : seats) { 
+	      	comboBoxSeat.addItem(s.getSeatNumber()); 
+	    } 
+	     
+	     
 		
 		
 	}
@@ -55,5 +75,7 @@ public class PassengerPanel extends JPanel {
 		String s = comboBoxSeat.getSelectedItem().toString();
 		return s;
 	}
+	
+	
 
 }

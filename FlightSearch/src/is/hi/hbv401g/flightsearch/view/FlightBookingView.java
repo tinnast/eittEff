@@ -99,7 +99,7 @@ public class FlightBookingView extends JFrame {
 		passengerPanels = new ArrayList<PassengerPanel>();
 		
 		for (int i = 0; i < passCount; i++) {
-            passengerPanels.add(new PassengerPanel());
+            passengerPanels.add(new PassengerPanel(myFlight));
         }
 		
 		for (PassengerPanel p : passengerPanels) {
@@ -201,7 +201,7 @@ public class FlightBookingView extends JFrame {
 		passengerPanels = new ArrayList<PassengerPanel>();
 		
 		for (int i = 0; i < passCount; i++) {
-            passengerPanels.add(new PassengerPanel(myFlight, this));
+            passengerPanels.add(new PassengerPanel(myFlight));
         }
 		
 		for (PassengerPanel p : passengerPanels) {

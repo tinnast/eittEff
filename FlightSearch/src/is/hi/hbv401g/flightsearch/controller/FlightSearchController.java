@@ -72,10 +72,21 @@ public class FlightSearchController {
 	public String bookFlight(Flight myFlight, ArrayList<Seat> seats) {
 		String bookingId = manager.newBookingId();
 		myBooking = new Booking(bookingId, myFlight, seats);
-		addBookingToDB();
+		//
+		if (isAnitaReady() == true)
+			addBookingToDB();
+		System.out.println(myBooking.getFlight() + ", ID " + myBooking.getBookingId());
 		return bookingId;
 	}
 	
+	/**
+	 * @return
+	 */
+	private boolean isAnitaReady() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	// Usage:	addbookingToDB();
 	// Before: 	myBooking contains a random alphanumeric string, a flight, and a list of 1 or more passengers. Each passenger may have 0 or 1 seat chosen.
 	// After:	booking has been added to manager DB.
