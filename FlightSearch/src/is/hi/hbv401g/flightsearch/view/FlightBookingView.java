@@ -46,6 +46,7 @@ public class FlightBookingView extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
+	private static final int FJOLDIPASSENGER = 5;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
