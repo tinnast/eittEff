@@ -55,13 +55,13 @@ public class FlightSearchView1 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtBookingNumber;
 	private JDateChooser dateChooser;
-	private JTextField txtPassCount;
 	private JComboBox<String> comboBoxFrom;
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
 	private JList<String> list;
 	private DefaultListModel<String> model;
 	public  List<Flight> flightResult;
+	private JComboBox<Integer> comboBoxPassengers;
 	
 
 	/**
@@ -123,7 +123,7 @@ public class FlightSearchView1 extends JFrame {
 				from = (String)comboBoxFrom.getSelectedItem();
 				to = (String)comboBoxTo.getSelectedItem();
 				date1Str = DateFormat.getDateInstance().format(date1);
-				passCount = Integer.parseInt(txtPassCount.getText());
+				passCount = (Integer)comboBoxPassengers.getSelectedItem();
 				
 				Calendar dTime = Calendar.getInstance();
 				Calendar aTime = Calendar.getInstance();
@@ -213,12 +213,6 @@ public class FlightSearchView1 extends JFrame {
 		separator.setBounds(25, 407, 492, 9);
 		contentPane.add(separator);
 		
-		txtPassCount = new JTextField();
-		txtPassCount.setText("1");
-		txtPassCount.setColumns(10);
-		txtPassCount.setBounds(349, 106, 45, 26);
-		contentPane.add(txtPassCount);
-		
 		
 		JLabel lblNoOfPassengers = new JLabel("No. of passengers");
 		lblNoOfPassengers.setBounds(232, 112, 119, 20);
@@ -232,7 +226,14 @@ public class FlightSearchView1 extends JFrame {
 		comboBoxTo.setBounds(294, 56, 159, 22);
 		contentPane.add(comboBoxTo);
 		
+		comboBoxPassengers = new JComboBox<Integer>();
+		comboBoxPassengers.setMaximumRowCount(5);
+		comboBoxPassengers.setBounds(343, 110, 51, 22);
+		contentPane.add(comboBoxPassengers);
 		
+		for (int i = 1; i < 6; i++) {
+			comboBoxPassengers.addItem(i);
+		}
 		
 		showDestinations();
 		
