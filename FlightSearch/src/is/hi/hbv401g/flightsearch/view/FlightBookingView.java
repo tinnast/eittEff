@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import is.hi.c4.rum.Flotur;
 import is.hi.hbv401g.flightsearch.model.Seat;
 
 import java.awt.FlowLayout;
