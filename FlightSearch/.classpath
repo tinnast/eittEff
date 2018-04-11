@@ -12,6 +12,6 @@
 	<classpathentry kind="lib" path="lib"/>
 	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-text-1.2/commons-text-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anita Kristjansdotti/Desktop/commons-lang3-3.7.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -53,7 +53,6 @@ public class FlightSearchView1 extends JFrame {
 	private JTextField txtBookingNumber;
 	private JDateChooser dateChooser;
 	private JTextField txtPassCount;
-	private JTextPane textPane;
 	private JComboBox<String> comboBoxFrom;
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
@@ -91,6 +90,17 @@ public class FlightSearchView1 extends JFrame {
 		JLabel lblTitle = new JLabel("FLIGHT SEARCH");
 		lblTitle.setBounds(205, 16, 119, 20);
 		contentPane.add(lblTitle);
+		list = new JList();
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
+		list.setBackground(Color.YELLOW);
+		list.setBounds(481, 360, -430, -132);
+		jDagskraLidir.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+		contentPane.add(list);
+		
 		
 		btnSearch = new JButton("Find me a flight!");
 		btnSearch.addActionListener(new ActionListener() {
@@ -127,7 +137,8 @@ public class FlightSearchView1 extends JFrame {
 				
 				// Bara til að testa útkomuna hahahahahahah
 //				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
-				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
+//				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
+				list.;
 				
 			}
 			
@@ -166,9 +177,6 @@ public class FlightSearchView1 extends JFrame {
 		txtPassCount.setBounds(349, 106, 45, 26);
 		contentPane.add(txtPassCount);
 		
-		textPane = new JTextPane();
-		textPane.setBounds(50, 196, 434, 126);
-		contentPane.add(textPane);
 		
 		JLabel lblNoOfPassengers = new JLabel("No. of passengers");
 		lblNoOfPassengers.setBounds(232, 112, 119, 20);
@@ -182,11 +190,7 @@ public class FlightSearchView1 extends JFrame {
 		comboBoxTo.setBounds(294, 56, 159, 22);
 		contentPane.add(comboBoxTo);
 		
-		list = new JList();
-		list.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list.setBackground(Color.YELLOW);
-		list.setBounds(481, 360, -430, -132);
-		contentPane.add(list);
+		
 		
 		showDestinations();
 		
