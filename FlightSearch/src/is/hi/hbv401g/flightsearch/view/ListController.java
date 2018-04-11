@@ -11,6 +11,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
+import is.hi.hbv401g.flightsearch.model.Flight;
+
 /**
  * @author Anita Kristjansdotti
  *
@@ -19,13 +22,17 @@ public class ListController implements ListSelectionListener {
 
 	    private FlightSearchView1 myView;  // Til að hafa samband við AdalDagsrka klasann
 	    private int valinDagskra;    // Númer staks sem klikkað var á í listanum
+	    private int passCount;
+	    private FlightSearchController myController;
 	    
 	    /**
 	     * Smiðurinn upphafsstillir tilviksbreytina minDagskra með dagskra
 	     * @param dagskra AdalDagskra sem við höfum samband við
 	     */
-	    public ListController(FlightSearchView1 f){
+	    public ListController(FlightSearchView1 f, int p){
 	        myView = f;
+	        passCount = p;
+	        
 	    }
 
 	    @Override
@@ -42,7 +49,8 @@ public class ListController implements ListSelectionListener {
 	        System.out.println(myView.flightResult.get(valinDagskra).getArrival());
 	        System.out.println(valinDagskra);
 	        System.out.println(myView.flightResult.size());
-	         showBooking();
+	        
+	         showBooking(myView.flightResult.get(valinDagskra));
 	         }
 	    
 	    /**
@@ -50,13 +58,14 @@ public class ListController implements ListSelectionListener {
 	     * birta upplýsingar um dagskráliðinn
 	     * @param n númer dagskráliðs sem á að birta upplýsingar um
 	     */
-	    private void showBooking() {
-	        // Búa til dialog til að birta dagskrálið
+	    private void showBooking(Flight f) {
+	    	 int p = myView.passCount;
 	         FlightBookingView bookingView = new FlightBookingView();
+	         FlightBookingView bookingView2 = new FlightBookingView(p,f);
 	         
 	         
 	        // Birta dialog fyrir notanda
-	         bookingView.setVisible(true);
+	         bookingView2.setVisible(true);
 	     }
 	    
 

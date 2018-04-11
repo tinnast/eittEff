@@ -62,6 +62,8 @@ public class FlightSearchView1 extends JFrame {
 	private DefaultListModel<String> model;
 	public  List<Flight> flightResult;
 	private JComboBox<Integer> comboBoxPassengers;
+	public int passCount;
+
 	
 
 	/**
@@ -101,7 +103,7 @@ public class FlightSearchView1 extends JFrame {
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setBackground(Color.YELLOW);
 		list.setBounds(50, 170, 430, 135);
-		list.getSelectionModel().addListSelectionListener(new ListController(this));
+		list.getSelectionModel().addListSelectionListener(new ListController(this, passCount));
 
 		contentPane.add(list);
 		
@@ -112,7 +114,7 @@ public class FlightSearchView1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				String from, to, date1Str, date2Str;
-				int passCount;
+				
 				
 				// Ná í dagsettningar
 				java.util.Date date1 = dateChooser.getDate();
@@ -134,7 +136,7 @@ public class FlightSearchView1 extends JFrame {
 				
 				Query q1 = new Query("", "", dTime, aTime, passCount);
 				
-				
+
 				
 				FlightSearchController mySearch = new FlightSearchController();
 				flightResult =  mySearch.search(from, to, dTime, aTime, passCount);
@@ -146,6 +148,7 @@ public class FlightSearchView1 extends JFrame {
 				
 				for (Flight f: flightResult) {
 					model.addElement(f.getDeparture() + " " +  f.getDepartureTime().get(Calendar.YEAR) + "-" + f.getDepartureTime().get(Calendar.MONTH) + "-" + f.getDepartureTime().get(Calendar.DAY_OF_MONTH) + " TO: " + f.getArrival() + " " + f.getArrivalTime().get(Calendar.YEAR)+ "-" + f.getArrivalTime().get(Calendar.MONTH) + "-" + f.getArrivalTime().get(Calendar.DAY_OF_MONTH));
+					System.out.println("MM:   " + f.getAvailableSeats().size());
 				}
 				
 				

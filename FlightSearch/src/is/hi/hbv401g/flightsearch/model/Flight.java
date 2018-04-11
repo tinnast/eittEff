@@ -56,7 +56,7 @@ public class Flight {
 	}
 	
 	public ArrayList<Seat> getAvailableSeats() {
-		return seats;  // FIX THIS METHOD
+		return seats;  
 	}
 	
 	public String getFlightNumber() {
