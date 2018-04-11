@@ -60,7 +60,6 @@ public class ListController implements ListSelectionListener {
 	     */
 	    private void showBooking(Flight f) {
 	    	 int p = myView.passCount;
-	         FlightBookingView bookingView = new FlightBookingView();
 	         FlightBookingView bookingView2 = new FlightBookingView(p,f);
 	         
 	         

@@ -70,22 +70,15 @@ public class FlightSearchController {
 	// 			myBooking.bookingId has been set to a unique alphanumeric string.
 	//          s contains this booingId.
 	public String bookFlight(Flight myFlight, ArrayList<Seat> seats) {
+		System.out.println("Booking flight…");
 		String bookingId = manager.newBookingId();
 		myBooking = new Booking(bookingId, myFlight, seats);
 		//
-		if (isAnitaReady() == true)
-			addBookingToDB();
-		System.out.println(myBooking.getFlight() + ", ID " + myBooking.getBookingId());
+		addBookingToDB();
 		return bookingId;
 	}
 	
-	/**
-	 * @return
-	 */
-	private boolean isAnitaReady() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	// Usage:	addbookingToDB();
 	// Before: 	myBooking contains a random alphanumeric string, a flight, and a list of 1 or more passengers. Each passenger may have 0 or 1 seat chosen.

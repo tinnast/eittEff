@@ -16,7 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
 import is.hi.hbv401g.flightsearch.model.Flight;
-import is.hi.hbv401g.flightsearch.model.Passenger;
 import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
@@ -47,11 +46,7 @@ public class PassengerPanel extends JPanel {
 		comboBoxSeat.setToolTipText("Choose a seat for this passenger.");
 		add(comboBoxSeat);
 		
-	    ArrayList<Seat> seats = new ArrayList<Seat>();
-	    Passenger passy = new Passenger("Bob");
-	    Seat f = new Seat(2, "Drunk Tank", passy, true, "NOPE", "luggage", false, "seatnumber"); //flight.getAvailableSeats(); 
-		seats.add(f);
-		
+	    ArrayList<Seat> seats = flight.getAvailableSeats(); 
 	    System.out.print(flight.getFlightNumber() + "  " + seats.size()); 
 	     
 	    for (Seat s : seats) { 

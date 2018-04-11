@@ -37,6 +37,7 @@ import java.awt.CardLayout;
 import java.awt.Rectangle;
 
 import java.util.ArrayList;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -54,6 +55,8 @@ public class FlightBookingView extends JFrame {
 	private JTextField textField_4;
 	private static int passCount;
 	public Flight myFlight;
+	JLabel lblSuccess;
+
 	
 	private FlightSearchController fatController; // Squarepusher https://www.youtube.com/watch?v=0j5Ss4XyLb0
 	
@@ -89,10 +92,11 @@ public class FlightBookingView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel passengerPaneArea = new JPanel();
+		fatController = new FlightSearchController();
 		
 
 
-		passengerPaneArea.setBounds(12, 135, 534, 222);
+		passengerPaneArea.setBounds(12, 135, 581, 222);
 		contentPane.add(passengerPaneArea);
 
 
@@ -176,12 +180,22 @@ public class FlightBookingView extends JFrame {
 		JLabel food = new JLabel("");
 		food.setBounds(115, 79, 69, 20);
 		contentPane.add(food);
+		
+		lblSuccess = new JLabel("");
+		lblSuccess.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuccess.setForeground(new Color(0, 128, 0));
+		lblSuccess.setBounds(12, 460, 581, 31);
+		contentPane.add(lblSuccess);
 
 	}
 
 	public FlightBookingView(int pCount, Flight f) {
 		passCount = pCount;
 		myFlight = f;
+		
+		fatController = new FlightSearchController();
+
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 519);
@@ -297,6 +311,11 @@ public class FlightBookingView extends JFrame {
 			food.setText("No");
 		}
 				
+		lblSuccess = new JLabel("");
+		lblSuccess.setForeground(new Color(0, 128, 0));
+		lblSuccess.setBounds(193, 460, 184, 31);
+		contentPane.add(lblSuccess);
+		
 	}
 
 	// Usage:  String s = bookThisFlight();
@@ -314,7 +333,10 @@ public class FlightBookingView extends JFrame {
 			mySeat.setPassenger(myPassenger);
 			seats.add(mySeat);
 		}
-		fatController.bookFlight(myFlight, seats);
+		System.out.println(myFlight.getFlightNumber() + " " + seats.get(0).getSeatNumber());
+		String s = fatController.bookFlight(myFlight, seats);
+		lblSuccess.setText("Booking successful! Your booking ID is " + s);
+		
 	}
 }
 
