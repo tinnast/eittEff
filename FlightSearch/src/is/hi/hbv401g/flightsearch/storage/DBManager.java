@@ -410,13 +410,13 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO flights VALUES(?,?,?,?,?,?)"); 
 				
 				for (int j =0; j<30; j++) {
-				String date = "2018-4-" + j +  " 15:0:0";
-				String date2 = "2018-4-" + j + " 19:0:0";
+				String date = "2018-4-" + j +  " 19:0:0";
+				String date2 = "2018-4-" + j + " 22:0:0";
 
 
 				pstmt.clearParameters(); 
-				pstmt.setString(1, ("BABL" + j));
-				pstmt.setString(2,"Barcelona");
+				pstmt.setString(1, ("XZSP" + j));
+				pstmt.setString(2,"Paris");
 				pstmt.setString(3, "Keflavik");
 				pstmt.setString(4, date); 
 				pstmt.setString(5, date2);
@@ -440,9 +440,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 	 }
 		public static void main( String[] args ) throws Exception { 
 			DBManager mydb = new DBManager();
-			List<String> s = mydb.getLocations();
-			System.out.println(s.size());
-			mydb.newBookingId();
+//			List<String> s = mydb.getLocations();
+//			System.out.println(s.size());
+			mydb.addThings();
 			
 			
 /*			
