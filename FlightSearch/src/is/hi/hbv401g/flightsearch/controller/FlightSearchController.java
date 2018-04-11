@@ -57,10 +57,10 @@ public class FlightSearchController {
 		
 		Query myQuery = new Query (departure, arrival, depDate, arrDate, passengerCount);
 
-    	returnFlights = manager.searchByQuery(myQuery);
+    	results = manager.searchByQuery(myQuery);
 	
 		
-		return returnFlights;
+		return results;
 	}
 
 
