@@ -191,9 +191,7 @@ public class FlightSearchView1 extends JFrame {
 		showDestinations();
 		
 		
-		list.addListSelectionListener(new ListSelectionListener() {
-			
-	});
+		list.addListSelectionListener(new ListController(this));
 	}
 	
 	private void showDestinations() {
