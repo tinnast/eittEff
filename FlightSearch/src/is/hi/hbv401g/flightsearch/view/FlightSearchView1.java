@@ -33,6 +33,7 @@ import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
 import is.hi.hbv401g.flightsearch.model.Booking;
 import is.hi.hbv401g.flightsearch.model.Flight;
 import is.hi.hbv401g.flightsearch.model.Query;
+import is.hi.hbv401g.flightsearch.model.Seat;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -40,6 +41,7 @@ import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 
 /**
  * @author tinna
@@ -171,6 +173,39 @@ public class FlightSearchView1 extends JFrame {
 		txtBookingNumber.setColumns(10);
 		
 		JButton btnFindBooking = new JButton("Find");
+		btnFindBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bookingNo = txtBookingNumber.getText();
+				String message = "";
+				Booking booking = myController.getBookingWithId(bookingNo);
+				
+				message += "Booking ID: " + booking.getBookingId() + "\n";
+				message += "FlightNumber: " + booking.getFlight().getFlightNumber() + "\n";
+				ArrayList<Seat> seats = booking.getSeats();
+				
+				
+				for (Seat s: seats) {
+					message += "Passenger " + s.getPassenger().getName() + " in seat " + s.getSeatNumber() + "\n";
+				}
+			
+				Flight f = booking.getFlight();
+				Calendar cf = f.getDepartureTime();
+				Calendar ca = f.getArrivalTime();
+				
+				String dep = cf.get(Calendar.YEAR) + "-" + cf.get(Calendar.MONTH) + "-" + cf.get(Calendar.DAY_OF_MONTH) + "\n";
+				String arr = ca.get(Calendar.YEAR) + "-" + ca.get(Calendar.MONTH) + "-" + ca.get(Calendar.DAY_OF_MONTH);
+				
+				
+				message += "Departure from " + f.getDeparture() + " at " + dep;
+				message += "Arrival at " + f.getArrival() + " at " + arr; 
+				
+				JOptionPane optionPane = new JOptionPane(message);
+				JDialog dialog = optionPane.createDialog("Booking info");
+				
+				dialog.setVisible(true);
+				
+			}
+		});
 		btnFindBooking.setBounds(267, 428, 97, 25);
 		contentPane.add(btnFindBooking);
 		
