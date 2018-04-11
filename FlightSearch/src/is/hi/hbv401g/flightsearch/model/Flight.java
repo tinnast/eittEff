@@ -63,4 +63,20 @@ public class Flight {
 		return flightNumber;
 	}
 
+
+
+
+	/**
+	 * @param seatNumber
+	 * @return
+	 */
+	public Seat findSeatName(String seatNumber) {
+		// TODO Auto-generated method stub
+		for (Seat s : seats) {
+			if (seatNumber == s.getSeatNumber())
+				return s;
+		}
+		return null;
+	}
+
 }

@@ -31,6 +31,9 @@ public class Seat {
 		this.seatNumber = seatnumber;
 	}
 
+	public void setPassenger(Passenger p) {
+		passenger = p;
+	}
 
 	public String getLug() {
 		return luggage;
@@ -60,7 +63,7 @@ public class Seat {
 	public boolean getEnt() {
 		return entertainment;
 	}
-
+	
 }
 
 

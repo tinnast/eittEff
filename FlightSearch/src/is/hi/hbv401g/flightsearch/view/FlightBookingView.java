@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import is.hi.hbv401g.flightsearch.controller.FlightSearchController;
 import is.hi.hbv401g.flightsearch.model.Flight;
+import is.hi.hbv401g.flightsearch.model.Passenger;
 import is.hi.hbv401g.flightsearch.model.Seat;
 
 import java.awt.FlowLayout;
@@ -53,6 +54,8 @@ public class FlightBookingView extends JFrame {
 	private JTextField textField_4;
 	private static int passCount;
 	public Flight myFlight;
+	
+	private FlightSearchController fatController; // Squarepusher https://www.youtube.com/watch?v=0j5Ss4XyLb0
 	
 	private ArrayList<PassengerPanel> passengerPanels;
 
@@ -96,7 +99,7 @@ public class FlightBookingView extends JFrame {
 		passengerPanels = new ArrayList<PassengerPanel>();
 		
 		for (int i = 0; i < passCount; i++) {
-            passengerPanels.add(new PassengerPanel(null, this));
+            passengerPanels.add(new PassengerPanel());
         }
 		
 		for (PassengerPanel p : passengerPanels) {
@@ -295,6 +298,23 @@ public class FlightBookingView extends JFrame {
 		}
 				
 	}
-	}
 
+	// Usage:  String s = bookThisFlight();
+	// Before: Each panel in passengerPanels contains a passenger name and seat number. 
+	//         myFlight points to a flight object.
+	// After:  new booking has been sent to controller and DB.
+	public void bookThisFlight() {
+		ArrayList<Seat> seats = new ArrayList();
+		for (PassengerPanel p : passengerPanels) {
+			String seatNumber = p.getPassengerSeat();
+			String myName = p.getPassengerName();
+			
+			Seat mySeat = myFlight.findSeatName(seatNumber);
+			Passenger myPassenger = new Passenger(myName);
+			mySeat.setPassenger(myPassenger);
+			seats.add(mySeat);
+		}
+		fatController.bookFlight(myFlight, seats);
+	}
+}
 
