@@ -36,6 +36,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
+import javax.swing.JComboBox;
 
 /**
  * @author tinna
@@ -44,13 +45,10 @@ import javax.swing.JTextPane;
 public class FlightSearchView1 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtFrom;
-	private JTextField txtTo;
 	private JButton btnSearch;
 	private static final long serialVersionUID = 1L;
 	private JTextField txtBookingNumber;
-	private JDateChooser dateChooserFrom;
-	private JDateChooser dateChooserTo;
+	private JDateChooser dateChooser;
 	private JTextField txtPassCount;
 	private JTextPane textPane;
 
@@ -85,18 +83,6 @@ public class FlightSearchView1 extends JFrame {
 		lblTitle.setBounds(205, 16, 119, 20);
 		contentPane.add(lblTitle);
 		
-		txtFrom = new JTextField();
-		txtFrom.setBounds(40, 64, 157, 26);
-		txtFrom.setText("FROM");
-		contentPane.add(txtFrom);
-		txtFrom.setColumns(10);
-		
-		txtTo = new JTextField();
-		txtTo.setBounds(318, 64, 157, 26);
-		txtTo.setText("TO");
-		contentPane.add(txtTo);
-		txtTo.setColumns(10);
-		
 		btnSearch = new JButton("Find me a flight!");
 		btnSearch.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
@@ -106,7 +92,7 @@ public class FlightSearchView1 extends JFrame {
 				int passCount;
 				
 				// Ná í dagsettningar
-				java.util.Date date1 = dateChooserFrom.getDate();
+				java.util.Date date1 = dateChooser.getDate();
 				java.util.Date date2 = dateChooserTo.getDate();
 				// Formatta dagsetningu
 				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy");
@@ -143,16 +129,11 @@ public class FlightSearchView1 extends JFrame {
 		btnSearch.setBounds(160, 343, 234, 51);
 		contentPane.add(btnSearch);
 		
-		dateChooserFrom = new JDateChooser();
-		dateChooserFrom.setToolTipText("select date");
-		dateChooserFrom.setDateFormatString("dd-MM-yyyy");
-		dateChooserFrom.setBounds(50, 106, 125, 26);
-		contentPane.add(dateChooserFrom);
-		
-		dateChooserTo = new JDateChooser();
-		dateChooserTo.setToolTipText("select date");
-		dateChooserTo.setBounds(328, 106, 125, 26);
-		contentPane.add(dateChooserTo);
+		dateChooser = new JDateChooser();
+		dateChooser.setToolTipText("select date");
+		dateChooser.setDateFormatString("dd-MM-yyyy");
+		dateChooser.setBounds(50, 106, 125, 26);
+		contentPane.add(dateChooser);
 		
 		JLabel lblSeeMyBooking = new JLabel("View my booking");
 		lblSeeMyBooking.setBounds(35, 432, 105, 16);
@@ -173,8 +154,9 @@ public class FlightSearchView1 extends JFrame {
 		contentPane.add(separator);
 		
 		txtPassCount = new JTextField();
+		txtPassCount.setText("1");
 		txtPassCount.setColumns(10);
-		txtPassCount.setBounds(149, 145, 26, 26);
+		txtPassCount.setBounds(349, 106, 45, 26);
 		contentPane.add(txtPassCount);
 		
 		textPane = new JTextPane();
@@ -182,7 +164,15 @@ public class FlightSearchView1 extends JFrame {
 		contentPane.add(textPane);
 		
 		JLabel lblNoOfPassengers = new JLabel("No. of passengers");
-		lblNoOfPassengers.setBounds(40, 150, 119, 20);
+		lblNoOfPassengers.setBounds(232, 112, 119, 20);
 		contentPane.add(lblNoOfPassengers);
+		
+		JComboBox comboBoxFrom = new JComboBox();
+		comboBoxFrom.setBounds(34, 56, 159, 22);
+		contentPane.add(comboBoxFrom);
+		
+		JComboBox comboBoxTo = new JComboBox();
+		comboBoxTo.setBounds(294, 56, 159, 22);
+		contentPane.add(comboBoxTo);
 	}
 }
