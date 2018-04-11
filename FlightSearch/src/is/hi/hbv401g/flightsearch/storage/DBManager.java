@@ -407,22 +407,50 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				}
 			try {
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO flights VALUES(?,?,?,?,?,?)"); 
+				PreparedStatement pstmt = conn.prepareStatement("SELECT flightnumer FROM flights;");		
+				ResultSet res = pstmt.executeQuery();
+				String a = "ABCDEFGHIJKLMNOPQRSTUV";
 				
-				for (int j =0; j<30; j++) {
-				String date = "2018-4-" + j +  " 19:0:0";
-				String date2 = "2018-4-" + j + " 22:0:0";
-
-
-				pstmt.clearParameters(); 
-				pstmt.setString(1, ("XZSP" + j));
-				pstmt.setString(2,"Paris");
-				pstmt.setString(3, "Keflavik");
-				pstmt.setString(4, date); 
-				pstmt.setString(5, date2);
-				pstmt.setString(6, "4 hours 0 min");
-				int res = pstmt.executeUpdate(); 
-		    }
+				while (res.next()) {
+					String fnumber = res.getString(1);
+					
+					PreparedStatement ps = conn.prepareStatement("INSERT into seats values (?, ?, ?, ?, ?, ?, ?, ?,?);");
+					
+					for (int i =0; i<11; i++) {
+						
+					for (int j=1; j<20; j++) {
+						
+					ps.clearParameters();
+					ps.setString(1, fnumber);
+					ps.setString(2, null);
+					ps.setInt(3, 20000);
+					ps.setString(4, "economy");
+					ps.setBoolean(5, true);
+					ps.setString(6, "none");
+					ps.setString(7, "one bag");
+					ps.setBoolean(8, false);
+					String seatNumber = j + "" + a.charAt(i);
+					ps.setString(9, seatNumber);
+					ps.executeUpdate();
+					}
+					
+					}
+					System.out.print(fnumber);
+				}
+//				for (int j =0; j<30; j++) {
+//				String date = "2018-4-" + j +  " 19:0:0";
+//				String date2 = "2018-4-" + j + " 22:0:0";
+//
+//
+//				pstmt.clearParameters(); 
+//				pstmt.setString(1, ("XZSP" + j));
+//				pstmt.setString(2,"Paris");
+//				pstmt.setString(3, "Keflavik");
+//				pstmt.setString(4, date); 
+//				pstmt.setString(5, date2);
+//				pstmt.setString(6, "4 hours 0 min");
+//				int res = pstmt.executeUpdate(); 
+		    //}
 			
 			
 
