@@ -88,8 +88,9 @@ public class FlightBookingView extends JFrame {
 		lblSeat.setBounds(268, 338, 56, 16);
 		contentPane.add(lblSeat);
 		
+			
 		JLabel lblPassengerName = new JLabel("Passenger name:");
-		lblPassengerName.setBounds(22, 337, 107, 19);
+		lblPassengerName.setBounds(12, 337, 107, 19);
 		contentPane.add(lblPassengerName);
 		
 		JSeparator separator = new JSeparator();
@@ -99,5 +100,6 @@ public class FlightBookingView extends JFrame {
 		JButton btnAddPassenger = new JButton("Add passenger");
 		btnAddPassenger.setBounds(367, 334, 136, 25);
 		contentPane.add(btnAddPassenger);
+
 	}
 }

@@ -39,7 +39,7 @@ public class ListController implements ListSelectionListener {
 	        
 	        // Ef ekkert er valið
 	        if(valinDagskra==-1) return;
-	        
+	        System.out.println(valinDagskra);
 	         showBooking();
 	         }
 	    

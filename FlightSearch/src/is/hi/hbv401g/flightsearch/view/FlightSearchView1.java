@@ -58,6 +58,7 @@ public class FlightSearchView1 extends JFrame {
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
 	private JList<String> list;
+	private DefaultListModel<String> model;
 	
 
 	/**
@@ -91,12 +92,13 @@ public class FlightSearchView1 extends JFrame {
 		JLabel lblTitle = new JLabel("FLIGHT SEARCH");
 		lblTitle.setBounds(205, 16, 119, 20);
 		contentPane.add(lblTitle);
-		DefaultListModel<String> model = new DefaultListModel<>();
-		list = new JList<String>(model);
+		model = new DefaultListModel<String>();
+		list = new JList<String>();
+		list.setModel(model);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setBackground(Color.YELLOW);
-		list.setBounds(481, 360, -430, -132);
-		
+		list.setBounds(50, 170, 430, 135);
+		list.getSelectionModel().addListSelectionListener(new ListController(this));
 
 		contentPane.add(list);
 		
@@ -132,13 +134,18 @@ public class FlightSearchView1 extends JFrame {
 				
 				
 				FlightSearchController mySearch = new FlightSearchController();
-				List<Flight> f1 =  mySearch.search(from, to, dTime, aTime, passCount);
+				List<Flight> flightResult =  mySearch.search(from, to, dTime, aTime, passCount);
 				
 				// Bara til að testa útkomuna hahahahahahah
 //				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
 //				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
 				model.addElement("hey");
-				list.setModel(model);
+//				list.setModel(model);
+				
+				for (Flight f: flightResult) {
+					model.addElement(f.getDeparture() + " " +  f.getDepartureTime().get(Calendar.YEAR) + "-" + f.getDepartureTime().get(Calendar.MONTH) + "-" + f.getDepartureTime().get(Calendar.DAY_OF_MONTH) + " TO: " + f.getArrival() + " " + f.getArrivalTime().get(Calendar.YEAR)+ "-" + f.getArrivalTime().get(Calendar.MONTH) + "-" + f.getArrivalTime().get(Calendar.DAY_OF_MONTH));
+				}
+				
 				
 			}
 			
@@ -195,7 +202,6 @@ public class FlightSearchView1 extends JFrame {
 		showDestinations();
 		
 		
-		list.addListSelectionListener(new ListController(this));
 	}
 	
 	private void showDestinations() {
