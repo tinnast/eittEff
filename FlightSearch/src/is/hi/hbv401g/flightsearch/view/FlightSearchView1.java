@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -56,7 +57,7 @@ public class FlightSearchView1 extends JFrame {
 	private JComboBox<String> comboBoxFrom;
 	private JComboBox<String> comboBoxTo;
 	private FlightSearchController myController;
-	private JList list;
+	private JList<String> list;
 	
 
 	/**
@@ -90,15 +91,13 @@ public class FlightSearchView1 extends JFrame {
 		JLabel lblTitle = new JLabel("FLIGHT SEARCH");
 		lblTitle.setBounds(205, 16, 119, 20);
 		contentPane.add(lblTitle);
-		list = new JList();
+		DefaultListModel<String> model = new DefaultListModel<>();
+		list = new JList<String>(model);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setBackground(Color.YELLOW);
 		list.setBounds(481, 360, -430, -132);
-		jDagskraLidir.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+		
+
 		contentPane.add(list);
 		
 		
@@ -138,7 +137,8 @@ public class FlightSearchView1 extends JFrame {
 				// Bara til að testa útkomuna hahahahahahah
 //				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
 //				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
-				list.;
+				model.addElement("hey");
+				list.setModel(model);
 				
 			}
 			

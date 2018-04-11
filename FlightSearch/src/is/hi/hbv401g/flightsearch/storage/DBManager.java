@@ -440,6 +440,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			DBManager mydb = new DBManager();
 			List<String> s = mydb.getLocations();
 			System.out.println(s.size());
+			mydb.newBookingId();
 			
 			
 /*			
