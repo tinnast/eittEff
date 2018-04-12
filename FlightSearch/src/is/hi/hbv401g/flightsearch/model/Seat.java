@@ -64,6 +64,10 @@ public class Seat {
 		return entertainment;
 	}
 	
+	public String getElectConn() {
+		return electricalConnections;
+	}
+	
 }
 
 

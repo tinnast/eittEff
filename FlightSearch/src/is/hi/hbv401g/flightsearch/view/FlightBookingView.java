@@ -23,11 +23,13 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JSeparator;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
@@ -38,6 +40,7 @@ import java.awt.Rectangle;
 
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 
 /**
@@ -85,7 +88,7 @@ public class FlightBookingView extends JFrame {
 	public FlightBookingView() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 599, 519);
+		setBounds(100, 100, 604, 598);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,7 +118,8 @@ public class FlightBookingView extends JFrame {
 			
 		}				
 
-		JLabel lblTitle = new JLabel("SELECTED FLIGHT");
+		JLabel lblTitle = new JLabel("YOUR FLIGHT");
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTitle.setBounds(220, 13, 157, 16);
 		contentPane.add(lblTitle);
 		
@@ -169,12 +173,13 @@ public class FlightBookingView extends JFrame {
 		connections.setBounds(315, 60, 69, 20);
 		contentPane.add(connections);
 		
+		
 		JLabel enter = new JLabel("");
 		enter.setBounds(338, 45, 69, 20);
 		contentPane.add(enter);
 		
 		JLabel lblNewLabel = new JLabel("Food");
-		lblNewLabel.setBounds(22, 79, 69, 20);
+		lblNewLabel.setBounds(28, 87, 69, 20);
 		contentPane.add(lblNewLabel);
 		
 		JLabel food = new JLabel("");
@@ -185,7 +190,7 @@ public class FlightBookingView extends JFrame {
 		lblSuccess.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuccess.setForeground(new Color(0, 128, 0));
-		lblSuccess.setBounds(12, 460, 581, 31);
+		lblSuccess.setBounds(12, 358, 581, 31);
 		contentPane.add(lblSuccess);
 
 	}
@@ -259,9 +264,10 @@ public class FlightBookingView extends JFrame {
 		
 		
 		
-		JLabel lblElectricalConnection = new JLabel("Connection:");
+		JLabel lblElectricalConnection = new JLabel("USB outlet:");
 		lblElectricalConnection.setBounds(230, 62, 105, 16);
 		contentPane.add(lblElectricalConnection);
+		
 		
 		JLabel lblLuggage = new JLabel("Luggage:");
 		lblLuggage.setBounds(230, 75, 70, 29);
@@ -276,6 +282,8 @@ public class FlightBookingView extends JFrame {
 		JLabel seatPrice = new JLabel("");
 		seatPrice.setBounds(115, 60, 69, 20);
 		contentPane.add(seatPrice);
+		int price = f.getAvailableSeats().get(0).getPrice();
+		seatPrice.setText(String.valueOf(price));
 		
 		JLabel luggage = new JLabel("");
 		luggage.setBounds(302, 84, 69, 20);
@@ -286,6 +294,7 @@ public class FlightBookingView extends JFrame {
 		JLabel connections = new JLabel("");
 		connections.setBounds(315, 60, 69, 20);
 		contentPane.add(connections);
+		connections.setText(f.getAvailableSeats().get(0).getElectConn());
 		
 		JLabel enter = new JLabel("");
 		enter.setBounds(338, 45, 69, 20);
@@ -337,7 +346,13 @@ public class FlightBookingView extends JFrame {
 		}
 		System.out.println(myFlight.getFlightNumber() + " " + seats.get(0).getSeatNumber());
 		String s = fatController.bookFlight(myFlight, seats);
-		lblSuccess.setText("Booking successful! Your booking ID is " + s);
+		
+		JOptionPane successPane = new JOptionPane("Your booking number is: " + s + "\n" + "Please write it down so you can view yor booking later");
+		JDialog dialog = successPane.createDialog("Booking successful");
+		
+		dialog.setVisible(true);
+		
+		//lblSuccess.setText("Booking successful! Your booking ID is " + s);
 		
 	}
 }

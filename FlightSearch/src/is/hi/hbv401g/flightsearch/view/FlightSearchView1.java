@@ -104,7 +104,7 @@ public class FlightSearchView1 extends JFrame {
 		list.setModel(model);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list.setBackground(Color.CYAN);
-		list.setBounds(50, 170, 430, 135);
+		list.setBounds(57, 263, 430, 135);
 		list.getSelectionModel().addListSelectionListener(new ListController(this, passCount));
 
 		contentPane.add(list);
@@ -158,7 +158,7 @@ public class FlightSearchView1 extends JFrame {
 			
 				
 		});
-		btnSearch.setBounds(160, 343, 234, 51);
+		btnSearch.setBounds(150, 160, 214, 33);
 		contentPane.add(btnSearch);
 		
 		dateChooser = new JDateChooser();
@@ -239,7 +239,7 @@ public class FlightSearchView1 extends JFrame {
 		contentPane.add(comboBoxPassengers);
 		
 		JLabel lblSmelltuFlug = new JLabel("Click on the flight you want to book");
-		lblSmelltuFlug.setBounds(50, 145, 314, 20);
+		lblSmelltuFlug.setBounds(150, 230, 214, 20);
 		contentPane.add(lblSmelltuFlug);
 		
 		JLabel lblFrom = new JLabel("From");
