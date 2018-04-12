@@ -151,6 +151,12 @@ public class FlightSearchView1 extends JFrame {
 		dateChooser.setToolTipText("select date");
 		dateChooser.setDateFormatString("dd-MM-yyyy");
 		dateChooser.setBounds(50, 106, 125, 26);
+		@SuppressWarnings("deprecation")
+		Date d = new Date(2018-1900, 3, 1);
+		@SuppressWarnings("deprecation")
+		Date d2 = new Date(2018-1900, 3, 30);
+		dateChooser.setSelectableDateRange(d, d2);
+		dateChooser.setDate(d);
 		contentPane.add(dateChooser);
 		
 		JLabel lblSeeMyBooking = new JLabel("View my booking");
