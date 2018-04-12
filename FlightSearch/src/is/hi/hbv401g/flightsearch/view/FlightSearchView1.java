@@ -42,6 +42,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import java.awt.Font;
 
 /**
  * @author tinna
@@ -95,13 +96,14 @@ public class FlightSearchView1 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblTitle = new JLabel("FLIGHT SEARCH");
-		lblTitle.setBounds(205, 16, 119, 20);
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitle.setBounds(188, 3, 119, 20);
 		contentPane.add(lblTitle);
 		model = new DefaultListModel<String>();
 		list = new JList<String>();
 		list.setModel(model);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
-		list.setBackground(Color.YELLOW);
+		list.setBackground(Color.CYAN);
 		list.setBounds(50, 170, 430, 135);
 		list.getSelectionModel().addListSelectionListener(new ListController(this, passCount));
 
@@ -222,10 +224,12 @@ public class FlightSearchView1 extends JFrame {
 		contentPane.add(lblNoOfPassengers);
 		
 		comboBoxFrom = new JComboBox<String>();
+		comboBoxFrom.setToolTipText("FROM");
 		comboBoxFrom.setBounds(34, 56, 159, 22);
 		contentPane.add(comboBoxFrom);
 		
 		comboBoxTo = new JComboBox<String>();
+		comboBoxTo.setToolTipText("TO");
 		comboBoxTo.setBounds(294, 56, 159, 22);
 		contentPane.add(comboBoxTo);
 		
@@ -233,6 +237,22 @@ public class FlightSearchView1 extends JFrame {
 		comboBoxPassengers.setMaximumRowCount(5);
 		comboBoxPassengers.setBounds(343, 110, 51, 22);
 		contentPane.add(comboBoxPassengers);
+		
+		JLabel lblSmelltuFlug = new JLabel("Click on the flight you want to book");
+		lblSmelltuFlug.setBounds(50, 145, 314, 20);
+		contentPane.add(lblSmelltuFlug);
+		
+		JLabel lblFrom = new JLabel("From");
+		lblFrom.setBounds(33, 34, 119, 20);
+		contentPane.add(lblFrom);
+		
+		JLabel lblTo = new JLabel("To");
+		lblTo.setBounds(294, 36, 119, 20);
+		contentPane.add(lblTo);
+		
+		JLabel lblPickADate = new JLabel("Pick a date");
+		lblPickADate.setBounds(50, 87, 119, 20);
+		contentPane.add(lblPickADate);
 		
 		for (int i = 1; i < 6; i++) {
 			comboBoxPassengers.addItem(i);
