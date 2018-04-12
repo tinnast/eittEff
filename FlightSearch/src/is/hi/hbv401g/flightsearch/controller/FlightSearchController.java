@@ -52,14 +52,13 @@ public class FlightSearchController {
 		locationList = new LocationList(manager);
 	}
 	
-	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
-		List<Flight> returnFlights = new ArrayList<Flight>();
-		
-		Query myQuery = new Query (departure, arrival, depDate, arrDate, passengerCount);
-
-    	results = manager.searchByQuery(myQuery);
 	
-		
+	/* Use this function to search for flights that match the given search inputs. The return value is a list of 
+	 * Flight objects that match the given search. The depDate has to contain a Calendar object with year, month and day set.
+	 * The arrDate does not affect the search results. The arrDate does not affect the search results*/
+	public List<Flight> search(String departure, String arrival, Calendar depDate, Calendar arrDate, int passengerCount) {
+		Query myQuery = new Query (departure, arrival, depDate, arrDate, passengerCount);
+    	results = manager.searchByQuery(myQuery);
 		return results;
 	}
 
@@ -70,7 +69,6 @@ public class FlightSearchController {
 	// 			myBooking.bookingId has been set to a unique alphanumeric string.
 	//          s contains this booingId.
 	public String bookFlight(Flight myFlight, ArrayList<Seat> seats) {
-		System.out.println("Booking flight…");
 		String bookingId = manager.newBookingId();
 		myBooking = new Booking(bookingId, myFlight, seats);
 		//
@@ -93,12 +91,16 @@ public class FlightSearchController {
 		}
 	}
 	
+	/* Returns a list of strings of all the available departures in the database */
 	public List<String> getAllLocations() {
 		List<String> loc = locationList.populateLocationList();
 		
 		return loc;
 	}
 	
+	/* Use this function to search for a booking with the given bookingId. 
+	 * Return value is a Booking object that contains all the neccasary information
+	 * for that booking, the Flight object and a list of Seats that are booked. */
 	public Booking getBookingWithId(String bookingId) {
 		Booking returnBooking = manager.searchForBooking(bookingId);
 		return returnBooking;

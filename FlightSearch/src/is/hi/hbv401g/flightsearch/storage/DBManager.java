@@ -261,7 +261,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		}
 		
 		public ArrayList<Flight> searchByQuery(Query q)  {
-		System.out.println("searching for "+  q.getDepartureTime().get(Calendar.YEAR)+  q.getDepartureTime().get(Calendar.MONTH)+  q.getDepartureTime().get(Calendar.DAY_OF_MONTH));
 			Connection conn = null;
 			try {
 				Class.forName(DATABASE_NAME);
@@ -278,12 +277,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				String arrival = q.getArrival();
 				
 				Calendar c1 = q.getDepartureTime();
-				Calendar c2 = q.getArrivalTime();
 				
 				String departureTime = c1.get(Calendar.YEAR) + "-" + c1.get(Calendar.MONTH) + "-" + c1.get(Calendar.DAY_OF_MONTH) + "%";// + c1.get(Calendar.HOUR_OF_DAY) + ":" + c1.get(Calendar.MINUTE) + ":" + c1.get(Calendar.SECOND);
-				String arrivalTime =  c2.get(Calendar.YEAR) + "-" +c2.get(Calendar.MONTH) + "-" + c2.get(Calendar.DAY_OF_MONTH) + "%"; //+ c2.get(Calendar.HOUR_OF_DAY)  + ":" + c2.get(Calendar.MINUTE) + ":" + c2.get(Calendar.SECOND);
-				
-				
 				
 				pstmt.clearParameters(); 
 				pstmt.setString(1, departure);

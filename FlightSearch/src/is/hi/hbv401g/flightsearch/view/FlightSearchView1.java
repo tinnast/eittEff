@@ -121,8 +121,6 @@ public class FlightSearchView1 extends JFrame {
 				// Ná í dagsettningar
 				java.util.Date date1 = dateChooser.getDate();
 				
-				// Formatta dagsetningu
-//				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy");
 							
 				from = (String)comboBoxFrom.getSelectedItem();
 				to = (String)comboBoxTo.getSelectedItem();
