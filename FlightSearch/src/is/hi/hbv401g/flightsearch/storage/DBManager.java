@@ -280,12 +280,15 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime LIKE ?");
 				
+				System.out.print("Searh: " +  q.getDepartureTime().get(Calendar.YEAR) +q.getDepartureTime().get(Calendar.MONTH) +q.getDepartureTime().get(Calendar.DAY_OF_MONTH) ); 
 				String departure = q.getDeparture();
 				String arrival = q.getArrival();
 				
+				System.out.println("Search: " +q.getDeparture() + " " + q.getArrival());
+				
 				Calendar c1 = q.getDepartureTime();
 				
-				String departureTime = c1.get(Calendar.YEAR) + "-" + c1.get(Calendar.MONTH) + "-" + c1.get(Calendar.DAY_OF_MONTH) + "%";// + c1.get(Calendar.HOUR_OF_DAY) + ":" + c1.get(Calendar.MINUTE) + ":" + c1.get(Calendar.SECOND);
+				String departureTime = c1.get(Calendar.YEAR) + "-" + c1.get(Calendar.MONTH) + "-" + c1.get(Calendar.DAY_OF_MONTH) + " %";// + c1.get(Calendar.HOUR_OF_DAY) + ":" + c1.get(Calendar.MINUTE) + ":" + c1.get(Calendar.SECOND);
 				
 				pstmt.clearParameters(); 
 				pstmt.setString(1, departure);
