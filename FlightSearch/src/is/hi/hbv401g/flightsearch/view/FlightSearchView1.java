@@ -190,8 +190,8 @@ public class FlightSearchView1 extends JFrame {
 				Calendar cf = f.getDepartureTime();
 				Calendar ca = f.getArrivalTime();
 				
-				String dep = cf.get(Calendar.YEAR) + "-" + cf.get(Calendar.MONTH) + "-" + cf.get(Calendar.DAY_OF_MONTH) + "\n";
-				String arr = ca.get(Calendar.YEAR) + "-" + ca.get(Calendar.MONTH) + "-" + ca.get(Calendar.DAY_OF_MONTH);
+				String dep = cf.get(Calendar.YEAR) + "-" + cf.get(Calendar.MONTH) + "-" + cf.get(Calendar.DAY_OF_MONTH) + " " + cf.get(Calendar.HOUR_OF_DAY) + ":"  + cf.get(Calendar.MINUTE) + "0" +  "\n";
+				String arr = ca.get(Calendar.YEAR) + "-" + ca.get(Calendar.MONTH) + "-" + ca.get(Calendar.DAY_OF_MONTH)  +" " + ca.get(Calendar.HOUR_OF_DAY) + ":"  + ca.get(Calendar.MINUTE) + "0";
 				
 				
 				message += "Departure from " + f.getDeparture() + " at " + dep;

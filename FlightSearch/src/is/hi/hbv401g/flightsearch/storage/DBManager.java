@@ -121,7 +121,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					Calendar arrCal = Calendar.getInstance();
 					try {
 						convertedArrival = dateFormat.parse(arrivalDate);
-						depCal.setTime(convertedArrival);
+						arrCal.setTime(convertedArrival);
 						arrCal.set(arrCal.get(Calendar.YEAR), arrCal.get(Calendar.MONTH) +1, arrCal.get(Calendar.DAY_OF_MONTH));
 						
 					} catch (ParseException e) {

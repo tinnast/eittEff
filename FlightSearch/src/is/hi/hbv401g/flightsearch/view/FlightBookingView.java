@@ -298,9 +298,9 @@ public class FlightBookingView extends JFrame {
 		enter.setBounds(338, 45, 69, 20);
 		contentPane.add(enter);
 		if (f.getAvailableSeats().get(0).getEnt()) {
-			enter.setText("Já");
+			enter.setText("No");
 		} else {
-			enter.setText("Nei");
+			enter.setText("Yes");
 		}
 			
 		
