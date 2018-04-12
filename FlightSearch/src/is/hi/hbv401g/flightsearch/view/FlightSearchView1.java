@@ -133,13 +133,18 @@ public class FlightSearchView1 extends JFrame {
 				FlightSearchController mySearch = new FlightSearchController();
 				flightResult =  mySearch.search(from, to, dTime, aTime, passCount);
 				
-				
+				if (flightResult.size() ==0) {
+					JOptionPane noFlights = new JOptionPane("I'm sorry, there are no available flights on this date");
+					JDialog dialog = noFlights.createDialog("No flights");
+					dialog.setVisible(true);
+				} else {
+				model.clear();
 				for (Flight f: flightResult) {
 					model.addElement(f.getDeparture() + " at " +  f.getDepartureTime().get(Calendar.HOUR_OF_DAY) + ":" + f.getDepartureTime().get(Calendar.MINUTE)  + "0 TO: " + f.getArrival() + " at " + f.getArrivalTime().get(Calendar.HOUR_OF_DAY)+ ":" + f.getArrivalTime().get(Calendar.MINUTE)+"0");
 					System.out.println("MM:   " + f.getAvailableSeats().size());
 				}
 				
-				
+				}
 			}
 			
 				
