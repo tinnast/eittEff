@@ -122,34 +122,27 @@ public class FlightSearchView1 extends JFrame {
 				java.util.Date date1 = dateChooser.getDate();
 				
 				// Formatta dagsetningu
-				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy");
+//				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM.yyyy");
 							
 				from = (String)comboBoxFrom.getSelectedItem();
 				to = (String)comboBoxTo.getSelectedItem();
-				date1Str = DateFormat.getDateInstance().format(date1);
+//				date1Str = DateFormat.getDateInstance().format(date1);
 				passCount = (Integer)comboBoxPassengers.getSelectedItem();
 				
 				Calendar dTime = Calendar.getInstance();
 				Calendar aTime = Calendar.getInstance();
 				
-				dTime.set(date1.getYear() + 1900, date1.getMonth() + 1, date1.getDate());
-				System.out.println(date1.getDate());
+				dTime.setTime(date1);
+				dTime.set(dTime.get(Calendar.YEAR), dTime.get(Calendar.MONTH) + 1, dTime.get(Calendar.DAY_OF_MONTH));
 				
-				
-				Query q1 = new Query("", "", dTime, aTime, passCount);
-				
-
+				System.out.println("Date: " + dTime.get(Calendar.YEAR) + dTime.get(Calendar.MONTH) + dTime.get(Calendar.DAY_OF_MONTH));
 				
 				FlightSearchController mySearch = new FlightSearchController();
 				flightResult =  mySearch.search(from, to, dTime, aTime, passCount);
 				
-				// Bara til að testa útkomuna hahahahahahah
-//				textPane.setText(from + " " + to + " " + sdf.format(date1) + " "+ " " + passCount);
-//				textPane.setText(f1.get(0).getDeparture()  + " " + sdf.format(date1) + " " + passCount);
-//				list.setModel(model);
 				
 				for (Flight f: flightResult) {
-					model.addElement(f.getDeparture() + " " +  f.getDepartureTime().get(Calendar.YEAR) + "-" + f.getDepartureTime().get(Calendar.MONTH) + "-" + f.getDepartureTime().get(Calendar.DAY_OF_MONTH) + " TO: " + f.getArrival() + " " + f.getArrivalTime().get(Calendar.YEAR)+ "-" + f.getArrivalTime().get(Calendar.MONTH) + "-" + f.getArrivalTime().get(Calendar.DAY_OF_MONTH));
+					model.addElement(f.getDeparture() + " at " +  f.getDepartureTime().get(Calendar.HOUR_OF_DAY) + ":" + f.getDepartureTime().get(Calendar.MINUTE)  + "0 TO: " + f.getArrival() + " at " + f.getArrivalTime().get(Calendar.HOUR_OF_DAY)+ ":" + f.getArrivalTime().get(Calendar.MINUTE)+"0");
 					System.out.println("MM:   " + f.getAvailableSeats().size());
 				}
 				

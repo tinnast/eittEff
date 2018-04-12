@@ -261,7 +261,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		}
 		
 		public ArrayList<Flight> searchByQuery(Query q)  {
-			System.out.println("searching for "+ q.getDeparture() + " to " + q.getArrival() + q.getDepartureTime().get(Calendar.YEAR));
+		System.out.println("searching for "+  q.getDepartureTime().get(Calendar.YEAR)+  q.getDepartureTime().get(Calendar.MONTH)+  q.getDepartureTime().get(Calendar.DAY_OF_MONTH));
 			Connection conn = null;
 			try {
 				Class.forName(DATABASE_NAME);
@@ -319,7 +319,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					Calendar arrCal = Calendar.getInstance();
 					try {
 						convertedArrival = dateFormat.parse(arrivalDate);
-						depCal.setTime(convertedArrival);
+						arrCal.setTime(convertedArrival);
 						arrCal.set(arrCal.get(Calendar.YEAR), arrCal.get(Calendar.MONTH) +1, arrCal.get(Calendar.DAY_OF_MONTH));
 						
 					} catch (ParseException e) {
@@ -327,7 +327,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					}
 					
 					
-					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=?");
+					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=? AND passenger IS NULL");
 					
 					
 					pstmt2.clearParameters(); 
