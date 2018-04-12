@@ -141,8 +141,8 @@ public class FlightBookingView extends JFrame {
 		lblFlightNo.setBounds(27, 39, 70, 16);
 		contentPane.add(lblFlightNo);
 		
-		JLabel lblPricePerSeat = new JLabel("Price per person:");
-		lblPricePerSeat.setBounds(27, 62, 105, 16);
+		JLabel lblPricePerSeat = new JLabel("Price p seat:");
+		lblPricePerSeat.setBounds(27, 62, 92, 16);
 		contentPane.add(lblPricePerSeat);
 		
 		JLabel ent = new JLabel("Entertainment:");
@@ -162,7 +162,7 @@ public class FlightBookingView extends JFrame {
 		contentPane.add(fNumber);
 		
 		JLabel seatPrice = new JLabel("");
-		seatPrice.setBounds(126, 62, 92, 20);
+		seatPrice.setBounds(115, 60, 69, 20);
 		contentPane.add(seatPrice);
 		
 		JLabel luggage = new JLabel("");
@@ -183,7 +183,7 @@ public class FlightBookingView extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel food = new JLabel("");
-		food.setBounds(105, 91, 69, 20);
+		food.setBounds(115, 79, 69, 20);
 		contentPane.add(food);
 		
 		lblSuccess = new JLabel("");
@@ -281,7 +281,7 @@ public class FlightBookingView extends JFrame {
 		seatPrice.setBounds(115, 60, 69, 20);
 		contentPane.add(seatPrice);
 		int price = f.getAvailableSeats().get(0).getPrice();
-		seatPrice.setText(String.valueOf(price) + " ISK");
+		seatPrice.setText(String.valueOf(price));
 		
 		JLabel luggage = new JLabel("");
 		luggage.setBounds(302, 84, 69, 20);
