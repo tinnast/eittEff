@@ -261,9 +261,7 @@ public class FlightBookingView extends JFrame {
 		JLabel ent = new JLabel("Entertainment:");
 		ent.setBounds(230, 42, 105, 16);
 		contentPane.add(ent);
-		
-		
-		
+			
 		JLabel lblElectricalConnection = new JLabel("USB outlet:");
 		lblElectricalConnection.setBounds(230, 62, 105, 16);
 		contentPane.add(lblElectricalConnection);
@@ -319,13 +317,6 @@ public class FlightBookingView extends JFrame {
 		} else {
 			food.setText("No");
 		}
-				
-		lblSuccess = new JLabel("");
-		lblSuccess.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSuccess.setForeground(new Color(0, 128, 0));
-		lblSuccess.setBounds(12, 460, 581, 31);
-		contentPane.add(lblSuccess);
 		
 	}
 
@@ -352,7 +343,7 @@ public class FlightBookingView extends JFrame {
 		
 		dialog.setVisible(true);
 		
-		//lblSuccess.setText("Booking successful! Your booking ID is " + s);
+		
 		
 	}
 }
