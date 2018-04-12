@@ -12,8 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.text.RandomStringGenerator; // to generate unique bookingIds
@@ -99,26 +102,31 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					String arrival = res2.getString(3);
 					String departureDate = res2.getString(4);
+					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					Date convertedDate;
+					Calendar depCal = Calendar.getInstance();
+					try {
+						convertedDate = dateFormat.parse(departureDate);
+						depCal.setTime(convertedDate);
+						depCal.set(depCal.get(Calendar.YEAR), depCal.get(Calendar.MONTH) +1, depCal.get(Calendar.DAY_OF_MONTH));
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
 					String arrivalDate = res2.getString(5);
-					int year1 = Integer.parseInt(departureDate.substring(0, 4));
-					int year2 = Integer.parseInt(arrivalDate.substring(0, 4));
-			
-					int month1 = Integer.parseInt(departureDate.substring(5,6));
-					int month2 = Integer.parseInt(arrivalDate.substring(5,6));
-					int day1 = Integer.parseInt(departureDate.substring(7,9));
-					int day2 = Integer.parseInt(arrivalDate.substring(7,9));
-					int hour1 = Integer.parseInt(departureDate.substring(10,12));
-					int hour2 = Integer.parseInt(arrivalDate.substring(10,12));
-					int min1 = Integer.parseInt(departureDate.substring(13,14));
-					int min2 = Integer.parseInt(arrivalDate.substring(13,14));
-					int sec1 = Integer.parseInt(departureDate.substring(15,16));
-					int sec2 = Integer.parseInt(arrivalDate.substring(15,16));
 					
-					
-					Calendar ca1 = Calendar.getInstance();
-					Calendar ca2 = Calendar.getInstance();
-					ca1.set(year1, month1, day1, hour1, min1, sec1);
-					ca2.set(year2,  month2, day2, hour2, min2, sec2);
+					Date convertedArrival;
+					Calendar arrCal = Calendar.getInstance();
+					try {
+						convertedArrival = dateFormat.parse(arrivalDate);
+						depCal.setTime(convertedArrival);
+						arrCal.set(arrCal.get(Calendar.YEAR), arrCal.get(Calendar.MONTH) +1, arrCal.get(Calendar.DAY_OF_MONTH));
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 					
 					
 					PreparedStatement pstmt3 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=?");
@@ -180,7 +188,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				
 					
 					
-					Flight myFlight = new Flight(departure, arrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+					Flight myFlight = new Flight(departure, arrival, depCal, arrCal, seats, bookedSeats, theSeats, fNumber);
 					
 					Booking returnBooking = new Booking(bNumber, myFlight, returnSeats);
 					return returnBooking;
@@ -290,26 +298,34 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					String fdeparture = res.getString(2);
 					String farrival = res.getString(3);
 					String departureDate = res.getString(4);
+					
+					
+					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					Date convertedDate;
+					Calendar depCal = Calendar.getInstance();
+					try {
+						convertedDate = dateFormat.parse(departureDate);
+						depCal.setTime(convertedDate);
+						depCal.set(depCal.get(Calendar.YEAR), depCal.get(Calendar.MONTH) +1, depCal.get(Calendar.DAY_OF_MONTH));
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+					
 					String arrivalDate = res.getString(5);
-					int year1 = Integer.parseInt(departureDate.substring(0, 4));
-					int year2 = Integer.parseInt(arrivalDate.substring(0, 4));
-					System.out.println("her   " + fNumber);
-					int month1 = Integer.parseInt(departureDate.substring(5,6));
-					int month2 = Integer.parseInt(arrivalDate.substring(5,6));
-					int day1 = Integer.parseInt(departureDate.substring(7,9));
-					int day2 = Integer.parseInt(arrivalDate.substring(7,9));
-					int hour1 = Integer.parseInt(departureDate.substring(10,12));
-					int hour2 = Integer.parseInt(arrivalDate.substring(10,12));
-					int min1 = Integer.parseInt(departureDate.substring(13,14));
-					int min2 = Integer.parseInt(arrivalDate.substring(13,14));
-					int sec1 = Integer.parseInt(departureDate.substring(15,16));
-					int sec2 = Integer.parseInt(arrivalDate.substring(15,16));
+					Date convertedArrival;
+					Calendar arrCal = Calendar.getInstance();
+					try {
+						convertedArrival = dateFormat.parse(arrivalDate);
+						depCal.setTime(convertedArrival);
+						arrCal.set(arrCal.get(Calendar.YEAR), arrCal.get(Calendar.MONTH) +1, arrCal.get(Calendar.DAY_OF_MONTH));
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 					
-					
-					Calendar ca1 = Calendar.getInstance();
-					Calendar ca2 = Calendar.getInstance();
-					ca1.set(year1, month1, day1, hour1, min1, sec1);
-					ca2.set(year2,  month2, day2, hour2, min2, sec2);
 					
 					PreparedStatement pstmt2 = conn.prepareStatement("SELECT * FROM seats WHERE fNumber=?");
 					
@@ -346,7 +362,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					}
 					
 					
-					Flight f = new Flight(fdeparture, farrival, ca1, ca2, seats, bookedSeats, theSeats, fNumber);
+					Flight f = new Flight(fdeparture, farrival, depCal, arrCal, seats, bookedSeats, theSeats, fNumber);
 					System.out.println("LLLL    " + f.getAvailableSeats().size());
 					System.out.println("OOOO   " + theSeats.size());
 					
