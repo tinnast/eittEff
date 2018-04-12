@@ -116,15 +116,10 @@ public class FlightSearchView1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				String from, to, date1Str, date2Str;
-				
-				
-				// Ná í dagsettningar
 				java.util.Date date1 = dateChooser.getDate();
-				
 							
 				from = (String)comboBoxFrom.getSelectedItem();
 				to = (String)comboBoxTo.getSelectedItem();
-//				date1Str = DateFormat.getDateInstance().format(date1);
 				passCount = (Integer)comboBoxPassengers.getSelectedItem();
 				
 				Calendar dTime = Calendar.getInstance();

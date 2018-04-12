@@ -7,7 +7,6 @@
  */
 package is.hi.hbv401g.flightsearch.view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +14,8 @@ import javax.swing.JButton;
 
 /**
  * @author karlpestka
- *
+ * 
+ * 
  */
 public class ListenerForBookingView implements ActionListener {
 
@@ -30,17 +30,10 @@ public class ListenerForBookingView implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// color the button green
-
 
 		JButton button = (JButton)e.getSource();
-		System.out.println(button.getText());
 		FlightBookingView theView = (FlightBookingView)button.getTopLevelAncestor();
 		theView.bookThisFlight();
-		
-		System.out.println("DID I BOOK?");
-		
-
 	}
 
 }

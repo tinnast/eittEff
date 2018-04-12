@@ -16,7 +16,8 @@ import is.hi.hbv401g.flightsearch.model.Flight;
 
 /**
  * @author Anita Kristjansdotti
- *
+ * 
+ * Sér um að hlusta eftir klikki á valið flug ot birta þá Booking view til þess að bóka það flug
  */
 public class ListController implements ListSelectionListener {
 

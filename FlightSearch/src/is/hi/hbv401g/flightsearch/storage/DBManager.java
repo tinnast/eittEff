@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +33,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
  * @author Karl James Pestka 			101083-2689 	<kjp3@hi.is>
  * @author Mimoza Herta Róbertsdóttir 	310194-3289 <mhr4@hi.is>
  * @author Tinna Sturludóttir			300589-2439 <tis12@hi.is>
+ * 
+ * 
+ * All communication with the database flights.db
  */
  
 	public class DBManager {
@@ -73,7 +75,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 
 		/**
 		 * @param bookingId
-		 * @return
+		 * @return a Booking object from the booking in the database that has
+		 * 		   the bookingId that matches the parameter bookingId
 		 */
 		public Booking searchForBooking(String bookingId) {
 			Connection conn = null;
@@ -207,7 +210,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 		}
 
 		/**
-		 * @return the bookingId
+		 * This function adds the parameter booking to the database
+		 * @return the bookingId of the booking that was added to the database
 		 */
 		public String addBooking(Booking booking)  {
 			Connection conn = null;
@@ -260,6 +264,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			return booking.getBookingId();
 		}
 		
+		
+		/* This function handles the searching for flights that match the Query object q. 
+		 * The return value is a list of Flight objects that match the Query object */
 		public ArrayList<Flight> searchByQuery(Query q)  {
 			Connection conn = null;
 			try {
@@ -377,6 +384,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			return returnFlights;	
 	 }
 		
+		/* This function gets all the possible departure locations from the database and returns them as 
+		 * a list of Strings */
 		public List<String> getLocations() {
 			Connection conn = null;
 			List<String> departurePlaces = new ArrayList<String>();
@@ -409,139 +418,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 			return departurePlaces;
 		}
 		
-		public void addThings()  {
-			Connection conn = null;
-			try {
-				Class.forName(DATABASE_NAME);
-				} catch (Exception e) {
-				  System.err.println(e.getMessage());
-				}
-			try {
-				conn = DriverManager.getConnection(JDBC_CONNECTION);
-				PreparedStatement pstmt = conn.prepareStatement("SELECT flightnumer FROM flights;");		
-				ResultSet res = pstmt.executeQuery();
-				String a = "ABCDEFGHIJKLMNOPQRSTUV";
-				
-				while (res.next()) {
-					String fnumber = res.getString(1);
-					
-					PreparedStatement ps = conn.prepareStatement("INSERT into seats values (?, ?, ?, ?, ?, ?, ?, ?,?);");
-					
-					for (int i =0; i<11; i++) {
-						
-					for (int j=1; j<20; j++) {
-						
-					ps.clearParameters();
-					ps.setString(1, fnumber);
-					ps.setString(2, null);
-					ps.setInt(3, 20000);
-					ps.setString(4, "economy");
-					ps.setBoolean(5, true);
-					ps.setString(6, "none");
-					ps.setString(7, "one bag");
-					ps.setBoolean(8, false);
-					String seatNumber = j + "" + a.charAt(i);
-					ps.setString(9, seatNumber);
-					ps.executeUpdate();
-					}
-					
-					}
-					System.out.print(fnumber);
-				}
-//				for (int j =0; j<30; j++) {
-//				String date = "2018-4-" + j +  " 19:0:0";
-//				String date2 = "2018-4-" + j + " 22:0:0";
-//
-//
-//				pstmt.clearParameters(); 
-//				pstmt.setString(1, ("XZSP" + j));
-//				pstmt.setString(2,"Paris");
-//				pstmt.setString(3, "Keflavik");
-//				pstmt.setString(4, date); 
-//				pstmt.setString(5, date2);
-//				pstmt.setString(6, "4 hours 0 min");
-//				int res = pstmt.executeUpdate(); 
-		    //}
-			
-			
-
-			} catch(SQLException e) {
-				System.err.println(e.getMessage()); 
-				} finally {
-					try {
-						if(conn != null) conn.close(); 
-						} catch(SQLException e) {
-							System.err.println(e); 
-						  } 
-					    } 
-			
-		
-	 }
-		public static void main( String[] args ) throws Exception { 
-			DBManager mydb = new DBManager();
-//			List<String> s = mydb.getLocations();
-//			System.out.println(s.size());
-//			mydb.addThings();
-			
-			
-/*			
-			Booking b = mydb.searchForBooking("pueqnl");
-			if (b!=null) {
-				
-			ArrayList<Seat> ss = b.getSeats();
-			System.out.println("ID ER : " + b.getFlight().getArrivalTime().get(Calendar.HOUR_OF_DAY));*/
-			
-//			System.out.print(mydb.newBookingId());
-			}
-			
-			
-			/* Try insert booking */
-			
-//			Passenger p1 = new Passenger("Anna Jónsdóttir");
-//			Passenger p2 = new Passenger("Hanna Panna");
-//			
-//			
-//			
-//			Seat mySeat1 = new Seat(10000, "First Class", p1, false, "Iphone Charger", "One bag", false, "14A");
-//			Seat mySeat2 = new Seat(10000, "First Class", p2, false, "Iphone Charger", "One bag", false, "14B");
-//			
-//			ArrayList<Seat> mySeats = new ArrayList<Seat>();
-//			mySeats.add(mySeat2);
-//			mySeats.add(mySeat1);
-//			Calendar ca1 = Calendar.getInstance();
-//			Calendar ca2 = Calendar.getInstance();
-//			ca1.set(2018, 4, 20, 15, 0, 0);
-//			ca2.set(2018, 4, 20, 19, 0, 0);
-//			
-//			Flight myFlight = new Flight("Keflavik", "Barcelona", ca1, ca2, 100, 2, mySeats, "BBBK21");
-//			String bn = mydb.newBookingId();
-//			Booking myBooking = new Booking(bn, myFlight, mySeats);
-//			System.out.print(mySeat1.getSeatNumber());
-//			mydb.addBooking(myBooking);
-//			
-			
-			
-	/* Insert data into database */
-//			mydb.addThings();
-//			Calendar c1 = Calendar.getInstance();
-//			Calendar c2 = Calendar.getInstance();
-//			
-//			c1.set(2018, 04, 23, 11, 0, 0);
-//			c2.set(2018, 04, 23, 18, 0, 0);
-//			
-//			Query myQuery = new Query("Keflavik", "Madrid", c1, c2, 2);
-//			
-//			ArrayList<Flight> result;
-//			result = mydb.searchByQuery(myQuery);
-//			for (Flight f: result) {
-//				System.out.println(f.getFlightNumber());
-//			}
-//
-//			
-//			Calendar c = Calendar.getInstance();
-//			c.set(2016, 2, 2, 11, 11, 11);
-			
-			
 			
 	 }
 

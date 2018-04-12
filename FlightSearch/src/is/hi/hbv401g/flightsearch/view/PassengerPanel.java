@@ -20,6 +20,8 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 
 /**
  * @author karlpestka
+ * 
+ * A panel for an inpur for passanger name and passanger seat
  *
  */
 public class PassengerPanel extends JPanel {
@@ -28,7 +30,7 @@ public class PassengerPanel extends JPanel {
 	 */
 	private static final String DEFAULT_PASSENGER_NAME_TEXT = "Passenger Name";
 	private JTextField txtName;
-	private JComboBox comboBoxSeat;
+	private JComboBox<String> comboBoxSeat;
 	
 	public PassengerPanel(Flight flight) {
 		
@@ -42,7 +44,7 @@ public class PassengerPanel extends JPanel {
 		add(txtName);
 		txtName.setColumns(20);
 		
-		comboBoxSeat = new JComboBox();
+		comboBoxSeat = new JComboBox<String>();
 		comboBoxSeat.setToolTipText("Choose a seat for this passenger.");
 		add(comboBoxSeat);
 		

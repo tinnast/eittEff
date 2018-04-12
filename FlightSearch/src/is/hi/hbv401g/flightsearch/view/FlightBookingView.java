@@ -45,23 +45,19 @@ import java.awt.Font;
 
 /**
  * @author tinna
- *
+ * 
+ * A view for booking flight and chooing seats.
  */
 public class FlightBookingView extends JFrame {
 
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
-	private static final int FJOLDIPASSENGER = 5;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
 	private static int passCount;
 	public Flight myFlight;
 	JLabel lblSuccess;
 
 	
-	private FlightSearchController fatController; // Squarepusher https://www.youtube.com/watch?v=0j5Ss4XyLb0
+	private FlightSearchController fatController; 
 	
 	private ArrayList<PassengerPanel> passengerPanels;
 
@@ -73,7 +69,6 @@ public class FlightBookingView extends JFrame {
 			public void run() {
 				try {
 					FlightBookingView frame = new FlightBookingView();
-					System.out.println(passCount);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -105,6 +100,8 @@ public class FlightBookingView extends JFrame {
 
 		passengerPanels = new ArrayList<PassengerPanel>();
 		
+		
+		/* Add a seat choosing form for each passanger */
 		for (int i = 0; i < passCount; i++) {
             passengerPanels.add(new PassengerPanel(myFlight));
         }
@@ -325,7 +322,7 @@ public class FlightBookingView extends JFrame {
 	//         myFlight points to a flight object.
 	// After:  new booking has been sent to controller and DB.
 	public void bookThisFlight() {
-		ArrayList<Seat> seats = new ArrayList();
+		ArrayList<Seat> seats = new ArrayList<Seat>();
 		for (PassengerPanel p : passengerPanels) {
 			String seatNumber = p.getPassengerSeat();
 			String myName = p.getPassengerName();
@@ -335,7 +332,6 @@ public class FlightBookingView extends JFrame {
 			mySeat.setPassenger(myPassenger);
 			seats.add(mySeat);
 		}
-		System.out.println(myFlight.getFlightNumber() + " " + seats.get(0).getSeatNumber());
 		String s = fatController.bookFlight(myFlight, seats);
 		
 		JOptionPane successPane = new JOptionPane("Your booking number is: " + s + "\n" + "Please write it down so you can view yor booking later");
