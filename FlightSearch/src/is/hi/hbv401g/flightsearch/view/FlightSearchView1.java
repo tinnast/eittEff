@@ -128,7 +128,6 @@ public class FlightSearchView1 extends JFrame {
 				dTime.setTime(date1);
 				dTime.set(dTime.get(Calendar.YEAR), dTime.get(Calendar.MONTH) + 1, dTime.get(Calendar.DAY_OF_MONTH));
 				
-				System.out.println("Date: " + dTime.get(Calendar.YEAR) + dTime.get(Calendar.MONTH) + dTime.get(Calendar.DAY_OF_MONTH));
 				
 				FlightSearchController mySearch = new FlightSearchController();
 				flightResult =  mySearch.search(from, to, dTime, aTime, passCount);
@@ -141,7 +140,6 @@ public class FlightSearchView1 extends JFrame {
 				model.clear();
 				for (Flight f: flightResult) {
 					model.addElement(f.getDeparture() + " at " +  f.getDepartureTime().get(Calendar.HOUR_OF_DAY) + ":" + f.getDepartureTime().get(Calendar.MINUTE)  + "0 TO: " + f.getArrival() + " at " + f.getArrivalTime().get(Calendar.HOUR_OF_DAY)+ ":" + f.getArrivalTime().get(Calendar.MINUTE)+"0");
-					System.out.println("MM:   " + f.getAvailableSeats().size());
 				}
 				
 				}

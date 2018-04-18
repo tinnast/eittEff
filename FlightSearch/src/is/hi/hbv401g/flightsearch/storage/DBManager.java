@@ -137,7 +137,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					pstmt3.clearParameters(); 
 					pstmt3.setString(1, fNumber);
-					System.out.print(fNumber);
 				
 					ResultSet res3 = pstmt3.executeQuery(); 
 					ArrayList<Seat> theSeats = new ArrayList<Seat>();
@@ -180,7 +179,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 						
 						res4.next();
 						
-						System.out.println(fNumber + " OOOOOOOOOOOOO " + allSeats.length);
 						
 						Passenger myP = new Passenger(allPassengers[i]);
 						
@@ -280,11 +278,9 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				conn = DriverManager.getConnection(JDBC_CONNECTION);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM flights WHERE departure=? AND arrival=? AND departuretime LIKE ?");
 				
-				System.out.print("Searh: " +  q.getDepartureTime().get(Calendar.YEAR) +q.getDepartureTime().get(Calendar.MONTH) +q.getDepartureTime().get(Calendar.DAY_OF_MONTH) ); 
 				String departure = q.getDeparture();
 				String arrival = q.getArrival();
 				
-				System.out.println("Search: " +q.getDeparture() + " " + q.getArrival());
 				
 				Calendar c1 = q.getDepartureTime();
 				
@@ -337,15 +333,12 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					pstmt2.clearParameters(); 
 					pstmt2.setString(1, fNumber);
-					System.out.println(fNumber);
 					ResultSet res2 = pstmt2.executeQuery(); 
 					ArrayList<Seat> theSeats = new ArrayList<Seat>();
 					
 					int bookedSeats = 0;
 					int seats = 0;
-					System.out.println("fn  " + fNumber);
 					while (res2.next()) {
-						System.out.print("HER");
 						
 						Passenger p = null;
 						if (res2.getString(2) != null) {
@@ -368,8 +361,7 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 					
 					
 					Flight f = new Flight(fdeparture, farrival, depCal, arrCal, seats, bookedSeats, theSeats, fNumber);
-					System.out.println("LLLL    " + f.getAvailableSeats().size());
-					System.out.println("OOOO   " + theSeats.size());
+
 					
 					returnFlights.add(f);
 				}
@@ -403,7 +395,6 @@ import is.hi.hbv401g.flightsearch.model.Seat;
 				ResultSet res = pstmt.executeQuery(); 
 				
 				while (res.next()) {
-					System.out.println(res.getString(1));
 					departurePlaces.add(res.getString(1));
 				}
 					

@@ -47,9 +47,7 @@ public class ListController implements ListSelectionListener {
 	        
 	        // Ef ekkert er valið
 	        if(valinDagskra==-1) return;
-	        System.out.println(myView.flightResult.get(valinDagskra).getArrival());
-	        System.out.println(valinDagskra);
-	        System.out.println(myView.flightResult.size());
+
 	        
 	         showBooking(myView.flightResult.get(valinDagskra));
 	         }

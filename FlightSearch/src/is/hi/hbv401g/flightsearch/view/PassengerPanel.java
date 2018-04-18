@@ -49,7 +49,6 @@ public class PassengerPanel extends JPanel {
 		add(comboBoxSeat);
 		
 	    ArrayList<Seat> seats = flight.getAvailableSeats(); 
-	    System.out.print(flight.getFlightNumber() + "  " + seats.size()); 
 	     
 	    for (Seat s : seats) { 
 	      	comboBoxSeat.addItem(s.getSeatNumber()); 
